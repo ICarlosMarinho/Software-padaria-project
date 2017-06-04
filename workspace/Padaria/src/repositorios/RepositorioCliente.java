@@ -19,6 +19,7 @@ public class RepositorioCliente {
 	}
 	public RepositorioCliente(ArrayList<Cliente> aux) {
 		this.clientes = aux;
+		aux = null;
 	}
 	
 	

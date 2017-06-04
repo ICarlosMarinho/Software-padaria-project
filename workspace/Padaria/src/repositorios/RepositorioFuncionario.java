@@ -21,6 +21,7 @@ public class RepositorioFuncionario {
 		// inicializa o repositorio de funcionarios com os funcionarios da ArrayList aux
 	public RepositorioFuncionario(ArrayList<Funcionario> aux) {
 		this.funcionarios = aux;
+		aux = null;
 	}
 	
 	
