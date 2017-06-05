@@ -1,4 +1,4 @@
-package repositorios;
+package repositorio;
 
 import basico.Funcionario;
 
@@ -21,7 +21,6 @@ public class RepositorioFuncionario {
 		// inicializa o repositorio de funcionarios com os funcionarios da ArrayList aux
 	public RepositorioFuncionario(ArrayList<Funcionario> aux) {
 		this.funcionarios = aux;
-		aux = null;
 	}
 	
 	
@@ -91,7 +90,15 @@ public class RepositorioFuncionario {
 		
 		return this.funcionarios.get(posicao);
 	}
-	
+	public Funcionario buscar(String nome) { // buscar funcionario pelo nome
+		int posicao = this.retornarPosicao(nome);
+		
+		if( posicao == -1 ) {
+			return null;
+		}
+		
+		return this.funcionarios.get(posicao);
+	}
 	
 	/*
 	 * metodo exclusivo da classe
@@ -116,7 +123,23 @@ public class RepositorioFuncionario {
 		
 		return -1;
 	}
-	
+	public int retornarPosicao(String nome) { // retornar posicao pelo nome
+		if( nome == null ) {
+			return -1;
+		}
+		
+		Funcionario auxiliar;
+		
+		for(int a = 0; a < this.funcionarios.size(); a++) {
+			
+			auxiliar = this.funcionarios.get(a);
+			if( nome.equals(auxiliar.getNome()) ) {
+				return a;
+			}
+		}
+		
+		return -1;
+	}
 	
 	
 	

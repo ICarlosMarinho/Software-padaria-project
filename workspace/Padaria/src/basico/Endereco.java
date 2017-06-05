@@ -11,7 +11,8 @@ public class Endereco {
 	
 	// construtores
 	public Endereco() {}
-	public Endereco(String logradouro, String numero, String complemento, String cidade, String estado) {
+	public Endereco(String logradouro, String numero, String complemento
+				   , String cidade, String estado) {
 		this.logradouro = logradouro;
 		this.numero = numero;
 		this.complemento = complemento;

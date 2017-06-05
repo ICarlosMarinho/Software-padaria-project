@@ -1,4 +1,4 @@
-package repositorios;
+package repositorio;
 
 import basico.Produto;
 
@@ -19,7 +19,6 @@ public class RepositorioProduto {
 	}
 	public RepositorioProduto(ArrayList<Produto> aux) {
 		this.estoque = aux;
-		aux = null;
 	}
 	
 	
@@ -105,10 +104,36 @@ public class RepositorioProduto {
 	}
 	
 	
-	//TODO funcao atualizar() tamanho()
+	/*
+	 * este metodo atualiza um produto no estoque
+	 * 
+	 * @ parametro antigo --- produto antigo que deve ser atualizado
+	 * @ parametro novo   --- produto atualizado
+	 */
+	public boolean atualizar(Produto antigo, Produto novo) {
+		if( novo == null ) {
+			return false;
+		}
+		
+		int posicao = this.retornarPosicao(antigo);
+		
+		if( posicao == -1 ) {
+			return false;
+		}
+		
+		this.estoque.set(posicao, novo);
+		return true;
+	}
 	
 	
-	
+	/*
+	 * este metodo retorna o tamanho de produtos no estoque
+	 * 	
+	 * Obs.: O metodo retorna o numero de produtos DIFERENTES no estoque
+	 */
+	public int tamanho() {
+		return this.estoque.size();
+	}
 	
 	
 	
