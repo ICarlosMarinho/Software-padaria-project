@@ -1,8 +1,8 @@
-package intermediario;
+package negocio;
 
 import repositorio.RepositorioFuncionario;
-import basico.Funcionario;
-import basico.Endereco;
+import classesBasicas.Funcionario;
+import classesBasicas.Endereco;
 
 public class IntermediarioFuncionario {
 	

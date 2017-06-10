@@ -1,6 +1,6 @@
 package repositorio;
 
-import basico.Cliente;
+import classesBasicas.Cliente;
 
 import java.util.ArrayList;
 

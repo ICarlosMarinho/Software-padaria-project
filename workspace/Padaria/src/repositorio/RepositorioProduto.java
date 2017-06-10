@@ -1,6 +1,6 @@
 package repositorio;
 
-import basico.Produto;
+import classesBasicas.Produto;
 
 import java.util.ArrayList;
 

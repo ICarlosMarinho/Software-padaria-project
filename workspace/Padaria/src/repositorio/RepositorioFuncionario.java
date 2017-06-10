@@ -1,6 +1,6 @@
 package repositorio;
 
-import basico.Funcionario;
+import classesBasicas.Funcionario;
 
 import java.util.ArrayList;
 
