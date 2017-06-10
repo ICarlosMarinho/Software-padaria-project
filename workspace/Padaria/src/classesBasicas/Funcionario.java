@@ -1,4 +1,4 @@
-package basico;
+package classesBasicas;
 
 public class Funcionario {
 	
