@@ -13,6 +13,19 @@ public class Produto {
 	private int quantidade;
 	private double preco;
 	
+	// construtores
+	public Produto() {}
+	public Produto(String nome, String descricao, int id
+				  , Calendar validade, int quantidade, double preco) {
+		
+		this.nome = nome;
+		this.descricao = descricao;
+		this.id = id;
+		this.validade = validade;
+		this.quantidade = quantidade;
+		this.preco = preco;
+	}
+	
 	
 	// metodos get
 	public String getNome() {

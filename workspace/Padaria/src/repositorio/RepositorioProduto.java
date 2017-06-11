@@ -7,18 +7,34 @@ import java.util.ArrayList;
 public class RepositorioProduto {
 	
 	// atributos
-	private ArrayList<Produto> estoque;
+	private ArrayList<Produto> produtos;
 	
 	
 	// construtores
 	public RepositorioProduto() {
-		this.estoque = new ArrayList<Produto>();
+		this.produtos = new ArrayList<Produto>();
 	}
 	public RepositorioProduto(int tamanhoInicial) {
-		this.estoque = new ArrayList<Produto>(tamanhoInicial);
+		this.produtos = new ArrayList<Produto>(tamanhoInicial);
 	}
 	public RepositorioProduto(ArrayList<Produto> aux) {
-		this.estoque = aux;
+		this.produtos = aux;
+	}
+	
+	
+	// metodo get
+	public Produto[] getProdutos() {
+		
+		int tamanho = produtos.size();
+		
+		Produto[] lista = new Produto[tamanho];
+		
+		
+		for( int k = 0; k < tamanho; k++ ) {
+			lista[k] = produtos.get(k);
+		}
+		
+		return lista;
 	}
 	
 	
@@ -36,10 +52,28 @@ public class RepositorioProduto {
 		
 		Produto aux;
 		
-		for(int a = 0; a < this.estoque.size(); a++) {
+		for(int a = 0; a < this.produtos.size(); a++) {
 			
-			aux = this.estoque.get(a);
+			aux = this.produtos.get(a);
 			if( aux.getId() == procurado.getId() ) {
+				return a;
+			}
+		
+		}
+		
+		return -1;
+	}
+	private int retornarPosicao(String nome) {
+		if( nome == null ) {
+			return -1;
+		}
+		
+		Produto aux;
+		
+		for(int a = 0; a < this.produtos.size(); a++) {
+			
+			aux = this.produtos.get(a);
+			if( nome.equals(aux.getNome()) ) {
 				return a;
 			}
 		
@@ -64,7 +98,7 @@ public class RepositorioProduto {
 			return false;
 		}
 		
-		this.estoque.add(novo);
+		this.produtos.add(novo);
 		return true;	
 	}
 	
@@ -82,7 +116,7 @@ public class RepositorioProduto {
 			return false;
 		}
 		
-		this.estoque.remove(posicao);
+		this.produtos.remove(posicao);
 		return true;
 	}
 	
@@ -100,9 +134,18 @@ public class RepositorioProduto {
 			return null;
 		}
 		
-		return this.estoque.get(posicao);
+		return this.produtos.get(posicao);
 	}
-	
+	public Produto buscar(String nome) {
+		
+		int posicao = retornarPosicao(nome);
+		
+		if( posicao == -1 ) {
+			return null;
+		}
+		
+		return this.produtos.get(posicao);
+	}
 	
 	/*
 	 * este metodo atualiza um produto no estoque
@@ -121,7 +164,7 @@ public class RepositorioProduto {
 			return false;
 		}
 		
-		this.estoque.set(posicao, novo);
+		this.produtos.set(posicao, novo);
 		return true;
 	}
 	
@@ -132,7 +175,7 @@ public class RepositorioProduto {
 	 * Obs.: O metodo retorna o numero de produtos DIFERENTES no estoque
 	 */
 	public int tamanho() {
-		return this.estoque.size();
+		return this.produtos.size();
 	}
 	
 	
