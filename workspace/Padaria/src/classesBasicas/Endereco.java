@@ -63,8 +63,13 @@ public class Endereco {
 
 	
 	// metodo toString
-	public String toString() {
-		return this.logradouro + " nº " + this.numero + " | " + this.complemento + ", " + this.cidade + ", " + this.estado;
+	public String toString() 
+        {
+		return "\n\tLogradouro: " + this.logradouro 
+                        + "\n\tnº:  " + this.numero 
+                        + "\n\tComplemento: " + this.complemento 
+                        + "\n\tCidade: " + this.cidade 
+                        + "\n\tEstado: " + this.estado;
 	}
 	
 	
