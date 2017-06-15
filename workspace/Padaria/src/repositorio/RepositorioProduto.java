@@ -120,7 +120,6 @@ public class RepositorioProduto {
 		return true;
 	}
 	
-	
 	/*
 	 * este metodo procura um produto no estoque e o devolve se existir
 	 * 

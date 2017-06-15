@@ -38,24 +38,60 @@ public class IntermediarioProduto {
 			return false;
 		}
 		
-		if(    mes < atual.getMinimum(Calendar.MONTH) 
-			|| mes > atual.getMaximum(Calendar.MONTH) 
-			|| mes < atual.get(Calendar.MONTH)      ) {
+		if(    mes < atual.getMinimum(Calendar.MONTH)
+		    || mes > atual.getMaximum(Calendar.MONTH) ) {
 			
-			return false; // mes incompativel
+			return false;
 		}
 		
 		
-		Calendar validade = Calendar.getInstance();
-		
-		validade.set(Calendar.YEAR, ano);
-		validade.set(Calendar.MONTH, mes);
-		
-		if(    dia < validade.getMinimum(Calendar.DAY_OF_MONTH)
-		    || dia > validade.getMaximum(Calendar.DAY_OF_MONTH)
-		    || dia < atual.get(Calendar.DAY_OF_MONTH)         ) {
+		if( ano == atual.get(Calendar.YEAR) ) {
 			
-			return false; // dia incompativel
+			if( mes < atual.get(Calendar.MONTH) ) {
+					return false;
+			}
+			
+			
+			
+			Calendar validade = Calendar.getInstance();
+			
+			validade.set(Calendar.YEAR, ano);
+			validade.set(Calendar.MONTH, mes);
+			
+			
+			if(    dia < validade.getActualMinimum(Calendar.DAY_OF_MONTH)
+			    || dia > validade.getActualMaximum(Calendar.DAY_OF_MONTH) ) {
+				
+				return false;
+			}
+			
+			
+			
+			if( mes == atual.get(Calendar.MONTH) ) {
+				
+				if( dia <= atual.get(Calendar.DAY_OF_MONTH) ) {
+					return false;
+				}
+			}
+			
+			
+		} else { // ano > maior que ano atual
+			
+			
+			Calendar validade = Calendar.getInstance();
+			
+			validade.set(Calendar.YEAR, ano);
+			validade.set(Calendar.MONTH, mes);
+			
+			
+			
+			if(    dia < validade.getActualMinimum(Calendar.DAY_OF_MONTH)
+			    || dia > validade.getActualMaximum(Calendar.DAY_OF_MONTH) ) {
+				
+				return false;
+			}
+			
+			
 		}
 		
 		return true;
@@ -83,9 +119,11 @@ public class IntermediarioProduto {
 		}
 		mes--;
 		if( !validadeOK(dia, mes, ano) ) {
+			System.out.println("validade inválida"); // remover
 			return false;
 		}
 		if( this.estoque.buscar(nome) != null ) {
+			System.out.println("Ja existe"); // remover
 			return false;
 		}
 		
@@ -138,6 +176,7 @@ public class IntermediarioProduto {
 			
 		}
 	}
+	
 	
 	
 	/*

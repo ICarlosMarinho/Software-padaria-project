@@ -186,7 +186,7 @@ public class IntermediarioCliente {
 			return false;
 		}
 		
-		if( campo > 5 || campo < 1) {
+		if( campo > 5 || campo < 0) {
 			// campo errado
 			return false;
 		}
