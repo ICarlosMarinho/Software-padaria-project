@@ -1,6 +1,7 @@
 package sistemaPadaria;
 import java.util.Scanner;
 import classesBasicas.*;
+import negocio.SistemaPadaria;
 
 public class MenuGerencia 
 {

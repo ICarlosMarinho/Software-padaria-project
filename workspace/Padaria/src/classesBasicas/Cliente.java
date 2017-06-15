@@ -11,7 +11,8 @@ public class Cliente {
 	
 	// construtores
 	public Cliente() {}
-	public Cliente(String nome, int id, Endereco endereco, int qtdVendas, double valorVendas) {
+	public Cliente(String nome, int id, Endereco endereco
+				  , int qtdVendas, double valorVendas) {
 		this.nome = nome;
 		this.id = id;
 		this.endereco = endereco;

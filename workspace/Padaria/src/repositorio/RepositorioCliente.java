@@ -22,6 +22,21 @@ public class RepositorioCliente {
 	}
 	
 	
+	// metodo get
+	public Cliente[] getClientes() {
+		
+		Cliente[] lista = new Cliente[clientes.size()];
+		
+		
+		for( int k = 0; k < lista.length; k++ ) {
+			
+			lista[k] = clientes.get(k);
+			
+		}
+		
+		return lista;
+	}
+	
 	/*
 	 * metodo para adicionar um novo Cliente ao repositorio
 	 * 
@@ -89,6 +104,15 @@ public class RepositorioCliente {
 		
 		return this.clientes.get(posicao);
 	}
+	public Cliente buscar(String nome) {
+		int posicao = this.retornarPosicao(nome);
+		
+		if( posicao == -1 ) {
+			return null;
+		}
+		
+		return this.clientes.get(posicao);
+	}
 	
 	
 	/*
@@ -118,8 +142,33 @@ public class RepositorioCliente {
 		
 		return -1;
 	}
+	private int retornarPosicao(String nome) {
+		if( nome == null ) {
+			return -1;
+		}
+		
+		Cliente aux;
+		
+		for(int a = 0; a < this.clientes.size(); a++) {
+			
+			aux = this.clientes.get(a);
+			if( nome.equals(aux.getNome()) ) {
+				return a;
+			}
+			
+		}
+		
+		return -1;
+	}
 	
-	
+	/*
+	 * este metodo retorna o tamanho do repositorio clientes
+	 * 
+	 * @ retorna tamanho --- quantidade de clientes cadastrados
+	 */
+	public int tamanho() {
+		return this.clientes.size();
+	}
 	
 	
 }
