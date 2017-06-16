@@ -20,12 +20,6 @@ public class Endereco {
 		this.estado = estado;
 	}
 	
-	
-	
-	
-	
-	
-	
 	// metodos get
 	public String getLogradouro() {
 		return this.logradouro;

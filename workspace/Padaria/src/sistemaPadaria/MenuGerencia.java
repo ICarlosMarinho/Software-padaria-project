@@ -5,18 +5,13 @@ import negocio.SistemaPadaria;
 
 public class MenuGerencia 
 {
-        
-    SistemaPadaria sistema = SistemaPadaria.getInstancia();
-    Scanner input;
-    Funcionario auxFun;
-    Endereco auxEnd;
-    int auxOpc;
-    
+    private int auxOpc;
+    private Scanner input;
+    private SubmenusFuncionario subFun;
     
     public MenuGerencia() 
     {
-        this.auxFun = new Funcionario();
-        this.auxEnd = new Endereco();
+        this.subFun = new SubmenusFuncionario();
         this.input = new Scanner(System.in);
         this.auxOpc = 0;
     }
@@ -27,9 +22,8 @@ public class MenuGerencia
         
         System.out.println("1.Funcionarios\n"
                 + "2.Produtos\n"
-                + "3.Fornecedores\n"
-                + "4.Clientes\n\n"
-                + "5.Sair\n");
+                + "3.Clientes\n\n"
+                + "4.Sair\n");
         
        this.auxOpc = Integer.parseInt(input.nextLine());
        
@@ -39,7 +33,7 @@ public class MenuGerencia
            {
                do
                {
-                    System.out.println("***FUNCIONARIOS***\n\n\n");
+                    System.out.print("***FUNCIONARIOS***\n\n\n");
                
                     System.out.println("1.Cadastar funcionario\n"
                             + "2.Editar funcionario\n"
@@ -52,104 +46,27 @@ public class MenuGerencia
 
                     switch(this.auxOpc)
                     {
-                        case 1://**CADASTRO DE UM FUNCIONARIO
+                        case 1://**CADASTRAR UM FUNCIONARIO
                         {
-                            System.out.print("Insira o nome do funcionario: ");
-                            this.auxFun.setNome(input.nextLine());
-
-                            System.out.print("Insira o cargo: ");
-                            this.auxFun.setCargo(input.nextLine());
-                           
-                            do
-                            {
-                                this.auxFun.setId(sistema.atribuirIdFuncionario(this.auxFun.getCargo()));
-                            }
-                            while(sistema.buscarFuncionario(this.auxFun.getId()) != null);
-                          
-                            System.out.print("ID: " + this.auxFun.getId());
-
-                            System.out.print("\nInsira o login: ");
-                            this.auxFun.setLogin(input.nextLine());
-
-                            System.out.print("Insira a senha: ");
-                            this.auxFun.setSenha(input.nextLine());
-
-                            System.out.print("Insira o salario: R$");
-                            this.auxFun.setSalario(Double.parseDouble(input.nextLine()));
-
-                            this.auxFun.setValorVendas(0);
-
-                            //**PARTE DE CADASTRO DO ENDEREÇO DO FUNCIONARIO QUE ESTA SENDO CADASTRADO
-
-                            System.out.print("\n\n\t**Endereco**\n\n");
-
-                            System.out.print("Insira o logradouro: ");
-                            this.auxEnd.setLogradouro(input.nextLine());
-
-                            System.out.print("Insira o numero: ");
-                            this.auxEnd.setNumero(input.nextLine());
-
-                            System.out.print("Insira o complemento: ");              
-                            this.auxEnd.setComplemento(input.nextLine());
-
-                            System.out.print("Insira a cidade: ");
-                            this.auxEnd.setCidade(input.nextLine());
-
-                            System.out.print("Insira o Estado: ");
-                            this.auxEnd.setEstado(input.nextLine());
-
-                            this.auxFun.setEndereco(auxEnd);//**ATRIBUIR O ENDEREÇO QUE FOI PREENCHIDO AO FUNCIONARIO CADASTRADO
-
-                            if(sistema.cadastrarFuncionario(auxFun) == true)//**CADASTRO EFETIVADO NO VETOR DE FUNCIONARIOS 
-                            {
-                                System.out.println("\n\nFuncionario cadastrado com sucesso!");
-                            }
+                            this.subFun.menuCadastrarFuncionaio();
                         }
                         break;
 
-                        case 2:
+                        case 2://**EDITAR FUNCIONARIO
                         {
-                            //Editar
+                            this.subFun.menuEditarFuncionario();
                         }
                         break;
 
                         case 3://**BUSCAR FUNCIONARIO USANDO O ID COMO ARGUMENTO
                         {
-                            int auxId;
-
-                            System.out.print("Insira o ID: ");
-                            auxId = Integer.parseInt(input.nextLine());
-
-                            if(sistema.buscarFuncionario(auxId) == null)
-                            {
-                               System.err.print("\n\nEsse funcionario nao existe!\n\n");
-                           
-                               break;
-                            }
-
-                            System.out.print(sistema.buscarFuncionario(auxId).toString() + "\n\n");
+                            this.subFun.menuBuscarFuncionario();
                         }
                         break;
 
                         case 4://EXCLUIR FUNCIONARIO USANDO ID COMO ARGUMENTO
                         {
-                            int auxId;
-
-                            System.out.print("Insira o ID: ");
-
-                            auxId = Integer.parseInt(input.nextLine());
-
-                            if(sistema.buscarFuncionario(auxId) == null)
-                            {
-                               System.err.print("\n\nEsse funcionario nao existe!\n\n");
-
-                               break;
-                            }
-
-                            if(sistema.excluirFuncionario(sistema.retornarPosicaoFuncionario(auxId)) == true)
-                            {
-                                System.out.print("\nFuncionario excuido com sucesso!\n\n");
-                            }
+                            this.subFun.menuExcluirFuncionario();
                         }
                         break;
 
@@ -161,8 +78,65 @@ public class MenuGerencia
                     }
                }
                while(this.auxOpc != 6);
-               
            }
+
+            case 2:
+            {
+                do
+                {
+                    System.out.print("***PRODUTOS***\n\n\n");
+               
+                    System.out.println("1.Cadastar produto\n"
+                            + "2.Editar produto\n"
+                            + "3.Buscar produto\n"
+                            + "4.Remover produto\n"
+                            + "5.Listar produtos\n"
+                            + "6.Sair\n");
+
+                    this.auxOpc = Integer.parseInt(input.nextLine());
+                    
+                    switch(auxOpc)
+                    {
+                        case 1:
+                        {
+                            //Cadastrar produto
+                        }
+                        break;
+                        
+                        case 2:
+                        {
+                            //Editar
+                        }
+                        break;
+                        
+                        case 3:
+                        {
+                            //Buscar
+                        }
+                        break;
+                        
+                        case 4:
+                        {
+                            //Remover
+                        }
+                        break;
+                        
+                        case 5:
+                        {
+                            //Listar
+                        }
+                        break;
+                    }
+                }
+                while(this.auxOpc != 6);
+            }
+            break;
+            
+            case 3:
+            {
+                //**clientes
+            }
+            break;
        }
     }
        

@@ -40,9 +40,19 @@ public class SistemaPadaria
        return this.opFuncionarios.excluir(posicaoFun);
    }
    
+   public boolean alterarInfoFuncionario(Funcionario auxFun)
+   {
+       return this.opFuncionarios.alterarInfo(auxFun);
+   }
+   
    public Funcionario buscarFuncionario(int auxId)
    {
        return this.opFuncionarios.buscar(auxId);
+   }
+   
+   public Funcionario buscarFuncionario(String auxLogin)
+   {
+       return this.opFuncionarios.buscar(auxLogin);
    }
    
    public int retornarPosicaoFuncionario(int auxId)
@@ -50,15 +60,13 @@ public class SistemaPadaria
        return this.opFuncionarios.retornarPosicao(auxId);
    }
    
-   public int atribuirIdFuncionario(String auxCargo)
+   public int atribuirIdFuncionario(Funcionario auxFun)
    {
-       return this.opFuncionarios.atribuirId(auxCargo);
+       return this.opFuncionarios.atribuirId(auxFun);
    }
    
    
-   
-   
-   //**METODOS DE ACESSO A CLASSE OPERACOESPRODUTO
+   //**METODOS DE ACESSO A CLASSE INTERMEDIARIOPRODUTO
    public boolean cadastrarProduto( String nome, String descricao
 		   						  , int dia, int mes, int ano
 		   						  , int quantidade, double preco ) {
@@ -104,7 +112,7 @@ public class SistemaPadaria
    
    
    
-   //**METODOS DE ACESSO A CLASSE OPERACOESCLIENTE
+   //**METODOS DE ACESSO A CLASSE INTERMEDIARIOCLIENTE
    public boolean cadastrarCliente( String nome, String logradouro, String numero
 			                      , String complemento, String cidade, String estado ) {
 	   

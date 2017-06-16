@@ -35,7 +35,18 @@ public class Funcionario
             this.valorVendas = valorVendas;
             this.salario = salario;
     }
-
+    
+    public Funcionario(Funcionario auxFun)
+    {
+        this.nome = auxFun.getNome();
+        this.cargo = auxFun.getCargo();
+        this.id = auxFun.getId();
+        this.login = auxFun.getLogin();
+        this.senha = auxFun.getSenha();
+        this.valorVendas = auxFun.getValorVendas();
+        this.salario = auxFun.getSalario();
+        this.endereco = auxFun.getEndereco();
+    }
 
     // metodos set
     public void setNome(String nome){
@@ -104,18 +115,5 @@ public class Funcionario
                 + "\n*ID: " + this.id 
                 + "\n*Total em vendas: " + this.valorVendas 
                 + "\n*Salario: R$" + this.salario;
-    }
-
-    // metodo equals
-    public boolean equals(Funcionario f) {
-            if(f == null) {
-                    return false;
-            }
-
-            if( this.id == f.id ) {
-                    return true;
-            }
-
-            return false;
     }
 }
