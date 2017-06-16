@@ -517,6 +517,13 @@ public class MenuCaixa {
                                     }
                                     break;
                                 }
+                                
+                                if(auxOpc < 1 || auxOpc > 6)
+                                {
+                                    System.err.println("\nOpção invalida.");
+
+                                    System.exit(0);
+                                }
                             }
                             while(auxOpc != 6);
                             

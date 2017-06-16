@@ -19,7 +19,7 @@ public class MenuGerente
  
     public void inicializarMenu()
     {
-        System.out.print("***MENU GERENCIA***\n\n\n");//**MENU PRINCIPAL
+        System.out.print("***MENU GERENTE***\n\n\n");//**MENU PRINCIPAL
         
         System.out.println("1.Funcionarios\n"
                 + "2.Produtos\n"
@@ -39,9 +39,8 @@ public class MenuGerente
                     System.out.println("1.Cadastar funcionario\n"
                             + "2.Editar funcionario\n"
                             + "3.Buscar funcionario\n"
-                            + "4.Remover funcionario\n"
-                            + "5.Ranking de vendas\n\n"
-                            + "6.Sair\n");
+                            + "4.Remover funcionario\n\n"
+                            + "5.Sair\n");
 
                     this.auxOpc = Integer.parseInt(input.nextLine());
 
@@ -70,15 +69,16 @@ public class MenuGerente
                             this.subFun.menuExcluirFuncionario();
                         }
                         break;
-
-                        case 5: 
-                        {
-                            //Ranking
-                        }
-                        break;
+                    }
+                    
+                    if(this.auxOpc < 1 || this.auxOpc > 5)
+                    {
+                        System.err.println("\nOpção invalida.");
+                        
+                        System.exit(0);
                     }
                }
-               while(this.auxOpc != 6);
+               while(this.auxOpc != 5);
            }
 
             case 2:
@@ -179,6 +179,13 @@ public class MenuGerente
                             this.subCli.menuListarClientes();
                         }
                         break;
+                    }
+                    
+                    if(this.auxOpc < 1 || this.auxOpc > 6)
+                    {
+                        System.err.println("\nOpção invalida.");
+                        
+                        System.exit(0);
                     }
                 }
                 while(this.auxOpc != 6);
