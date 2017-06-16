@@ -9,6 +9,7 @@ public class SistemaPadaria
    private OperacoesFuncionario opFuncionarios;
    private IntermediarioCliente opCliente;
    private IntermediarioProduto opProduto;
+   private SistemaLogin opLogin;
    
    
    private SistemaPadaria()
@@ -16,6 +17,7 @@ public class SistemaPadaria
 	   opFuncionarios = new OperacoesFuncionario();
 	   opCliente      = new IntermediarioCliente();
 	   opProduto      = new IntermediarioProduto();
+           opLogin        = new SistemaLogin();
    }
    
    public static SistemaPadaria getInstancia()
@@ -40,19 +42,29 @@ public class SistemaPadaria
        return this.opFuncionarios.excluir(posicaoFun);
    }
    
+   public boolean alterarInfoFuncionario(Funcionario auxFun)
+   {
+       return this.opFuncionarios.alterarInfo(auxFun);
+   }
+   
    public Funcionario buscarFuncionario(int auxId)
    {
        return this.opFuncionarios.buscar(auxId);
    }
    
+    public Funcionario buscarFuncionario(String auxLogin)
+   {
+       return this.opFuncionarios.buscar(auxLogin);
+   }
+      
    public int retornarPosicaoFuncionario(int auxId)
    {
        return this.opFuncionarios.retornarPosicao(auxId);
    }
    
-   public int atribuirIdFuncionario(String auxCargo)
+   public int atribuirIdFuncionario(Funcionario auxFun)
    {
-       return this.opFuncionarios.atribuirId(auxCargo);
+       return this.opFuncionarios.atribuirId(auxFun);
    }
    
    
@@ -156,6 +168,11 @@ public class SistemaPadaria
    
    public boolean modificarCliente( int id, int campo, String valor ) {
 	   return this.opCliente.modificar( id, campo, valor );
+   }
+   
+   public String inicializarSistemaLogin(String auxLogin, String auxSenha)
+   {
+       return this.opLogin.InicializarLogin(auxLogin, auxSenha);
    }
    
 }

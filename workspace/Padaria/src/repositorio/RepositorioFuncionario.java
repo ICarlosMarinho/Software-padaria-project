@@ -31,7 +31,7 @@ public class RepositorioFuncionario
     
     public void inserirFuncionario(Funcionario novoFun)
     {        
-        this.funcionarios[this.totalFuncionarios] = novoFun;
+        this.funcionarios[this.totalFuncionarios] = new Funcionario(novoFun);
         
         this.totalFuncionarios++;
     }
