@@ -92,6 +92,11 @@ public class MenuCaixa {
 	 */
 	public void inicializarMenu() {
 		
+		this.sistema.cadastrarCliente("jonas", "-", "-", "-", "-", "-");
+		
+		System.out.println( this.sistema.buscarCliente("jonas") );
+		
+		
 		boolean continuar = true;
 		
 		do {
@@ -266,6 +271,7 @@ public class MenuCaixa {
 				
 				if( editar == null ) {
 					System.out.println("Produto não encontrado");
+					break;
 				}
 				
 				System.out.println("O que editar: \n");
@@ -484,6 +490,7 @@ public class MenuCaixa {
 			
 		} while ( continuar );
 	
+		
 		
 	}
 	
