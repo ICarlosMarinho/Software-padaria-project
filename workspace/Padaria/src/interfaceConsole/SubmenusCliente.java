@@ -1,6 +1,7 @@
 package interfaceConsole;
 
 import classesBasicas.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 import negocio.SistemaPadaria;
 
@@ -10,12 +11,13 @@ public class SubmenusCliente
    private Scanner input;
    private Cliente auxCli;
    private Endereco auxEnd;
-   private int auxOpc;
+   private int auxId;
+   private Cliente[] auxLista;
    
    public SubmenusCliente()
    {
        this.input = new Scanner(System.in);
-       this.auxOpc = 0;
+       this.auxLista = new Cliente[sistema.totalCliente()];
    }
    
    public void menuCadastrarCliente()
@@ -56,5 +58,48 @@ public class SubmenusCliente
        }
    }
    
+   public void menuRemoverCliente()
+   {
+       System.out.print("Insira o ID do cliente: ");
+       this.auxId = Integer.parseInt(input.nextLine());
+       
+       if(sistema.removerCliente(auxId) == true)
+       {
+           System.out.println("\n\nCliente removido com sucesso!");
+       }
+       else
+       {
+           System.err.println("\n\nErro na operação.");
+       }
+   }
    
+   public void menuBuscarCliente()
+   {
+        System.out.print("Insira o ID do cliente: ");
+        this.auxId = Integer.parseInt(input.nextLine());
+        
+        if(sistema.buscarCliente(auxId) != null)
+        {
+            System.out.println(sistema.buscarCliente(auxId).toString());
+        }
+        else 
+        {
+            System.out.println("Cliente não encontrado.");
+        }
+   }
+   
+   public void menuListarClientes()
+   {
+       this.auxLista = sistema.listaCliente();
+       
+       for(int i = 0; i < this.auxLista.length; i++)
+       {
+           System.out.println(this.auxLista[i].toString());
+       }
+   }
+   
+   public void menuEditarCliente()
+   {
+       //**Falta desenvolver.
+   }
 }

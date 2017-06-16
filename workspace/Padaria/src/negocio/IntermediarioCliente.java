@@ -167,7 +167,7 @@ public class IntermediarioCliente {
 	 * 							1] mudar o logradouro
 	 * 							2] mudar o numero
 	 * 							3] mudar o complemento
-	 * 						    4] mudar a cidade
+	 *                                                      4] mudar a cidade
 	 * 							5] mudar o estado
 	 * 
 	 * 

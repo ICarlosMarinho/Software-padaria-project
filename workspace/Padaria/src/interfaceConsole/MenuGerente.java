@@ -1,18 +1,18 @@
 package interfaceConsole;
 
 import java.util.Scanner;
-import classesBasicas.*;
-import negocio.SistemaPadaria;
 
-public class MenuGerencia 
+public class MenuGerente 
 {
     private int auxOpc;
     private Scanner input;
     private SubmenusFuncionario subFun;
+    private SubmenusCliente subCli;
     
-    public MenuGerencia() 
+    public MenuGerente() 
     {
         this.subFun = new SubmenusFuncionario();
+        this.subCli = new SubmenusCliente();
         this.input = new Scanner(System.in);
         this.auxOpc = 0;
     }
@@ -135,7 +135,53 @@ public class MenuGerencia
             
             case 3:
             {
-                //**clientes
+                do
+                {
+                    System.out.print("***CLIENTES***\n\n\n");
+               
+                    System.out.println("1.Cadastar cliente\n"
+                            + "2.Editar cliente\n"
+                            + "3.Buscar cliente\n"
+                            + "4.Remover cliente\n"
+                            + "5.Listar clientes\n"
+                            + "6.Sair\n");
+
+                    this.auxOpc = Integer.parseInt(input.nextLine());
+                    
+                    switch(auxOpc)
+                    {
+                        case 1:
+                        {
+                            this.subCli.menuCadastrarCliente();
+                        }
+                        break;
+                        
+                        case 2:
+                        {
+                            this.subCli.menuEditarCliente();
+                        }
+                        break;
+                        
+                        case 3:
+                        {
+                            this.subCli.menuBuscarCliente();
+                        }
+                        break;
+                        
+                        case 4:
+                        {
+                            this.subCli.menuRemoverCliente();
+                        }
+                        break;
+                        
+                        case 5:
+                        {
+                            this.subCli.menuListarClientes();
+                        }
+                        break;
+                    }
+                }
+                while(this.auxOpc != 6);
             }
             break;
        }
