@@ -92,10 +92,6 @@ public class MenuCaixa {
 	 */
 	public void inicializarMenu() {
 		
-		this.sistema.cadastrarCliente("jonas", "-", "-", "-", "-", "-");
-		
-		System.out.println( this.sistema.buscarCliente("jonas") );
-		
 		
 		boolean continuar = true;
 		
