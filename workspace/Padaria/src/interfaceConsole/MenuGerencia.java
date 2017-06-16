@@ -29,8 +29,10 @@ public class MenuGerencia
         System.out.println("1.Funcionarios\n"
                 + "2.Produtos\n"
                 + "3.Fornecedores\n"
-                + "4.Clientes\n\n"
-                + "5.Sair\n");
+                + "4.Ajustar Porcentual de crédito\n"
+                + "5.Valor máximo de crédito\n"
+                + "6.Clientes\n\n"
+                + "7.Sair\n");
         
        this.auxOpc = Integer.parseInt(input.nextLine());
        
@@ -131,8 +133,42 @@ public class MenuGerencia
                             System.out.print(sistema.buscarFuncionario(auxId).toString() + "\n\n");
                         }
                         break;
+                        
+                        case 4: { // Ajustar porcentual de credito
+                        	
+                        	System.out.print("Insira o novo porcentual [0 - 100]%: ");
+                        	double novoPorcentual = this.input.nextDouble();
+                        	this.input.nextLine();
+                        	
+                        	if( novoPorcentual < 0 ) {
+                        		System.out.println("Porcentual inválido\n");
+                        		break;
+                        	}
+                        	
+                        	novoPorcentual /= 100;
+                        	
+                        	this.sistema.setPorcentual(novoPorcentual);
+                        	break;
+                        }
+                        
+                        case 5: { // Ajustar maximo de credito
+                        	
+                        	System.out.print("Insira o novo maximo de credito: ");
+                        	double novoMaximo = this.input.nextDouble();
+                        	this.input.nextLine();
+                        	
+                        	if( novoMaximo < 0 ) {
+                        		System.out.println("Máximo inválido\n");
+                        		break;
+                        	}
+                        	
+                        	this.sistema.setMax(novoMaximo);
+                        	break;
+                        	
+                        }
+                        
 
-                        case 4://EXCLUIR FUNCIONARIO USANDO ID COMO ARGUMENTO
+                        case 6://EXCLUIR FUNCIONARIO USANDO ID COMO ARGUMENTO
                         {
                             int auxId;
 
@@ -154,7 +190,7 @@ public class MenuGerencia
                         }
                         break;
 
-                        case 5: 
+                        case 7: 
                         {
                             //Ranking
                         }

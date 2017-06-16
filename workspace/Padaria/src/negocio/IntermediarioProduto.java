@@ -27,6 +27,14 @@ public class IntermediarioProduto {
 		return this.estoque;
 	}
 
+	// metodo set
+	public static void setMax( double max ) {
+		IntermediarioProduto.max = max;
+	}
+	public static void setPorcentual( double porcentual ) {
+		IntermediarioProduto.porcentual = porcentual;
+	}
+	
 	/*
 	 *  verifica a validade de uma data
 	 * 

@@ -59,6 +59,14 @@ public class SistemaPadaria
    
    
    //**METODOS DE ACESSO A CLASSE OPERACOESPRODUTO
+   public boolean setPorcentual( double porcentual ) {
+	   return this.setPorcentual(porcentual);
+   }
+   
+   public boolean setMax( double max ) {
+	   return this.setMax(max);
+   }
+   
    public boolean cadastrarProduto( String nome, String descricao
 		   						  , int dia, int mes, int ano
 		   						  , double quantidade, double preco ) {
