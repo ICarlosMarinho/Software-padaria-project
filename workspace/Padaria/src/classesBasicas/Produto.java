@@ -10,13 +10,13 @@ public class Produto {
 	private String descricao;
 	private int id;
 	private Calendar validade;
-	private int quantidade;
+	private double quantidade;
 	private double preco;
 	
 	// construtores
 	public Produto() {}
 	public Produto(String nome, String descricao, int id
-				  , Calendar validade, int quantidade, double preco) {
+				  , Calendar validade, double quantidade, double preco) {
 		
 		this.nome = nome;
 		this.descricao = descricao;
@@ -40,7 +40,7 @@ public class Produto {
 	public Calendar getValidade() {
 		return this.validade;
 	}
-	public int getQuantidade() {
+	public double getQuantidade() {
 		return this.quantidade;
 	}
 	public double getPreco() {
@@ -61,7 +61,7 @@ public class Produto {
 	public void setValidade(Calendar validade) {
 		this.validade = validade;
 	}
-	public void setQuantidade(int quantidade) {
+	public void setQuantidade(double quantidade) {
 		this.quantidade = quantidade;
 	}
 	public void setPreco(double preco) {

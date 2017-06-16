@@ -151,7 +151,20 @@ public class IntermediarioCliente {
 		return this.clientes.getClientes();
 	}
 	
-	
+	/*
+	 * este metodo atualiza um cliente
+	 * 
+	 * @ parametro antigo --- cliente para ser sobrescrito
+	 * @ parametro novo   --- cliente para sobrescrever
+	 */
+	public boolean atualizar(Cliente antigo, Cliente novo) {
+		if( antigo == null || novo == null ) {
+			return false;
+		}
+		
+		this.clientes.atualizar(antigo, novo);
+		return true;
+	}
 	
 	/*
 	 * este metodo modifica um cliente cadastrado
@@ -200,9 +213,9 @@ public class IntermediarioCliente {
 		String cidadeAntigo      = antigo.getEndereco().getCidade();
 		String estadoAntigo      = antigo.getEndereco().getEstado();
 		
-		int qtdVendas  = antigo.getQtdVendas();
+		double qtdVendas   = antigo.getQtdVendas();
 		double valorVendas = antigo.getValorVendas();
-		
+		double credito     = antigo.getCredito();
 		
 		
 		
@@ -216,6 +229,7 @@ public class IntermediarioCliente {
 				
 				Cliente atualizado = new Cliente( valor, id, endereco
 												, qtdVendas, valorVendas);
+				atualizado.setCredito(credito);
 				
 				
 				this.clientes.atualizar(antigo, atualizado);
@@ -230,6 +244,8 @@ public class IntermediarioCliente {
 				
 				Cliente atualizado = new Cliente( nomeAntigo, id, endereco
 												, qtdVendas, valorVendas);
+				atualizado.setCredito(credito);
+				
 				
 				
 				this.clientes.atualizar(antigo, atualizado);
@@ -244,6 +260,7 @@ public class IntermediarioCliente {
 				
 				Cliente atualizado = new Cliente( nomeAntigo, id, endereco
 												, qtdVendas, valorVendas);
+				atualizado.setCredito(credito);
 				
 				
 				this.clientes.atualizar(antigo, atualizado);
@@ -258,6 +275,7 @@ public class IntermediarioCliente {
 				
 				Cliente atualizado = new Cliente( nomeAntigo, id, endereco
 												, qtdVendas, valorVendas);
+				atualizado.setCredito(credito);
 				
 				
 				this.clientes.atualizar(antigo, atualizado);
@@ -272,6 +290,7 @@ public class IntermediarioCliente {
 				
 				Cliente atualizado = new Cliente( nomeAntigo, id, endereco
 												, qtdVendas, valorVendas);
+				atualizado.setCredito(credito);
 				
 				
 				this.clientes.atualizar(antigo, atualizado);
@@ -286,6 +305,7 @@ public class IntermediarioCliente {
 				
 				Cliente atualizado = new Cliente( nomeAntigo, id, endereco
 												, qtdVendas, valorVendas);
+				atualizado.setCredito(credito);
 				
 				
 				this.clientes.atualizar(antigo, atualizado);

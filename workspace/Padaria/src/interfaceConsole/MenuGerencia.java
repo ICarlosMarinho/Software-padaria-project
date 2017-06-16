@@ -1,4 +1,4 @@
-package sistemaPadaria;
+package interfaceConsole;
 import java.util.Scanner;
 import classesBasicas.*;
 import negocio.SistemaPadaria;
@@ -6,7 +6,7 @@ import negocio.SistemaPadaria;
 public class MenuGerencia 
 {
         
-    SistemaPadaria sistema = SistemaPadaria.getInstancia();
+    SistemaPadaria sistema;
     Scanner input;
     Funcionario auxFun;
     Endereco auxEnd;
@@ -15,6 +15,7 @@ public class MenuGerencia
     
     public MenuGerencia() 
     {
+    	this.sistema = SistemaPadaria.getInstancia();
         this.auxFun = new Funcionario();
         this.auxEnd = new Endereco();
         this.input = new Scanner(System.in);

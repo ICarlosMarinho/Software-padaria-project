@@ -61,11 +61,15 @@ public class SistemaPadaria
    //**METODOS DE ACESSO A CLASSE OPERACOESPRODUTO
    public boolean cadastrarProduto( String nome, String descricao
 		   						  , int dia, int mes, int ano
-		   						  , int quantidade, double preco ) {
+		   						  , double quantidade, double preco ) {
 	   
 	   return this.opProduto.cadastrar( nome, descricao
 			   						  , dia, mes, ano
 			   						  , quantidade, preco );
+   }
+   
+   public boolean validadeProduto(int dia, int mes, int ano) {
+	   return this.opProduto.validadeOK(dia, mes, ano);
    }
    
    public boolean removerProduto( int id ) {
@@ -80,11 +84,15 @@ public class SistemaPadaria
 	   
 	   return this.opProduto.modificar(id, opcao, dia, mes, ano);
    }
-   public boolean modificarProduto( int id, int opcao, int valor ) {
-	   return this.opProduto.modificar( id, opcao, valor);
-   }
    public boolean modificarProduto( int id, int opcao, double valor ) {
 	   return this.opProduto.modificar(id, opcao, valor);
+   }
+   
+   public boolean venderProduto( int idProduto, int idCliente, double quantidade ) {
+	   return this.opProduto.vender(idProduto, idCliente, quantidade);
+   }
+   public boolean venderProduto( int idProduto, double quantidade ) {
+	   return this.opProduto.vender(idProduto, quantidade);
    }
    
    public Produto buscarProduto( int id ) {
@@ -124,6 +132,10 @@ public class SistemaPadaria
    }
    public Cliente buscarCliente( String nome ) {
 	   return this.opCliente.buscar(nome);
+   }
+   
+   public boolean atualizarCliente( Cliente antigo, Cliente novo ) {
+	   return this.opCliente.atualizar(antigo, novo);
    }
    
    public int totalCliente() {
