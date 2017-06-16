@@ -5,21 +5,19 @@ public class Cliente {
 	private String nome;
 	private int id;
 	private Endereco endereco;
-	private double qtdVendas;
+	private int qtdVendas;
 	private double valorVendas;
-	private double credito;
 	
 	
 	// construtores
 	public Cliente() {}
 	public Cliente(String nome, int id, Endereco endereco
-				  , double qtdVendas, double valorVendas) {
+				  , int qtdVendas, double valorVendas) {
 		this.nome = nome;
 		this.id = id;
 		this.endereco = endereco;
 		this.qtdVendas = qtdVendas;
 		this.valorVendas = valorVendas;
-		this.credito = 0;
 	}
 	
 	
@@ -33,14 +31,11 @@ public class Cliente {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-	public void setQtdVendas(double qtdVendas) {
+	public void setQtdVendas(int qtdVendas) {
 		this.qtdVendas = qtdVendas;
 	}
 	public void setValorVendas(double valorVendas) {
 		this.valorVendas = valorVendas;
-	}
-	public void setCredito(double credito) {
-		this.credito = credito;
 	}
 	
 	
@@ -54,14 +49,11 @@ public class Cliente {
 	public Endereco getEndereco() {
 		return this.endereco;
 	}
-	public double getQtdVendas() {
+	public int getQtdVendas() {
 		return this.qtdVendas;
 	}
 	public double getValorVendas() {
 		return this.valorVendas;
-	}
-	public double getCredito() {
-		return this.credito;
 	}
 	
 	

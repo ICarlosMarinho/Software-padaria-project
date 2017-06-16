@@ -11,13 +11,15 @@ public class MenuCaixa {
 	
 	// atributos
 	SistemaPadaria sistema;
-	Scanner console;
+	private Scanner console;
+        private SubmenusCliente subCli;
 	
 	
 	// construtores
 	public MenuCaixa() {
 		this.sistema = SistemaPadaria.getInstancia();
 		console = new Scanner(System.in);
+                this.subCli = new SubmenusCliente();
 	}
 	
 	
@@ -127,7 +129,7 @@ public class MenuCaixa {
 				
 				
 				System.out.print("\nInsira a quantidade: ");
-				double quantidade = this.console.nextDouble();
+				int quantidade = this.console.nextInt();
 				this.console.nextLine();
 				
 				System.out.print("Insira o preço do produto: ");
@@ -135,7 +137,7 @@ public class MenuCaixa {
 				this.console.nextLine();
 				
 				
-				if ( this.sistema.cadastrarProduto(nome, descricao
+				if ( sistema.cadastrarProduto(nome, descricao
 											      , dia, mes, ano
 											      , quantidade, preco) ) {
 					
@@ -192,13 +194,13 @@ public class MenuCaixa {
 					
 					
 					dia = estoque[k].getValidade().get(Calendar.DAY_OF_MONTH);
-					mes = estoque[k].getValidade().get(Calendar.MONTH);
+                                        mes = estoque[k].getValidade().get(Calendar.MONTH);
 					ano = estoque[k].getValidade().get(Calendar.YEAR);
 					
 					
 					System.out.print( "Nome: " + estoque[k].getNome() );
 					
-					if( !this.sistema.validadeProduto(dia, mes, ano) ) {
+					if( sistema.validadeProduto(dia, mes, ano) ) {
 						System.out.println("*");
 					} else {
 						System.out.println();
@@ -469,10 +471,65 @@ public class MenuCaixa {
 			}
 			
 			case 7: { // cliente
-				
-				// TODO colocar aqui chamada para classe com os menus do cliente
-				System.out.println("Ainda para implementar");
-				break;
+			
+                            int auxOpc;
+                            
+                            do
+                            {
+                                System.out.print("***CLIENTES***\n\n\n");
+
+                                System.out.println("1.Cadastar cliente\n"
+                                        + "2.Editar cliente\n"
+                                        + "3.Buscar cliente\n"
+                                        + "4.Remover cliente\n"
+                                        + "5.Listar clientes\n"
+                                        + "6.Sair\n");
+
+                                auxOpc = Integer.parseInt(this.console.nextLine());
+
+                                switch(auxOpc)
+                                {
+                                    case 1:
+                                    {
+                                        this.subCli.menuCadastrarCliente();
+                                    }
+                                    break;
+
+                                    case 2:
+                                    {
+                                        this.subCli.menuEditarCliente();
+                                    }
+                                    break;
+
+                                    case 3:
+                                    {
+                                        this.subCli.menuBuscarCliente();
+                                    }
+                                    break;
+
+                                    case 4:
+                                    {
+                                        this.subCli.menuRemoverCliente();
+                                    }
+                                    break;
+
+                                    case 5:
+                                    {
+                                        this.subCli.menuListarClientes();
+                                    }
+                                    break;
+                                }
+                                
+                                if(auxOpc < 1 || auxOpc > 6)
+                                {
+                                    System.err.println("\nOpção invalida.");
+
+                                    System.exit(0);
+                                }
+                            }
+                            while(auxOpc != 6);
+                            
+                            break;
 			}
 			
 			

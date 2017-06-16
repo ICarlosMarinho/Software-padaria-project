@@ -4,13 +4,8 @@ import java.util.Calendar;
 
 import repositorio.RepositorioProduto;
 import classesBasicas.Produto;
-import classesBasicas.Cliente;
 
 public class IntermediarioProduto {
-	
-	// constantes
-	private static double max = 10.00;
-	private static double porcentual = 0.1;
 	
 	// atributos
 	private RepositorioProduto estoque;
@@ -36,13 +31,14 @@ public class IntermediarioProduto {
 	}
 	
 	/*
-	 *  verifica a validade de uma data
+	 * este metodo e particular da classe pois verifica
+	 * 	a validade de uma data
 	 * 
 	 * @ parametro dia  --- dia em questao
 	 * @ parametro mes  --- mes em questao
 	 * @ parametro ano  --- ano em questao
 	 */
-	public boolean validadeOK(int dia, int mes, int ano) {
+	private boolean validadeOK(int dia, int mes, int ano) {
 		
 		Calendar atual = Calendar.getInstance();
 		
@@ -124,7 +120,7 @@ public class IntermediarioProduto {
 	 */
 	public boolean cadastrar(String nome, String descricao
 						    , int dia, int mes, int ano
-						    , double quantidade, double preco) {
+						    , int quantidade, double preco) {
 		
 		if( nome == null || descricao == null || quantidade <= 0 || preco <= 0 ) {
 			return false;
@@ -190,150 +186,6 @@ public class IntermediarioProduto {
 	}
 	
 	
-	/*
-	 * este metodo vende um produto
-	 * 
-	 * @ parametro idProduto   --- id do produto do estoque a ser vendido
-	 * @ parametro idCliente   --- id do cliente se o mesmo esta cadastrado
-	 * @ parametro quantidade  --- quantidade do produto a ser vendido
-	 * 
-	 * @ retorna true          --- se a operacao for bem sucedida
-	 */
-	public boolean vender( int idProduto, int idCliente, double quantidade ) {
-		
-		SistemaPadaria sistema = SistemaPadaria.getInstancia();
-		
-		if( quantidade <= 0 ) {
-			return false;
-		}
-		
-		
-		Produto paraVender = this.buscar(idProduto);
-		
-		if( paraVender == null ) {
-			return false;
-		}
-		
-		
-		Cliente paraComprar = sistema.buscarCliente(idCliente);
-		
-		if( paraComprar == null ) {
-			return false;
-		}
-		
-		
-		
-		double precoProduto = paraVender.getPreco();
-		
-		if( quantidade == paraVender.getQuantidade() ) { // remover produto
-			
-			
-			this.estoque.remover(paraVender);
-			
-			double precoFinal = ( quantidade*precoProduto ) - paraComprar.getCredito();
-			
-			
-			// computar credito para proxima compra
-			double novoCredito;
-			if( precoFinal >= 0 ) {
-				
-				novoCredito = precoFinal * IntermediarioProduto.porcentual;
-				
-			} else {
-				
-				novoCredito = 0;
-				
-			}
-			
-			
-			if( novoCredito < IntermediarioProduto.max ) {
-				
-				paraComprar.setCredito(novoCredito);
-			
-			} else {
-				
-				paraComprar.setCredito( IntermediarioProduto.max );
-				
-			}
-			
-			paraComprar.setQtdVendas( paraComprar.getQtdVendas() + quantidade     );
-			paraComprar.setValorVendas( paraComprar.getValorVendas() + precoFinal );
-			
-			
-		} else {
-			
-			
-			// diminuir a quantidade no estoque
-			this.modificar( idProduto, 3, paraVender.getQuantidade() - quantidade );
-			
-			double precoFinal = ( quantidade*precoProduto ) - paraComprar.getCredito();
-			
-			// computar credito para proxima compra
-			double novoCredito;
-			if( precoFinal >= 0 ) {
-				
-				novoCredito = precoFinal * IntermediarioProduto.porcentual;
-				
-			} else {
-				
-				novoCredito = 0;
-				
-			}
-			
-			
-			if( novoCredito < IntermediarioProduto.max ) {
-				
-				paraComprar.setCredito(novoCredito);
-			
-			} else {
-				
-				paraComprar.setCredito( IntermediarioProduto.max );
-				
-			}
-
-			paraComprar.setQtdVendas( paraComprar.getQtdVendas() + quantidade     );
-			paraComprar.setValorVendas( paraComprar.getValorVendas() + precoFinal );
-			
-		}
-		
-		Cliente antigo = sistema.buscarCliente(idCliente);
-		
-		sistema.atualizarCliente( antigo, paraComprar );
-		
-		return true;
-	}
-	public boolean vender( int idProduto, double quantidade ) { // sem clientes cadastrados
-		
-		if( quantidade <= 0 ) {
-			return false;
-		}
-		
-		
-		Produto paraVender = this.buscar(idProduto);
-		
-		if( paraVender == null ) {
-			return false;
-		}
-		
-		
-		
-		if( quantidade == paraVender.getQuantidade() ) { // remover produto
-			
-			this.estoque.remover(paraVender);
-			
-		} else { // diminuir a quantidade no estoque
-			
-			this.modificar( idProduto, 3, (paraVender.getQuantidade() - quantidade) );
-			
-		}
-		
-		
-		
-		return true;
-	}
-
-
-
 	
 	/*
 	 * este metodo modifica um produto existente no estoque
@@ -442,9 +294,9 @@ public class IntermediarioProduto {
 		}
 	
 	}
-	public boolean modificar(int id, int opcao, double valor    ) {
+	public boolean modificar(int id, int opcao, int valor    ) {
 		
-		if( opcao != 3 && opcao != 4 ) {
+		if( opcao != 3 ) {
 			System.out.println("Argumento na função modificar errado");
 			return false;
 		}
@@ -458,23 +310,9 @@ public class IntermediarioProduto {
 			return false;
 		}
 		
-		Produto atualizado;
-		
-		if( opcao == 3 ) {
-			
-			atualizado = new Produto( antigo.getNome()      ,  antigo.getDescricao()
-					                        , antigo.getId()        ,   antigo.getValidade()
-					                        , valor                 ,  antigo.getPreco()   );
-			
-		} else {
-			
-			atualizado = new Produto( antigo.getNome()      ,  antigo.getDescricao()
-						                    , antigo.getId()        ,   antigo.getValidade()
-						                    , antigo.getQuantidade(),  valor               );
-			
-		}
-		
-		
+		Produto atualizado = new Produto( antigo.getNome()      ,  antigo.getDescricao()
+				                        , antigo.getId()        ,   antigo.getValidade()
+				                        , valor                 ,  antigo.getPreco()   );
 		
 		if( this.estoque.atualizar(antigo, atualizado) ) {
 			
@@ -486,6 +324,40 @@ public class IntermediarioProduto {
 			return false;
 			
 		}
+		
+	}
+	public boolean modificar(int id, int opcao, double valor ) {
+		
+		if( opcao != 4 ) {
+			System.out.println("Argumento na função modificar errado");
+			return false;
+		}
+		
+		
+		Produto auxiliar = new Produto(null, null, id, null, 0, 0);
+		Produto antigo = this.estoque.buscar(auxiliar);
+		
+		if( antigo == null ) {
+			//System.out.println("Produto não encontrado");
+			return false;
+		}
+		
+		Produto atualizado = new Produto( antigo.getNome()      ,  antigo.getDescricao()
+				                        , antigo.getId()        ,   antigo.getValidade()
+				                        , antigo.getQuantidade(),              valor   );
+		
+		
+		
+		if( this.estoque.atualizar(antigo, atualizado) ) {
+			
+			return true;
+			
+		} else {
+			
+			return false;
+			
+		}
+		
 		
 	}
 	
