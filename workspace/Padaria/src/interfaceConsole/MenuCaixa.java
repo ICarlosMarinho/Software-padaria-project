@@ -213,6 +213,8 @@ public class MenuCaixa {
 					
 				}
 				
+				System.out.println("* produtos vencidos");
+				
 				break;
 			}
 			
