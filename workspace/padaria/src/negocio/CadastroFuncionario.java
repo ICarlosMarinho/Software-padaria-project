@@ -4,14 +4,14 @@ import repositorio.RepositorioFuncionario;
 import classesBasicas.*;
 import java.util.Random;
 
-public class OperacoesFuncionario 
+public class CadastroFuncionario 
 {
     private static final int TAM_VETOR = 100; //**Tamanho do vetor de funcionarios
     
     private RepositorioFuncionario repo;
     private Random aleatorio = new Random();
     
-    public OperacoesFuncionario()
+    public CadastroFuncionario()
     {
         repo = new RepositorioFuncionario(TAM_VETOR);
     }

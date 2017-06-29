@@ -12,7 +12,7 @@ public class Venda {
 	private Funcionario vendedor;
 	
 	
-	// TODO constructor
+	// constructor
 	public Venda( Calendar data, Produto vendido, Cliente comprador, Funcionario vendedor ) {
 		
 		this.data = data;

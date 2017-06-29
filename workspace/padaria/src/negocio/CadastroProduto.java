@@ -6,7 +6,7 @@ import repositorio.RepositorioProduto;
 import classesBasicas.Produto;
 import classesBasicas.Cliente;
 
-public class IntermediarioProduto {
+public class CadastroProduto {
 	
 	// constantes
 	private static double max;
@@ -17,7 +17,7 @@ public class IntermediarioProduto {
 	
 	
 	// construtor
-	public IntermediarioProduto() {
+	public CadastroProduto() {
 		this.estoque = new RepositorioProduto();
 		max = 10;
 		porcentual = 0.1;
@@ -231,7 +231,7 @@ public class IntermediarioProduto {
 			double novoCredito;
 			if( precoFinal >= 0 ) {
 				
-				novoCredito = precoFinal * IntermediarioProduto.porcentual;
+				novoCredito = precoFinal * CadastroProduto.porcentual;
 				
 			} else {
 				
@@ -240,19 +240,21 @@ public class IntermediarioProduto {
 			}
 			
 			
-			if( novoCredito < IntermediarioProduto.max ) {
+			if( novoCredito < CadastroProduto.max ) {
 				
 				paraComprar.setCredito(novoCredito);
 			
 			} else {
 				
-				paraComprar.setCredito( IntermediarioProduto.max );
+				paraComprar.setCredito( CadastroProduto.max );
 				
 			}
 			
 			paraComprar.setQtdVendas( paraComprar.getQtdVendas() + quantidade     );
 			paraComprar.setValorVendas( paraComprar.getValorVendas() + precoFinal );
 			
+			// TODO melhorar o metodo de vendas mas passando como argumento o id do funcionario
+			//sistema.adicionarVenda( paraVender, vendedor);
 			
 		} else {
 			
@@ -266,7 +268,7 @@ public class IntermediarioProduto {
 			double novoCredito;
 			if( precoFinal >= 0 ) {
 				
-				novoCredito = precoFinal * IntermediarioProduto.porcentual;
+				novoCredito = precoFinal * CadastroProduto.porcentual;
 				
 			} else {
 				
@@ -275,13 +277,13 @@ public class IntermediarioProduto {
 			}
 			
 			
-			if( novoCredito < IntermediarioProduto.max ) {
+			if( novoCredito < CadastroProduto.max ) {
 				
 				paraComprar.setCredito(novoCredito);
 			
 			} else {
 				
-				paraComprar.setCredito( IntermediarioProduto.max );
+				paraComprar.setCredito( CadastroProduto.max );
 				
 			}
 

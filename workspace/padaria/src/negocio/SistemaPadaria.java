@@ -6,17 +6,19 @@ public class SistemaPadaria
 {
    private static SistemaPadaria system;
    
-   private OperacoesFuncionario opFuncionarios;
-   private IntermediarioCliente opCliente;
-   private IntermediarioProduto opProduto;
+   private CadastroFuncionario opFuncionarios;
+   private CadastroCliente opCliente;
+   private CadastroProduto opProduto;
+   private CadastroVendas opVendas;
    private SistemaLogin opLogin;
    
    
    private SistemaPadaria()
    {
-	   opFuncionarios = new OperacoesFuncionario();
-	   opCliente      = new IntermediarioCliente();
-	   opProduto      = new IntermediarioProduto();
+	   opFuncionarios = new CadastroFuncionario();
+	   opCliente      = new CadastroCliente();
+	   opProduto      = new CadastroProduto();
+	   opVendas       = new CadastroVendas();
    }
    
    public static SistemaPadaria getInstancia()
@@ -168,5 +170,22 @@ public class SistemaPadaria
    public boolean modificarCliente( int id, int campo, String valor ) {
 	   return this.opCliente.modificar( id, campo, valor );
    }
+
+
+   
+   
+   //**METODO DE ACESSO A CLASSE CADASTROVENDAS
+   public Venda[] listaVenda() {
+	   	return opVendas.lista();
+   }
+
+   public boolean adicionarVenda(Produto vendido, Funcionario vendedor) {
+	   return opVendas.adicionar(vendido, vendedor);
+   }
+
+   public boolean adicionarVenda(Produto vendido, Funcionario vendedor, Cliente comprador) {
+      return opVendas.adicionar(vendido, vendedor, comprador);
+   }
+   
    
 }

@@ -4,14 +4,14 @@ import repositorio.RepositorioCliente;
 import classesBasicas.Cliente;
 import classesBasicas.Endereco;
 
-public class IntermediarioCliente {
+public class CadastroCliente {
 	
 	// atributos
 	private RepositorioCliente clientes;
 	
 	
 	// construtores
-	public IntermediarioCliente() {
+	public CadastroCliente() {
 		this.clientes = new RepositorioCliente();
 	}
 	

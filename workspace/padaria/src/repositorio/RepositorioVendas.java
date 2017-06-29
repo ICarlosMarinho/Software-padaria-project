@@ -19,16 +19,7 @@ public class RepositorioVendas {
 
 	
 	
-	/*
-	 * TODO ADICIONAR ISTO no cadastro de vendas
-	 * 
-	 * este metodo adiciona uma nova venda no histórico das vendas
-	 * 
-	 * @ parametro data       --- data onde ocorreu a venda
-	 * @ parametro vendido    --- produto que foi vendido
-	 * @ parametro vendedor   --- o funcionario que vendeu o produto
-	 * @ parametro comprador  --- se o cliente foi cadastrado 	->	 opcional
-	 */
+	
 	
 	
 	/*
@@ -58,7 +49,7 @@ public class RepositorioVendas {
 	
 	
 	/*
-	 * este metodo adiciona uma nova venda no histórico das vendas
+	 * este metodo adiciona uma nova venda no histï¿½rico das vendas
 	 * 
 	 * @ parametro venda --- nova venda para adicionar
 	 */
