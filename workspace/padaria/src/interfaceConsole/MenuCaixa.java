@@ -12,7 +12,7 @@ public class MenuCaixa {
 	// atributos
 	SistemaPadaria sistema;
 	private Scanner console;
-        private SubmenusCliente subCli;
+    private SubmenusCliente subCli;
 	
 	
 	// construtores
@@ -92,7 +92,7 @@ public class MenuCaixa {
 	/*
 	 * menu principal do funcionario
 	 */
-	public void inicializarMenu() {
+	public void inicializarMenu( int idFuncionario ) {
 		
 		
 		boolean continuar = true;
@@ -429,7 +429,7 @@ public class MenuCaixa {
 					
 					System.out.println("Venda será efetuada para cliente não cadastado");
 				
-					if( this.sistema.venderProduto(idProduto, quantidade) ) {
+					if( this.sistema.efetuarVenda(idProduto, idFuncionario, quantidade) ) {
 	
 						System.out.println("Venda efetuada com sucesso !");
 						
@@ -452,8 +452,8 @@ public class MenuCaixa {
 					}
 					
 					
-					if( this.sistema.venderProduto(idProduto, idCliente
-												  , quantidade)        ) {
+					if( this.sistema.efetuarVenda( idProduto, idCliente
+												 , idFuncionario , quantidade) ) {
 						
 						System.out.println("Venda efetuada com sucesso !");
 						

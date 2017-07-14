@@ -1,7 +1,6 @@
 package interfaceConsole;
 
 import classesBasicas.*;
-import java.util.ArrayList;
 import java.util.Scanner;
 import negocio.SistemaPadaria;
 

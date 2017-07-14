@@ -69,7 +69,7 @@ public class Produto {
 	}
 	
 	
-	// metodo toString
+	@Override
 	public String toString() {
 		return String.format( "%-20s | R$%-20.2f | id --- %d%n", this.nome, this.preco, this.id);
 	}

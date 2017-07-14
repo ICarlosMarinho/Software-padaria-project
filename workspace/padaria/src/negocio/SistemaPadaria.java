@@ -10,7 +10,7 @@ public class SistemaPadaria
    private CadastroCliente opCliente;
    private CadastroProduto opProduto;
    private CadastroVendas opVendas;
-   private SistemaLogin opLogin;
+   //private SistemaLogin opLogin;
    
    
    private SistemaPadaria()
@@ -108,14 +108,7 @@ public class SistemaPadaria
    public boolean modificarProduto( int id, int opcao, double valor ) {
 	   return this.opProduto.modificar(id, opcao, valor);
    }
-   
-   public boolean venderProduto( int idProduto, int idCliente, double quantidade ) {
-	   return this.opProduto.vender(idProduto, idCliente, quantidade);
-   }
-   public boolean venderProduto( int idProduto, double quantidade ) {
-	   return this.opProduto.vender(idProduto, quantidade);
-   }
-   
+      
    public Produto buscarProduto( int id ) {
 	   return this.opProduto.buscar(id);
    }
@@ -182,10 +175,15 @@ public class SistemaPadaria
    public boolean adicionarVenda(Produto vendido, Funcionario vendedor) {
 	   return opVendas.adicionar(vendido, vendedor);
    }
-
    public boolean adicionarVenda(Produto vendido, Funcionario vendedor, Cliente comprador) {
       return opVendas.adicionar(vendido, vendedor, comprador);
    }
    
+   public boolean efetuarVenda( int idProduto, int idFuncionario, double quantidade ) {
+	   return this.opVendas.vender(idProduto, idFuncionario, quantidade);
+   }
+   public boolean efetuarVenda( int idProduto, int idCliente, int idFuncionario, double quantidade ) {
+	   return this.opVendas.vender(idProduto, idCliente, idFuncionario, quantidade);
+   }
    
 }

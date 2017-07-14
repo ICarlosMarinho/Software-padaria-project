@@ -38,13 +38,16 @@ public class InicializarSistema
         auxSenha = input.nextLine();
         
         
+        Funcionario logado = sistema.buscarFuncionario( auxLogin );
+        
+        
         if(loginSistema.inicializarLogin(auxLogin, auxSenha).equalsIgnoreCase("Gerente") == true)
         {
             gerente.inicializarMenu();
         }
         else if((loginSistema.inicializarLogin(auxLogin, auxSenha)).equalsIgnoreCase("Caixa") == true)
         {
-            caixa.inicializarMenu();
+            caixa.inicializarMenu( logado.getId() );
         }
         else
         {
@@ -52,5 +55,7 @@ public class InicializarSistema
         }
         
         
+        
+        input.close();
     }
 }
