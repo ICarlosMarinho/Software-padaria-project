@@ -4,7 +4,7 @@ import classesBasicas.Cliente;
 
 import java.util.ArrayList;
 
-public class RepositorioCliente {
+public class RepositorioCliente implements IRepositorioCliente {
 	
 	// atributos
 	private ArrayList<Cliente> clientes;
@@ -23,7 +23,7 @@ public class RepositorioCliente {
 	
 	
 	// metodo get
-	public Cliente[] getClientes() {
+	public Cliente[] listar() {
 		
 		Cliente[] lista = new Cliente[clientes.size()];
 		

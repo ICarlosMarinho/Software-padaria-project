@@ -76,7 +76,7 @@ public class CadastroVendas {
 	 * 
 	 * @ retorna true          --- se a operacao for bem sucedida
 	 */
-	public boolean vender( int idProduto, int idCliente, int idFuncionário, double quantidade ) {
+	public boolean vender( int idProduto, int idCliente, int idFuncionario, double quantidade ) {
 		
 		SistemaPadaria sistema = SistemaPadaria.getInstancia();
 		
@@ -86,7 +86,7 @@ public class CadastroVendas {
 		
 		
 		Produto produto      = sistema.buscarProduto( idProduto );
-		Funcionario vendedor = sistema.buscarFuncionario( idFuncionário );
+		Funcionario vendedor = sistema.buscarFuncionario( idFuncionario );
 		Cliente comprador    = sistema.buscarCliente( idCliente );
 		
 		if( produto == null || comprador == null || vendedor == null ) {

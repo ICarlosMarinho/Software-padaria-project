@@ -1,13 +1,12 @@
 package negocio;
 
-import repositorio.RepositorioCliente;
-import classesBasicas.Cliente;
-import classesBasicas.Endereco;
+import repositorio.*;
+import classesBasicas.*;
 
 public class CadastroCliente {
 	
 	// atributos
-	private RepositorioCliente clientes;
+	private IRepositorioCliente clientes;
 	
 	
 	// construtores
@@ -17,8 +16,8 @@ public class CadastroCliente {
 	
 	
 	// metodo get
-	public Cliente[] getClientes() {
-		return this.clientes.getClientes();
+	public Cliente[] listar() {
+		return this.clientes.listar();
 	}
 	
 	
@@ -153,7 +152,7 @@ public class CadastroCliente {
 	 * @ retorna lista[] --- todos os clientes cadastrados
 	 */
 	public Cliente[] todos() {
-		return this.clientes.getClientes();
+		return this.clientes.listar();
 	}
 	
 	
