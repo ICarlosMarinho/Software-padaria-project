@@ -4,7 +4,7 @@ import java.util.*; // ArrayList
 
 import classesBasicas.*;
 
-public class RepositorioVendas {
+public class RepositorioVendas implements IRepositorioVenda {
 	
 	private ArrayList<Venda> vendas;
 	
@@ -17,9 +17,6 @@ public class RepositorioVendas {
 		this.vendas = vendas;
 	}
 
-	
-	
-	
 	
 	
 	/*

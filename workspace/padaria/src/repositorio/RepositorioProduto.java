@@ -4,7 +4,7 @@ import classesBasicas.Produto;
 
 import java.util.ArrayList;
 
-public class RepositorioProduto {
+public class RepositorioProduto implements IRepositorioProduto {
 	
 	// atributos
 	private ArrayList<Produto> produtos;
