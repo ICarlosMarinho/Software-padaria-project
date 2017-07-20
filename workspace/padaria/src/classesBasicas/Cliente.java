@@ -72,13 +72,13 @@ public class Cliente {
 	
 	
 	// metodo equals
-	public boolean equals(Cliente c) {
-		if(c == null) {
-			return false;
-		}
-		
-		if(c.id == this.id) {
-			return true;
+	public boolean equals(Object c) {
+		if( c instanceof Cliente ) {
+
+			if( this.id == ((Cliente)c).id) {
+				return true;
+			}
+			
 		}
 		
 		return false;

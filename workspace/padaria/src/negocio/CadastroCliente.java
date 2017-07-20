@@ -6,7 +6,7 @@ import classesBasicas.*;
 public class CadastroCliente {
 	
 	// atributos
-	private IRepositorioCliente clientes;
+	private RepositorioCliente clientes;
 	
 	
 	// construtores
@@ -17,7 +17,7 @@ public class CadastroCliente {
 	
 	// metodo get
 	public Cliente[] listar() {
-		return this.clientes.listar();
+		return (Cliente[])this.clientes.listar();
 	}
 	
 	
@@ -91,7 +91,7 @@ public class CadastroCliente {
 		Cliente aux = new Cliente(null, id, null, 0, 0);
 		
 		
-		Cliente remover = this.clientes.buscar(aux);
+		Cliente remover = (Cliente)this.clientes.buscar(aux);
 		
 		
 		if( remover == null ) {
@@ -131,7 +131,7 @@ public class CadastroCliente {
 	public Cliente buscar(int id) {
 		Cliente procurado = new Cliente(null, id, null, 0, 0);
 		
-		return this.clientes.buscar(procurado);
+		return (Cliente)this.clientes.buscar(procurado);
 	}
 
 	
@@ -152,7 +152,7 @@ public class CadastroCliente {
 	 * @ retorna lista[] --- todos os clientes cadastrados
 	 */
 	public Cliente[] todos() {
-		return this.clientes.listar();
+		return (Cliente[])this.clientes.listar();
 	}
 	
 	

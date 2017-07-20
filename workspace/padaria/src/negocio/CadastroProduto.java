@@ -1,10 +1,10 @@
 package negocio;
 
-import java.util.Calendar;
+import java.util.*;
 
-import repositorio.RepositorioProduto;
-import classesBasicas.Produto;
-import classesBasicas.Cliente;
+import repositorio.*;
+import classesBasicas.*;
+
 
 public class CadastroProduto {
 	
@@ -253,7 +253,7 @@ public class CadastroProduto {
 			paraComprar.setQtdVendas( paraComprar.getQtdVendas() + quantidade     );
 			paraComprar.setValorVendas( paraComprar.getValorVendas() + precoFinal );
 			
-			// TODO melhorar o metodo de vendas mas passando como argumento o id do funcionario
+			// TODO apagar isso
 			//sistema.adicionarVenda( paraVender, vendedor);
 			
 		} else {
@@ -358,7 +358,7 @@ public class CadastroProduto {
 		}
 		
 		Produto auxiliar = new Produto(null, null, id, null, 0, 0);
-		Produto antigo = this.estoque.buscar(auxiliar);
+		Produto antigo = (Produto)this.estoque.buscar(auxiliar);
 		
 		if( antigo == null ) {
 			return false;
@@ -413,7 +413,7 @@ public class CadastroProduto {
 		
 		
 		Produto auxiliar = new Produto(null, null, id, null, 0, 0);
-		Produto antigo = this.estoque.buscar(auxiliar);
+		Produto antigo = (Produto)this.estoque.buscar(auxiliar);
 		
 		if( antigo == null ) {
 			//System.out.println("Produto não encontrado");
@@ -447,7 +447,7 @@ public class CadastroProduto {
 		
 		
 		Produto auxiliar = new Produto(null, null, id, null, 0, 0);
-		Produto antigo = this.estoque.buscar(auxiliar);
+		Produto antigo = (Produto)this.estoque.buscar(auxiliar);
 		
 		if( antigo == null ) {
 			//System.out.println("Produto não encontrado");
@@ -497,7 +497,7 @@ public class CadastroProduto {
 		
 		Produto auxiliar = new Produto(null, null, id, null, 0, 0);
 		
-		return this.estoque.buscar(auxiliar);
+		return (Produto)this.estoque.buscar(auxiliar);
 	}
 	public Produto buscar(String nome) {
 		
@@ -514,7 +514,7 @@ public class CadastroProduto {
 	 */
 	public Produto[] todos() {
 		
-		return this.estoque.getProdutos();
+		return (Produto[])this.estoque.listar();
 		
 	}
 	

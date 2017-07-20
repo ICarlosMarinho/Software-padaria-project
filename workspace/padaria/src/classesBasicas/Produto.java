@@ -75,14 +75,14 @@ public class Produto {
 	}
 
 	
-	// metodo equals
-	public boolean equals(Produto p) {
-		if( p == null ) {
-			return false;
-		}
-		
-		if( this.id == p.id) {
-			return true;
+	@Override
+	public boolean equals(Object p) {
+		if( p instanceof Produto ) {
+
+			if( this.id == ((Produto)p).id) {
+				return true;
+			}
+			
 		}
 		
 		return false;
