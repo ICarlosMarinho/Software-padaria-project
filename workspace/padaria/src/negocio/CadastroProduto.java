@@ -4,13 +4,10 @@ import java.util.*;
 
 import repositorio.*;
 import classesBasicas.*;
+import exceptions.*;
 
 
 public class CadastroProduto {
-	
-	// constantes
-	private static double max;
-	private static double porcentual;
 	
 	// atributos
 	private RepositorioProduto estoque;
@@ -19,8 +16,6 @@ public class CadastroProduto {
 	// construtor
 	public CadastroProduto() {
 		this.estoque = new RepositorioProduto();
-		max = 10;
-		porcentual = 0.1;
 	}
 	
 	
@@ -105,6 +100,7 @@ public class CadastroProduto {
 	
 	
 	/*
+	 * 
 	 * este metodo cadastra um novo produto no estoque
 	 * 
 	 * @ parametro nome       --- nome       do novo produto
@@ -114,23 +110,35 @@ public class CadastroProduto {
 	 * @ parametro preco      --- preco      do novo produto
 	 * 
 	 * @ retorna true  se o produto foi adicionado
-	 * @ retorna false se nao
+	 * 
+	 * throw NegocioException se houver algum problema,
+	 * 	informacao sera passada apenas na string.
 	 */
 	public boolean cadastrar(String nome, String descricao
 						    , int dia, int mes, int ano
-						    , double quantidade, double preco) {
+						    , double quantidade, double preco) throws NegocioException {
 		
-		if( nome == null || descricao == null || quantidade <= 0 || preco <= 0 ) {
-			return false;
+		if( nome == null ) {
+			throw new NegocioException( "Nome inválido", this );
 		}
+		if( descricao == null ) {
+			throw new NegocioException( "Descrição inválida", this );
+		}
+		if( quantidade <= 0 ) {
+			throw new NegocioException( "Quantidade inválida", this );
+		}
+		if( preco <= 0 ) {
+			throw new NegocioException( "Preço inválido", this );
+		}
+		
+		
+		
 		mes--;
 		if( !validadeOK(dia, mes, ano) ) {
-			System.out.println("validade inválida"); // remover
-			return false;
+			throw new NegocioException( "Data inválida", this );
 		}
 		if( this.estoque.buscar(nome) != null ) {
-			System.out.println("Ja existe"); // remover
-			return false;
+			throw new NegocioException( "Produto já existe", this );
 		}
 		
 		
@@ -140,6 +148,7 @@ public class CadastroProduto {
 		validade.set(Calendar.DAY_OF_MONTH, dia);
 		validade.set(Calendar.MONTH, mes);
 		validade.set(Calendar.YEAR, ano);
+		
 		
 		
 		int id = 0;
@@ -158,180 +167,43 @@ public class CadastroProduto {
 		auxiliar = new Produto(nome, descricao, id, validade, quantidade, preco);
 		
 		this.estoque.adicionar(auxiliar);
-		return true;
+		return true; // TODO remover
 	}
 	
 	
 	/*
+	 * throwable classe
+	 * 
 	 * este metodo remove um produto do estoque
 	 * 	se o mesmo existir
 	 * 
 	 * @ parametro id  ---  id do produto a ser removido
+	 * 
+	 * throw NegocioException se houver algum problema,
+	 * 	informacao sera passada apenas na string.
+	 * 
 	 */
-	public boolean remover(int id) {
+	public boolean remover(int id) throws NegocioException {
 		
 		Produto auxiliar = new Produto(null, null, id, null, 0, 0);
 		
+		if( this.estoque.buscar( auxiliar ) == null ) {
+			throw new NegocioException( "Produto Inexistente", this );
+		}
+		
+		
 		if( this.estoque.remover(auxiliar) ) {
-			
 			return true;
-			
-		} else {
-			
-			return false;
-			
 		}
+		
+		return false;
 	}
 	
 	
-	/*
-	 * este metodo vende um produto
-	 * 
-	 * @ parametro idProduto   --- id do produto do estoque a ser vendido
-	 * @ parametro idCliente   --- id do cliente se o mesmo esta cadastrado
-	 * @ parametro quantidade  --- quantidade do produto a ser vendido
-	 * 
-	 * @ retorna true          --- se a operacao for bem sucedida
-	 */
-	public boolean vender( int idProduto, int idCliente, double quantidade ) {
-		
-		SistemaPadaria sistema = SistemaPadaria.getInstancia();
-		
-		if( quantidade <= 0 ) {
-			return false;
-		}
-		
-		
-		Produto paraVender = this.buscar(idProduto);
-		
-		if( paraVender == null ) {
-			return false;
-		}
-		
-		
-		Cliente paraComprar = sistema.buscarCliente(idCliente);
-		
-		if( paraComprar == null ) {
-			return false;
-		}
-		
-		
-		
-		double precoProduto = paraVender.getPreco();
-		
-		if( quantidade == paraVender.getQuantidade() ) { // remover produto
-			
-			
-			this.estoque.remover(paraVender);
-			
-			double precoFinal = ( quantidade*precoProduto ) - paraComprar.getCredito();
-			
-			
-			// computar credito para proxima compra
-			double novoCredito;
-			if( precoFinal >= 0 ) {
-				
-				novoCredito = precoFinal * CadastroProduto.porcentual;
-				
-			} else {
-				
-				novoCredito = 0;
-				
-			}
-			
-			
-			if( novoCredito < CadastroProduto.max ) {
-				
-				paraComprar.setCredito(novoCredito);
-			
-			} else {
-				
-				paraComprar.setCredito( CadastroProduto.max );
-				
-			}
-			
-			paraComprar.setQtdVendas( paraComprar.getQtdVendas() + quantidade     );
-			paraComprar.setValorVendas( paraComprar.getValorVendas() + precoFinal );
-			
-			// TODO apagar isso
-			//sistema.adicionarVenda( paraVender, vendedor);
-			
-		} else {
-			
-			
-			// diminuir a quantidade no estoque
-			this.modificar( idProduto, 3, paraVender.getQuantidade() - quantidade );
-			
-			double precoFinal = ( quantidade*precoProduto ) - paraComprar.getCredito();
-			
-			// computar credito para proxima compra
-			double novoCredito;
-			if( precoFinal >= 0 ) {
-				
-				novoCredito = precoFinal * CadastroProduto.porcentual;
-				
-			} else {
-				
-				novoCredito = 0;
-				
-			}
-			
-			
-			if( novoCredito < CadastroProduto.max ) {
-				
-				paraComprar.setCredito(novoCredito);
-			
-			} else {
-				
-				paraComprar.setCredito( CadastroProduto.max );
-				
-			}
-
-			paraComprar.setQtdVendas( paraComprar.getQtdVendas() + quantidade     );
-			paraComprar.setValorVendas( paraComprar.getValorVendas() + precoFinal );
-			
-		}
-		
-		Cliente antigo = sistema.buscarCliente(idCliente);
-		
-		sistema.atualizarCliente( antigo, paraComprar );
-		
-		return true;
-	}
-	public boolean vender( int idProduto, double quantidade ) { // sem clientes cadastrados
-		
-		if( quantidade <= 0 ) {
-			return false;
-		}
-		
-		
-		Produto paraVender = this.buscar(idProduto);
-		
-		if( paraVender == null ) {
-			return false;
-		}
-		
-		
-		
-		if( quantidade == paraVender.getQuantidade() ) { // remover produto
-			
-			this.estoque.remover(paraVender);
-			
-		} else { // diminuir a quantidade no estoque
-			
-			this.modificar( idProduto, 3, (paraVender.getQuantidade() - quantidade) );
-			
-		}
-		
-		
-		
-		return true;
-	}
-
-
 
 	
 	/*
+	 * 
 	 * este metodo modifica um produto existente no estoque
 	 * 
 	 * @ parametro id    --- id do produto que será modificado
@@ -346,22 +218,24 @@ public class CadastroProduto {
 	 * 
 	 * @ parametro valor --- novo valor que sera sobrescrito
 	 */
-	public boolean modificar(int id, int opcao, String valor ) {
+	public boolean modificar(int id, int opcao, String valor ) 
+			throws SistemaException, NegocioException {
 		
 		if(opcao != 0 && opcao != 1 ) {
-			System.out.println("Argumento na função modificar errado");
-			return false;
+			throw new SistemaException("Ocorreu algum erro no sistema, contate o administrador!", 
+					"Erro na opcao do metodo modificar, classe CadastroProduto");
 		}
 		
 		if( valor == null ) {
-			return false;
+			throw new SistemaException("Ocorreu algum erro no sistema, contate o administrador!", 
+					"Erro no valor do metodo modificar, classe CadastroProduto, string null");
 		}
 		
 		Produto auxiliar = new Produto(null, null, id, null, 0, 0);
 		Produto antigo = (Produto)this.estoque.buscar(auxiliar);
 		
 		if( antigo == null ) {
-			return false;
+			throw new NegocioException( "Produto inexistente", this );
 		}
 		
 		Produto atualizado = null;
@@ -374,35 +248,30 @@ public class CadastroProduto {
 			
 		} else {           // mudar descricao
 			
-			atualizado = new Produto(antigo.getNome(), valor,  antigo.getId() 
-					, antigo.getValidade(), antigo.getQuantidade()
-					, antigo.getPreco()                          );
+			atualizado = new Produto( antigo.getNome(), valor,  antigo.getId() 
+					                , antigo.getValidade(), antigo.getQuantidade()
+				                  	, antigo.getPreco()                          );
 		}
+		
 		
 		
 		
 		if( this.estoque.atualizar(antigo, atualizado) ) {
-			
 			return true;
-			
-		} else {
-			
-			return false;
-			
 		}
 		
-		
+		return false;
 	}
-	public boolean modificar(int id, int opcao, int dia, int mes, int ano ) {
+	public boolean modificar(int id, int opcao, int dia, int mes, int ano ) 
+			throws SistemaException, NegocioException {
 		
-		if( opcao != 2 ) {
-			System.out.println("Argumento na função modificar errado");
-			return false;
+		if(opcao != 2 ) {
+			throw new SistemaException("Ocorreu algum erro no sistema, contate o administrador!", 
+					"Erro na opcao do metodo modificar, classe CadastroProduto");
 		}
 		
 		if( !validadeOK(dia, mes, ano) ) {
-			//System.out.println("Nova validade inválida");
-			return false;
+			throw new NegocioException( "Data inválida", this);
 		}
 		
 		Calendar validade = Calendar.getInstance();
@@ -416,8 +285,7 @@ public class CadastroProduto {
 		Produto antigo = (Produto)this.estoque.buscar(auxiliar);
 		
 		if( antigo == null ) {
-			//System.out.println("Produto não encontrado");
-			return false;
+			throw new NegocioException( "Produto inexistente", this);
 		}
 		
 		Produto atualizado = new Produto( antigo.getNome()      ,  antigo.getDescricao()
@@ -428,21 +296,18 @@ public class CadastroProduto {
 		
 		
 		if( this.estoque.atualizar(antigo, atualizado) ) {
-			
 			return true;
-			
-		} else {
-			
-			return false;
-			
 		}
-	
+		
+		
+			return false;
 	}
-	public boolean modificar(int id, int opcao, double valor    ) {
+	public boolean modificar(int id, int opcao, double valor    ) 
+			throws SistemaException, NegocioException {
 		
 		if( opcao != 3 && opcao != 4 ) {
-			System.out.println("Argumento na função modificar errado");
-			return false;
+			throw new SistemaException("Ocorreu algum erro no sistema, contate o administrador!", 
+					"Erro na opcao do metodo modificar, classe CadastroProduto");
 		}
 		
 		
@@ -450,8 +315,7 @@ public class CadastroProduto {
 		Produto antigo = (Produto)this.estoque.buscar(auxiliar);
 		
 		if( antigo == null ) {
-			//System.out.println("Produto não encontrado");
-			return false;
+			throw new NegocioException( "Produto inexistente", this );
 		}
 		
 		Produto atualizado;
@@ -473,16 +337,11 @@ public class CadastroProduto {
 		
 		
 		if( this.estoque.atualizar(antigo, atualizado) ) {
-			
 			return true;
-			
-		} else {
-			
-			
-			return false;
-			
 		}
 		
+		
+		return false;
 	}
 	
 	

@@ -1,8 +1,10 @@
 package negocio;
 
+import java.util.*;
+
 import repositorio.*;
-import java.util.Calendar;
 import classesBasicas.*;
+import exceptions.*;
 
 public class CadastroVendas {
 	
@@ -30,6 +32,7 @@ public class CadastroVendas {
 		
 	}
 	
+	// TODO parei aqui implementacao das funcionarlidades de exception
 	
 	/*
 	 * este metodo adiciona uma nova venda no historico das vendas
@@ -39,10 +42,11 @@ public class CadastroVendas {
 	 * @ parametro vendedor   --- o funcionario que vendeu o produto
 	 * @ parametro comprador  --- se o cliente foi cadastrado 	->	 opcional
 	 */
-	public boolean adicionar( Produto vendido, Funcionario vendedor ) {
+	public boolean adicionar( Produto vendido, Funcionario vendedor ) throws SistemaException {
 		
 		if( vendido == null || vendedor == null ) {
-			return false;
+			throw new SistemaException("Ocorreu algum erro no sistema, contate o administrador!", 
+					"algum dos parametros do metodo adicionar estao nulls, classe CadastroVendas");
 		}
 		
 		Calendar data = Calendar.getInstance();
