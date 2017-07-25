@@ -167,12 +167,12 @@ public class CadastroVendas {
 		sistema.atualizarCliente( antigo, comprador );
 		
 		// alterar funcionario
-		sistema.alterarInfoFuncionario( vendedor );
+		sistema.alterarInfoFuncionario(sistema.buscarFuncionario(vendedor.getId()), vendedor);
 		
 		
 		return true;
 	}
-	public boolean vender( int idProduto, int idFuncionario, double quantidade ) { // sem clientes cadastrados
+	public boolean vender( int idProduto, int idFuncionario, double quantidade ) throws SistemaException { // sem clientes cadastrados
 		
 		SistemaPadaria sistema = SistemaPadaria.getInstancia();
 		
@@ -198,7 +198,7 @@ public class CadastroVendas {
 		this.adicionar( produto, vendedor );
 		
 		// alterar funcionario
-		sistema.alterarInfoFuncionario( vendedor );
+		sistema.alterarInfoFuncionario(sistema.buscarFuncionario(vendedor.getId()), vendedor);
 		
 		return true;
 	}

@@ -1,21 +1,20 @@
 package repositorio;
 
-import classesBasicas.*;
+import classesBasicas.Funcionario;
+import java.util.ArrayList;
 
 public interface IRepositorioFuncionario {
-	
-	public Funcionario[] getFuncionarios();
-	
-	public int getTotalFuncionarios();
-	
-	public void inserirFuncionario( Funcionario novoFun );
-	
-	public void removerFuncionario( int posicaoFun );
-	
-	public boolean substituirFuncionario( Funcionario editFun, int posicaoFun );
-	
-	public Funcionario obterFuncionario( int posFun );
-	
-	
+
+    public boolean adicionar(Funcionario novo);
+
+    public boolean remover(Funcionario Procurado);
+
+    public Funcionario buscar(Funcionario procurado);
+
+    public Funcionario buscar(int auxiliarId);
+
+    public int tamanho();
+    
+    public boolean atualizar(Funcionario antigo, Funcionario novo);
 
 }
