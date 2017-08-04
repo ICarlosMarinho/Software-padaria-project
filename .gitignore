@@ -34,3 +34,6 @@ hs_err_pid*
 
 ClasseTestes.java
 
+/bin/
+/nbproject/
+/build/

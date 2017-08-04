@@ -1,67 +1,65 @@
 package repositorio;
 
 import classesBasicas.Funcionario;
+import java.util.ArrayList;
 
-public class RepositorioFuncionario 
-{	
-    //**Atributos
-    
-    private Funcionario[] funcionarios;
-    private int totalFuncionarios;
-	
+public class RepositorioFuncionario extends Repositorio implements IRepositorioFuncionario {
+
     //**Metodos construtores
-   
-    public RepositorioFuncionario(int tamVetor)
-    {
-        this.funcionarios = new Funcionario[tamVetor];
-        this.totalFuncionarios = 0;
+    public RepositorioFuncionario() {
+        super();
     }
-    
-    //**Metodos get
-    
-    public Funcionario[] getFuncionarios()
-    {
-        return this.funcionarios;
+
+    public RepositorioFuncionario(int TamInicial) {
+        super(TamInicial);
     }
-    
-    public int getTotalFuncionarios()
-    {
-        return this.totalFuncionarios;
+
+    @Override
+    public boolean adicionar(Funcionario novo) {
+
+        return super.adicionar(novo);
     }
-    
-    public void inserirFuncionario(Funcionario novoFun)
-    {        
-        this.funcionarios[this.totalFuncionarios] = new Funcionario(novoFun);
-        
-        this.totalFuncionarios++;
+
+    @Override
+    public boolean remover(Funcionario Procurado) {
+
+        return super.remover(this.buscar(Procurado));
     }
-    
-    public void removerFuncionario(int posicaoFun)
-    {   
-        for (int i = posicaoFun; i < this.totalFuncionarios;)
-        {
-            this.funcionarios[i] = this.funcionarios[i + 1];
-            
-            i++;
+
+    @Override
+    public Funcionario buscar(Funcionario procurado) {
+
+        return (Funcionario) super.buscar(procurado);
+    }
+
+    @Override
+    public int tamanho() {
+        return super.tamanho();
+    }
+
+    @Override
+    public Funcionario buscar(int auxiliarId) {
+        Object[] listaFuncionario = new Object[this.tamanho()];
+        Funcionario auxFuncionario;
+
+        listaFuncionario = super.listar();
+
+        for (int i = 0; i < this.tamanho(); i++) {
+
+            auxFuncionario = (Funcionario) listaFuncionario[i];
+
+            if (auxFuncionario.getId() == auxiliarId) {
+                return auxFuncionario;
+            }
+
         }
-        
-        this.totalFuncionarios--;   
+
+        return null;
     }
     
-    public boolean substituirFuncionario(Funcionario editFun, int posicaoFun)
+    @Override
+    public boolean atualizar(Funcionario antigo, Funcionario novo)
     {
-        if (editFun == null)
-        {
-            return false;
-        }
-        
-        this.funcionarios[posicaoFun] = editFun;
-        
-        return true;
-    }
-    
-    public Funcionario obterFuncionario(int posFun)
-    {   
-        return this.funcionarios[posFun];
+        return super.atualizar(antigo, novo);
     }
 }

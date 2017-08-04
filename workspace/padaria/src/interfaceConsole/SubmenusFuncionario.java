@@ -5,22 +5,20 @@ import classesBasicas.Funcionario;
 import java.util.Scanner;
 import negocio.SistemaPadaria;
 
-public class SubmenusFuncionario 
-{
+public class SubmenusFuncionario {
+
     SistemaPadaria sistema = SistemaPadaria.getInstancia();
     private Scanner input;
     private Funcionario auxFun;
     private Endereco auxEnd;
     private int auxOpc;
-    
-    public SubmenusFuncionario()
-    {
+
+    public SubmenusFuncionario() {
         input = new Scanner(System.in);
         auxOpc = 0;
     }
-    
-    public void menuCadastrarFuncionaio()
-    {
+
+    public void menuCadastrarFuncionaio() {
         this.auxFun = new Funcionario();
         this.auxEnd = new Endereco();
 
@@ -30,13 +28,11 @@ public class SubmenusFuncionario
         System.out.print("Insira o cargo(Gerente, caixa, estoquista ou padeiro): ");
         this.auxFun.setCargo(input.nextLine());
 
-        this.auxFun.setId(sistema.atribuirIdFuncionario(this.auxFun));
-        
+        this.auxFun.setId(sistema.atribuirIdFuncionario());
 
         System.out.print("\nID: " + this.auxFun.getId());
 
-        if (auxFun.getCargo().equalsIgnoreCase("Gerente") || auxFun.getCargo().equalsIgnoreCase("Caixa"))
-        {
+        if (auxFun.getCargo().equalsIgnoreCase("Gerente") || auxFun.getCargo().equalsIgnoreCase("Caixa")) {
             System.out.print("\nInsira o login(4-10 caracteres): ");
             this.auxFun.setLogin(input.nextLine());
 
@@ -50,7 +46,6 @@ public class SubmenusFuncionario
         this.auxFun.setValorVendas(0);
 
         //**PARTE DE CADASTRO DO ENDEREÇO DO FUNCIONARIO QUE ESTA SENDO CADASTRADO
-
         System.out.print("\n\n\t**Endereco**\n\n");
 
         System.out.print("Insira o logradouro: ");
@@ -59,7 +54,7 @@ public class SubmenusFuncionario
         System.out.print("Insira o numero: ");
         this.auxEnd.setNumero(input.nextLine());
 
-        System.out.print("Insira o complemento: ");              
+        System.out.print("Insira o complemento: ");
         this.auxEnd.setComplemento(input.nextLine());
 
         System.out.print("Insira a cidade: ");
@@ -70,31 +65,27 @@ public class SubmenusFuncionario
 
         this.auxFun.setEndereco(auxEnd);//**ATRIBUIR O ENDEREÇO QUE FOI PREENCHIDO AO FUNCIONARIO CADASTRADO
 
-        if(sistema.cadastrarFuncionario(auxFun) == true)//**CADASTRO EFETIVADO NO VETOR DE FUNCIONARIOS 
+        if (sistema.cadastrarFuncionario(auxFun) == true)//**CADASTRO EFETIVADO NO VETOR DE FUNCIONARIOS 
         {
             System.out.println("\n\nFuncionario cadastrado com sucesso!");
-        }
-        else
-        {
+        } else {
             System.err.println("\n\nErro no cadastro do funcionario.");
         }
     }
-    
-    public void menuEditarFuncionario()
-    {
+
+    public void menuEditarFuncionario() {
         int auxId;
 
         System.out.print("Insira o ID: ");
         auxId = Integer.parseInt(input.nextLine());
 
-        if(sistema.buscarFuncionario(auxId) == null)
-        {
-           System.err.print("\n\nEsse funcionario nao existe!\n\n");
+        if (sistema.buscarFuncionario(auxId) == null) {
+            System.err.print("\n\nEsse funcionario nao existe!\n\n");
 
-           return;
+            return;
         }
 
-        this.auxFun = new Funcionario(sistema.buscarFuncionario(auxId));
+        this.auxFun = sistema.buscarFuncionario(auxId);
 
         System.out.print("1.Editar nome\n");
         System.out.print("2.Editar cargo\n");
@@ -104,83 +95,61 @@ public class SubmenusFuncionario
 
         this.auxOpc = Integer.parseInt(input.nextLine());
 
-        switch(auxOpc)
-        {
-            case 1:
-            {
+        switch (auxOpc) {
+            case 1: {
                 System.out.print("\n\nInsira o novo nome: ");
                 this.auxFun.setNome(input.nextLine());
-
 
             }
             break;
 
-            case 2:
-            {
+            case 2: {
                 System.out.print("\n\nInsira o novo cargo(Gerente, caixa, estoquista ou padeiro): ");
                 this.auxFun.setCargo(input.nextLine());
             }
             break;
 
-            case 3:
-            {
+            case 3: {
                 System.out.print("\nInsira a nova senha(4-10 caracteres): ");
                 this.auxFun.setSenha(input.nextLine());
             }
             break;
 
-            case 4:
-            {
+            case 4: {
                 System.out.print("\nInsira o novo salario: ");
                 this.auxFun.setSalario(Double.parseDouble(input.nextLine()));
-            }   
+            }
         }
 
-        if (sistema.alterarInfoFuncionario(auxFun) == true)
-        {
+        if (sistema.alterarInfoFuncionario(sistema.buscarFuncionario(auxId), auxFun) == true) {
             System.out.println("\n\nFuncionario atualizado!");
-        }
-        else
-        {
+        } else {
             System.err.println("\n\nErro na atualizaçao das informações.");
         }
     }
-    
-    public void menuBuscarFuncionario()
-    {
+
+    public void menuBuscarFuncionario() {
         int auxId;
 
         System.out.print("Insira o ID: ");
         auxId = Integer.parseInt(input.nextLine());
 
-        if(sistema.buscarFuncionario(auxId) == null)
-        {
-           System.err.print("\n\nEsse funcionario nao existe!\n\n");
+        if (sistema.buscarFuncionario(auxId) == null) {
+            System.err.print("\n\nEsse funcionario nao existe!\n\n");
 
-           return;
+            return;
         }
 
         System.out.print(sistema.buscarFuncionario(auxId).toString() + "\n\n");
     }
-    
-    public void menuExcluirFuncionario()
-    {
+
+    public void menuExcluirFuncionario() {
         int auxId;
 
         System.out.print("Insira o ID: ");
 
         auxId = Integer.parseInt(input.nextLine());
 
-        if(sistema.buscarFuncionario(auxId) == null)
-        {
-           System.err.print("\n\nEsse funcionario nao existe!\n\n");
-
-           return;
-        }
-
-        if(sistema.excluirFuncionario(sistema.retornarPosicaoFuncionario(auxId)) == true)
-        {
-            System.out.print("\nFuncionario excuido com sucesso!\n\n");
-        }
+        System.out.println(sistema.excluirFuncionario(sistema.buscarFuncionario(auxId)) ? "\nFuncionario excuido com sucesso!\n\n" : "\n\nEsse funcionario nao existe!\n\n");
     }
 }
