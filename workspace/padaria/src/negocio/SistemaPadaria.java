@@ -1,6 +1,8 @@
 package negocio;
 
 import classesBasicas.*;
+import exceptions.NegocioException;
+import exceptions.SistemaException;
 
 public class SistemaPadaria {
 
@@ -59,7 +61,7 @@ public class SistemaPadaria {
 
     public boolean cadastrarProduto(String nome, String descricao,
              int dia, int mes, int ano,
-             double quantidade, double preco) {
+             double quantidade, double preco) throws NegocioException {
 
         return this.opProduto.cadastrar(nome, descricao,
                  dia, mes, ano,
@@ -70,21 +72,23 @@ public class SistemaPadaria {
         return this.opProduto.validadeOK(dia, mes, ano);
     }
 
-    public boolean removerProduto(int id) {
+    public boolean removerProduto(int id) throws NegocioException {
         return this.opProduto.remover(id);
     }
 
-    public boolean modificarProduto(int id, int opcao, String valor) {
+    public boolean modificarProduto(int id, int opcao, String valor)
+    		throws NegocioException, SistemaException {
         return this.opProduto.modificar(id, opcao, valor);
     }
 
     public boolean modificarProduto(int id, int opcao,
-             int dia, int mes, int ano) {
+             int dia, int mes, int ano) throws NegocioException, SistemaException {
 
         return this.opProduto.modificar(id, opcao, dia, mes, ano);
     }
 
-    public boolean modificarProduto(int id, int opcao, double valor) {
+    public boolean modificarProduto(int id, int opcao, double valor)
+    		throws NegocioException, SistemaException {
         return this.opProduto.modificar(id, opcao, valor);
     }
 
@@ -149,7 +153,7 @@ public class SistemaPadaria {
         return opVendas.lista();
     }
 
-    public boolean adicionarVenda(Produto vendido, Funcionario vendedor) {
+    public boolean adicionarVenda(Produto vendido, Funcionario vendedor) throws SistemaException {
         return opVendas.adicionar(vendido, vendedor);
     }
 
@@ -157,11 +161,13 @@ public class SistemaPadaria {
         return opVendas.adicionar(vendido, vendedor, comprador);
     }
 
-    public boolean efetuarVenda(int idProduto, int idFuncionario, double quantidade) {
+    public boolean efetuarVenda(int idProduto, int idFuncionario, double quantidade)
+    		throws SistemaException, NegocioException {
         return this.opVendas.vender(idProduto, idFuncionario, quantidade);
     }
 
-    public boolean efetuarVenda(int idProduto, int idCliente, int idFuncionario, double quantidade) {
+    public boolean efetuarVenda(int idProduto, int idCliente, int idFuncionario, double quantidade)
+    		throws SistemaException, NegocioException {
         return this.opVendas.vender(idProduto, idCliente, idFuncionario, quantidade);
     }
 

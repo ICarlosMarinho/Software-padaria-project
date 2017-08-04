@@ -80,7 +80,8 @@ public class CadastroVendas {
 	 * 
 	 * @ retorna true          --- se a operacao for bem sucedida
 	 */
-	public boolean vender( int idProduto, int idCliente, int idFuncionario, double quantidade ) {
+	public boolean vender( int idProduto, int idCliente, int idFuncionario, double quantidade )
+			 throws NegocioException, SistemaException {
 		
 		SistemaPadaria sistema = SistemaPadaria.getInstancia();
 		
@@ -172,7 +173,8 @@ public class CadastroVendas {
 		
 		return true;
 	}
-	public boolean vender( int idProduto, int idFuncionario, double quantidade ) throws SistemaException { // sem clientes cadastrados
+	public boolean vender( int idProduto, int idFuncionario, double quantidade )
+			throws NegocioException, SistemaException { // sem clientes cadastrados
 		
 		SistemaPadaria sistema = SistemaPadaria.getInstancia();
 		
