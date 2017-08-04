@@ -1,23 +1,24 @@
 package negocio;
 
-import repositorio.*;
-import classesBasicas.*;
+import repositorio.RepositorioCliente;
+import classesBasicas.Cliente;
+import classesBasicas.Endereco;
 
-public class CadastroCliente {
+public class IntermediarioCliente {
 	
 	// atributos
 	private RepositorioCliente clientes;
 	
 	
 	// construtores
-	public CadastroCliente() {
+	public IntermediarioCliente() {
 		this.clientes = new RepositorioCliente();
 	}
 	
 	
 	// metodo get
-	public Cliente[] listar() {
-		return (Cliente[])this.clientes.listar();
+	public Cliente[] getClientes() {
+		return this.clientes.getClientes();
 	}
 	
 	
@@ -91,7 +92,7 @@ public class CadastroCliente {
 		Cliente aux = new Cliente(null, id, null, 0, 0);
 		
 		
-		Cliente remover = (Cliente)this.clientes.buscar(aux);
+		Cliente remover = this.clientes.buscar(aux);
 		
 		
 		if( remover == null ) {
@@ -131,7 +132,7 @@ public class CadastroCliente {
 	public Cliente buscar(int id) {
 		Cliente procurado = new Cliente(null, id, null, 0, 0);
 		
-		return (Cliente)this.clientes.buscar(procurado);
+		return this.clientes.buscar(procurado);
 	}
 
 	
@@ -152,7 +153,7 @@ public class CadastroCliente {
 	 * @ retorna lista[] --- todos os clientes cadastrados
 	 */
 	public Cliente[] todos() {
-		return (Cliente[])this.clientes.listar();
+		return this.clientes.getClientes();
 	}
 	
 	
