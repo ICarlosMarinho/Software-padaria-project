@@ -83,7 +83,7 @@ public class OperacoesFuncionario
     public boolean cadastrar(Funcionario novoFun)
     {
         //**VERIFICAR SE O VETOR DE FUNCIONARIOS ATINGIU O LIMITE
-        if(this.repo.getTotalFuncionarios() >= TAM_VETOR)
+        if(this.repo.tamanho() >= TAM_VETOR)
         {
             return false;
         }
@@ -94,7 +94,7 @@ public class OperacoesFuncionario
         }
         
         //**VERIFICA SE O LOGIN DO FUNCIONARIO A SER CADASTRADO JA EXISTE
-        for (int i = 0; i < this.repo.getTotalFuncionarios(); i++)
+        for (int i = 0; i < this.repo.tamanho(); i++)
         {
             if (novoFun.getLogin().equalsIgnoreCase(this.repo.obterFuncionario(i).getLogin()) == true)
             {

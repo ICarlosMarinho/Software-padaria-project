@@ -18,7 +18,7 @@ public class IntermediarioCliente {
 	
 	// metodo get
 	public Cliente[] getClientes() {
-		return this.clientes.getClientes();
+		return (Cliente[])this.clientes.listar();
 	}
 	
 	
@@ -92,7 +92,7 @@ public class IntermediarioCliente {
 		Cliente aux = new Cliente(null, id, null, 0, 0);
 		
 		
-		Cliente remover = this.clientes.buscar(aux);
+		Cliente remover = (Cliente)this.clientes.buscar(aux);
 		
 		
 		if( remover == null ) {
@@ -132,7 +132,7 @@ public class IntermediarioCliente {
 	public Cliente buscar(int id) {
 		Cliente procurado = new Cliente(null, id, null, 0, 0);
 		
-		return this.clientes.buscar(procurado);
+		return (Cliente)this.clientes.buscar(procurado);
 	}
 
 	
@@ -153,7 +153,7 @@ public class IntermediarioCliente {
 	 * @ retorna lista[] --- todos os clientes cadastrados
 	 */
 	public Cliente[] todos() {
-		return this.clientes.getClientes();
+		return (Cliente[])this.clientes.listar();
 	}
 	
 	

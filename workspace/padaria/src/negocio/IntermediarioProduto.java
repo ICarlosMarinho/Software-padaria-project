@@ -356,7 +356,7 @@ public class IntermediarioProduto {
 		}
 		
 		Produto auxiliar = new Produto(null, null, id, null, 0, 0);
-		Produto antigo = this.estoque.buscar(auxiliar);
+		Produto antigo = (Produto)this.estoque.buscar(auxiliar);
 		
 		if( antigo == null ) {
 			return false;
@@ -411,7 +411,7 @@ public class IntermediarioProduto {
 		
 		
 		Produto auxiliar = new Produto(null, null, id, null, 0, 0);
-		Produto antigo = this.estoque.buscar(auxiliar);
+		Produto antigo = (Produto)this.estoque.buscar(auxiliar);
 		
 		if( antigo == null ) {
 			//System.out.println("Produto não encontrado");
@@ -445,7 +445,7 @@ public class IntermediarioProduto {
 		
 		
 		Produto auxiliar = new Produto(null, null, id, null, 0, 0);
-		Produto antigo = this.estoque.buscar(auxiliar);
+		Produto antigo = (Produto)this.estoque.buscar(auxiliar);
 		
 		if( antigo == null ) {
 			//System.out.println("Produto não encontrado");
@@ -495,7 +495,7 @@ public class IntermediarioProduto {
 		
 		Produto auxiliar = new Produto(null, null, id, null, 0, 0);
 		
-		return this.estoque.buscar(auxiliar);
+		return (Produto)this.estoque.buscar(auxiliar);
 	}
 	public Produto buscar(String nome) {
 		
@@ -512,7 +512,7 @@ public class IntermediarioProduto {
 	 */
 	public Produto[] todos() {
 		
-		return this.estoque.getProdutos();
+		return (Produto[])this.estoque.listar();
 		
 	}
 	
