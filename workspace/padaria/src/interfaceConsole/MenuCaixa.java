@@ -6,6 +6,7 @@ import java.util.Scanner;
 import negocio.SistemaPadaria;
 import classesBasicas.*;
 
+import exceptions.*;
 
 public class MenuCaixa {
 	
@@ -13,13 +14,13 @@ public class MenuCaixa {
 	SistemaPadaria sistema;
 	private Scanner console;
     private SubmenusCliente subCli;
-	
-	
+    
+    
 	// construtores
 	public MenuCaixa() {
 		this.sistema = SistemaPadaria.getInstancia();
 		console = new Scanner(System.in);
-                this.subCli = new SubmenusCliente();
+        this.subCli = new SubmenusCliente();
 	}
 	
 	
@@ -92,7 +93,7 @@ public class MenuCaixa {
 	/*
 	 * menu principal do funcionario
 	 */
-	public void inicializarMenu( int idFuncionario ) {
+	public void inicializarMenu( int idFuncionario ) throws NegocioException, SistemaException {
 		
 		
 		boolean continuar = true;
