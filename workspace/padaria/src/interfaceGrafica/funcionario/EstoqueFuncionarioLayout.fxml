@@ -40,7 +40,7 @@
    <left>
       <SplitPane dividerPositions="0.25" orientation="VERTICAL" prefHeight="371.0" prefWidth="297.0" BorderPane.alignment="CENTER">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+          <AnchorPane maxHeight="77.0" maxWidth="295.0" minHeight="77.0" minWidth="295.0" prefHeight="100.0" prefWidth="160.0">
                <children>
                   <GridPane hgap="5.0" maxHeight="77.0" maxWidth="295.0" minHeight="77.0" minWidth="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columnConstraints>
@@ -92,6 +92,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label text="Estoque" GridPane.columnSpan="2" GridPane.halignment="CENTER">
@@ -111,8 +112,13 @@
       </GridPane>
    </center>
    <bottom>
-      <HBox alignment="BOTTOM_RIGHT" prefHeight="40.0" BorderPane.alignment="CENTER">
+      <HBox alignment="BOTTOM_RIGHT" prefHeight="40.0" spacing="30.0" BorderPane.alignment="CENTER">
          <children>
+            <Button mnemonicParsing="false" prefHeight="41.0" prefWidth="74.0" text="Vender">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
             <Button alignment="CENTER" mnemonicParsing="false" prefHeight="38.0" prefWidth="70.0" text="Voltar">
                <font>
                   <Font size="15.0" />
