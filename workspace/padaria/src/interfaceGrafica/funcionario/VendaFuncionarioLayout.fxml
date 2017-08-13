@@ -6,7 +6,11 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -33,12 +37,54 @@
         </menus>
       </MenuBar>
    </top>
+   <left>
+      <SplitPane dividerPositions="0.25" orientation="VERTICAL" prefHeight="371.0" prefWidth="297.0" BorderPane.alignment="CENTER">
+        <items>
+          <AnchorPane maxHeight="77.0" maxWidth="295.0" minHeight="77.0" minWidth="295.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <GridPane hgap="5.0" maxHeight="77.0" maxWidth="295.0" minHeight="77.0" minWidth="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <TextField promptText="Buscar produto" GridPane.columnSpan="2">
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" top="10.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Buscar" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Limpar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                     </children>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <TableView minHeight="240.0" minWidth="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn prefWidth="129.0" text="Nome" />
+                      <TableColumn prefWidth="67.0" text="Preço" />
+                        <TableColumn prefWidth="105.0" text="Qtd" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </children></AnchorPane>
+        </items>
+      </SplitPane>
+   </left>
    <bottom>
-      <HBox alignment="BOTTOM_RIGHT" maxHeight="70.0" prefHeight="70.0" prefWidth="400.0" spacing="20.0" BorderPane.alignment="BOTTOM_RIGHT">
+      <HBox alignment="BOTTOM_RIGHT" prefHeight="40.0" spacing="30.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="80.0" text="Vender">
+            <Button mnemonicParsing="false" prefHeight="41.0" prefWidth="74.0" text="Vender">
                <font>
-                  <Font size="16.0" />
+                  <Font size="15.0" />
                </font>
             </Button>
             <Button alignment="CENTER" mnemonicParsing="false" prefHeight="38.0" prefWidth="70.0" text="Voltar">
@@ -53,36 +99,80 @@
       </HBox>
    </bottom>
    <center>
-      <GridPane maxHeight="250.0" minHeight="250.0" BorderPane.alignment="CENTER">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="150.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Label text="Venda" GridPane.columnSpan="2" GridPane.halignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </Label>
-            <Label text="Produto:" GridPane.rowIndex="1" />
-            <Label text="Quantidade:" GridPane.rowIndex="2" />
-            <Label text="Cliente cadastrado:" GridPane.rowIndex="3" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="5" />
-         </children>
-         <BorderPane.margin>
-            <Insets left="15.0" right="5.0" />
-         </BorderPane.margin>
-      </GridPane>
+      <SplitPane dividerPositions="0.5" maxWidth="303.0" minWidth="303.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" BorderPane.alignment="TOP_LEFT">
+        <items>
+          <AnchorPane maxHeight="110.0" minHeight="110.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="90.0" minWidth="10.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                           <children>
+                              <Button mnemonicParsing="false" text="Adicionar" />
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" right="5.0" />
+                           </padding>
+                        </HBox>
+                        <Label text="Venda" GridPane.columnSpan="2" GridPane.halignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label text="Quantidade:" GridPane.rowIndex="1" />
+                        <TextField promptText="Quantidade do produto" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                     </children>
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="80.0" minWidth="10.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowSpan="2">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="Produto" />
+                            <TableColumn prefWidth="75.0" text="Qtd" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <Label text="Cliente:" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets left="5.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <TextField promptText="Cliente cadastrado" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets right="5.0" />
+                           </GridPane.margin>
+                        </TextField>
+                     </children>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
    </center>
 </BorderPane>
