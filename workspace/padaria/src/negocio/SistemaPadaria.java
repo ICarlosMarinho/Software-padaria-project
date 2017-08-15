@@ -101,7 +101,7 @@ public class SistemaPadaria {
     }
 
     public Produto[] listaProduto() {
-        return this.opProduto.todos();
+        return (Produto[])this.opProduto.todos();
     }
 
     public int totalProduto() {

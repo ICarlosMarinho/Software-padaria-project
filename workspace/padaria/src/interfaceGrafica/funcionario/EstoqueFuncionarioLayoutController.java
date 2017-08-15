@@ -2,8 +2,14 @@ package interfaceGrafica.funcionario;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import repositorio.*;
+
+import java.util.ArrayList;
+
 import classesBasicas.*;
+import exceptions.NegocioException;
+import negocio.*;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -13,17 +19,33 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class EstoqueFuncionarioLayoutController {
 
-    public EstoqueFuncionarioLayoutController(RepositorioProduto produtos) {
+	private SistemaPadaria sistema;
+	
+	@FXML
+    public void initialize() {
+		
+		sistema = SistemaPadaria.getInstancia();
+		
+		try {
+			sistema.cadastrarProduto("leite em pó", "camponesa", 13, 9, 2018, 4, 4.5);
+		} catch (NegocioException ne) {
+			System.out.println( ne.getMessage() );
+			System.exit(1);
+		}
+		
+		ArrayList<Produto> produtos = new ArrayList<Produto>();
+		
+		for( Produto produto : sistema.listaProduto() )  {
+			produtos.add(produto);
+		}
+		
+		
+//		ObservableList<Produto> dados = FXCollections.observableArrayList( produtos );
         
-        ObservableList<Produto> dados = FXCollections.observableArrayList( (Produto[])produtos.listar() );
+//        tblProduto.setItems( dados );
         
-        tblProduto.setItems( dados );
-        
-        colNome.setCellValueFactory( new PropertyValueFactory<Produto, String>("nome") );
-        
-        
-        
-    }
+//        colNome.setCellValueFactory( new PropertyValueFactory<Produto, String>("nome") );
+	}
     
     @FXML
     private TableView<Produto> tblProduto;
