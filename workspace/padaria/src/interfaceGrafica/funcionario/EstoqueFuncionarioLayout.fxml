@@ -52,20 +52,20 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TextField promptText="Buscar produto" GridPane.columnSpan="2">
+                        <TextField fx:id="ttfBuscarProduto" promptText="Buscar produto" GridPane.columnSpan="2">
                            <GridPane.margin>
                               <Insets left="5.0" right="5.0" top="10.0" />
                            </GridPane.margin>
                         </TextField>
-                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Buscar" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Limpar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <Button fx:id="btnBuscar" onAction="#onActionBuscar" alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Buscar" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <Button fx:id="btnLimpar" onAction="#onActionLimpar" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Limpar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <TableView fx:id="tblFuncionario" minHeight="240.0" minWidth="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="tblProduto" minHeight="240.0" minWidth="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
                       <TableColumn fx:id="colNome" prefWidth="129.0" text="Nome" />
                       <TableColumn fx:id="colPreco" prefWidth="67.0" text="Preço" />
@@ -114,7 +114,7 @@
    <bottom>
       <HBox alignment="BOTTOM_RIGHT" prefHeight="40.0" spacing="30.0" BorderPane.alignment="CENTER">
          <children>
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#onActionVoltar" prefHeight="38.0" prefWidth="70.0" text="Voltar">
+            <Button fx:id="btnVoltar" onAction="#onActionVoltar" alignment="CENTER" mnemonicParsing="false" prefHeight="38.0" prefWidth="70.0" text="Voltar">
                <font>
                   <Font size="15.0" />
                </font>

@@ -37,9 +37,9 @@ public class Repositorio {
     }
 
     public Object[] listar() {
-
         return this.repositorio.toArray();
     }
+    
 
     public boolean adicionar(Object novo) {
 

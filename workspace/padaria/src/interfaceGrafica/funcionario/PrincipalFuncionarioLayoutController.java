@@ -62,6 +62,7 @@ public class PrincipalFuncionarioLayoutController {
 			root = FXMLLoader.load( getClass().getResource("EstoqueFuncionarioLayout.fxml") );			
 		} catch ( IOException ioe ) {
 			System.out.println("Problema para carregar arquivo EstoqueFuncionarioLayout");
+			ioe.printStackTrace();
 			System.exit(1);
 		}
 		
