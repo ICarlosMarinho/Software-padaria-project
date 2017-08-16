@@ -17,18 +17,21 @@ public class CadastroFuncionario {
         if (auxFun == null | auxFun.getEndereco() == null) {
             return null;
         } //**VERIFICAR SE A STRING REFERENTE AO NOME Ã‰ NULA
-        else if (auxFun.getNome() == null) {
+        else if (auxFun.getNome() == null | auxFun.getNome().isEmpty() == true) {
             return null;
         } //**VERIFICA SE O CARGO DO FUNCIONARIO Ã‰ VALIDO 
+        else if(auxFun.getCargo() ==null){
+            
+            return null;
+        }
         else if (auxFun.getCargo().equalsIgnoreCase("Gerente") == false
                 && auxFun.getCargo().equalsIgnoreCase("Caixa") == false
-                && auxFun.getCargo().equalsIgnoreCase("Padeiro") == false
-                && auxFun.getCargo().equalsIgnoreCase("Estoquista") == false) {
+                && auxFun.getCargo().equalsIgnoreCase("Padeiro") == false) {
             return null;
         } /*
         *Verifica algumas informaÃ§Ãµes sobre login e senha caso o funcionÃ¡rio seja gerente ou caixa,
         *pois somente esses cargos tem acesso ao sistema.
-         */ else if (auxFun.getCargo().equalsIgnoreCase("Gerente") || auxFun.getCargo().equalsIgnoreCase("Caixa")) {
+         */ else if (auxFun.getCargo().equalsIgnoreCase("Gerente") | auxFun.getCargo().equalsIgnoreCase("Caixa")) {
             //**VERIFICA SE O LOGIN E A SENHA ESTÃƒO NULOS
             if (auxFun.getLogin() == null | auxFun.getSenha() == null) {
                 return null;
@@ -37,17 +40,24 @@ public class CadastroFuncionario {
                     | auxFun.getSenha().length() < 4 && auxFun.getSenha().length() > 10) {
                 return null;
             }
+
+            //**VERIFICA SE O LOGIN DO FUNCIONARIO A SER CADASTRADO JA EXISTE
+            if (this.repo.buscar(auxFun.getLogin()) != null) {
+
+                return null;
+            }
+
         } //**VERIFICA SE O SALARIO Ã‰ MAIOR QUE ZERO
         else if (auxFun.getSalario() <= 0f) {
             return null;
         }
 
         //**VERIFICA SE ALGUMA INFORMAÃ‡ÃƒO DO ENDEREÃ‡O ESTÃ� NULA
-        if (auxFun.getEndereco().getLogradouro() == null
-                | auxFun.getEndereco().getCidade() == null
-                | auxFun.getEndereco().getComplemento() == null
-                | auxFun.getEndereco().getEstado() == null
-                | auxFun.getEndereco().getNumero() == null) {
+        if (auxFun.getEndereco().getLogradouro().isEmpty()
+                | auxFun.getEndereco().getCidade().isEmpty()
+                | auxFun.getEndereco().getComplemento().isEmpty()
+                | auxFun.getEndereco().getEstado().isEmpty()
+                | auxFun.getEndereco().getNumero().isEmpty()) {
             return null;
         }
 
@@ -57,13 +67,6 @@ public class CadastroFuncionario {
     public boolean cadastrar(Funcionario novoFun) {
         if (this.verificarInformacoes(novoFun) == null) {
             return false;
-        }
-
-        //**VERIFICA SE O LOGIN DO FUNCIONARIO A SER CADASTRADO JA EXISTE
-        for (int i = 0; i < this.repo.tamanho(); i++) {
-            if (this.repo.buscar(novoFun) != null) {
-                return false;
-            }
         }
 
         this.repo.adicionar(novoFun);
@@ -98,8 +101,25 @@ public class CadastroFuncionario {
         return this.repo.buscar(auxId);
     }
 
+    public Funcionario buscar(String login) {
+
+        if (login != null) {
+
+            return this.repo.buscar(login);
+        }
+
+        return null;
+    }
+
     public int atribuirId() {
 
-        return 10000 + repo.tamanho();
+        int auxId = 10000 + repo.tamanho();
+
+        while (this.repo.buscar(auxId) != null) {
+
+            auxId++;
+        }
+
+        return auxId;
     }
 }

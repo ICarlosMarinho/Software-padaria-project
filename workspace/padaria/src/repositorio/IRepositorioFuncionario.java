@@ -17,4 +17,6 @@ public interface IRepositorioFuncionario {
     
     public boolean atualizar(Funcionario antigo, Funcionario novo);
 
+    public Funcionario buscar(String login);
+
 }
