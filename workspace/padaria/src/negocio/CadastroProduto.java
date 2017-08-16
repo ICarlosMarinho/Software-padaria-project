@@ -365,16 +365,42 @@ public class CadastroProduto {
 		return auxiliar;
 	}
 	
+	/**
+	 * Buscar ocorrencia de string nos nomes dos produtos
+	 * @return uma ArrayList contendo os produtos encontrados
+	 */
+	public ArrayList<Produto> buscarOcorrencia(String ocorrencia) {
+		
+		ArrayList<Produto> encontrados = new ArrayList<Produto>();
+		ArrayList<Produto> produtos    = this.todos();
+		
+		
+		for( int k = 0; k < produtos.size(); k++ ) {
+			
+			Produto aux = produtos.get(k);
+			
+			if( aux.getNome().contains(ocorrencia) ) {
+				encontrados.add(aux);
+			}
+		}
+		
+		return encontrados;
+	}
 	
 	/*
 	 * este metodo retorna uma array contendo todo o estoque de produtos
 	 * 
 	 * @ retorna Produtos[] --- array contendo todo o estoque
 	 */
-	public Produto[] todos() {
+	public ArrayList<Produto> todos() {
 		
-		return (Produto[])this.estoque.listar();
+		ArrayList<Produto> produtos = new ArrayList<Produto>();
 		
+		for( Object obj : this.estoque.listar() ) {
+			produtos.add( (Produto)obj );
+		}
+		
+		return produtos;
 	}
 	
 	

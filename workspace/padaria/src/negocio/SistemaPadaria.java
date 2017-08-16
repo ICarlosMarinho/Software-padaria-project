@@ -1,5 +1,7 @@
 package negocio;
 
+import java.util.ArrayList;
+
 import classesBasicas.*;
 import exceptions.NegocioException;
 import exceptions.SistemaException;
@@ -100,8 +102,12 @@ public class SistemaPadaria {
         return this.opProduto.buscar(nome);
     }
 
-    public Produto[] listaProduto() {
-        return (Produto[])this.opProduto.todos();
+    public ArrayList<Produto> buscarProdutoOcorrencia(String ocorrencia) {
+        return this.opProduto.buscarOcorrencia(ocorrencia);
+    }
+    
+    public ArrayList<Produto> listaProduto() {
+        return this.opProduto.todos();
     }
 
     public int totalProduto() {

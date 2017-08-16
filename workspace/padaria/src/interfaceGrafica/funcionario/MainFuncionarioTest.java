@@ -3,11 +3,13 @@ package interfaceGrafica.funcionario;
 import java.io.IOException;
 import java.util.Stack;
 
+import exceptions.NegocioException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import negocio.SistemaPadaria;
 
 public class MainFuncionarioTest extends Application {
 
@@ -18,7 +20,6 @@ public class MainFuncionarioTest extends Application {
 	public static void setCenaAtual(Scene scene) {
 		MainFuncionarioTest.cenaAnterior.push( MainFuncionarioTest.palco.getScene() );
 		MainFuncionarioTest.palco.setScene(scene);
-		MainFuncionarioTest.palco.show();
 	}
 	
 	public static void setTituloAtualPalco(String title) {
@@ -37,6 +38,19 @@ public class MainFuncionarioTest extends Application {
 	
 	
 	public static void main(String[] args) {
+		
+		SistemaPadaria sistema = SistemaPadaria.getInstancia();
+		
+		try { /// caso para teste
+			sistema.cadastrarProduto("Leite", "Camponesa", 9, 2, 2020, 40, 4.5);
+			sistema.cadastrarProduto("Leite em pó", "Camponesa", 9, 2, 2020, 40, 4.5);
+			sistema.cadastrarProduto("Pão Francês", "Encomendado pelo fornecedor de Joana Bezerra", 9, 2, 2019, 200, 5.5);
+		} catch (NegocioException ne) {
+			System.out.println(ne.getMessage());
+		}
+		
+		System.out.println("Quantidade = " + sistema.totalProduto());
+		
 		launch(args);
 	}
 
