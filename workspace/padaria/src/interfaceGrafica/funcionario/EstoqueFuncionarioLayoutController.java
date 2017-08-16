@@ -1,6 +1,7 @@
 package interfaceGrafica.funcionario;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import classesBasicas.*;
 import negocio.*;
@@ -30,13 +31,19 @@ public class EstoqueFuncionarioLayoutController {
 
 	@FXML
 	private Button btnVoltar;
+	@FXML 
+	private Button btnCadastrar;
+	@FXML 
+	private Button btnConfirmarCadastrar;
+	@FXML 
+	private Button btnCancelarCadastrar;
+	@FXML 
+	private Button btnAtualizar;
 
 	@FXML 
 	private Label lblNome;
 	@FXML 
 	private Label lblDescricao;
-	@FXML 
-	private Label lblValidade;
 	@FXML 
 	private Label lblQuantidade;
 	@FXML 
@@ -49,6 +56,23 @@ public class EstoqueFuncionarioLayoutController {
 	private Button btnLimpar;
 	@FXML 
 	private Button btnBuscar;
+
+
+	@FXML 
+	private TextField ttfNome;
+	@FXML 
+	private TextField ttfDescricao;
+	@FXML
+	private TextField ttfQuantidade;
+	@FXML 
+	private TextField ttfPreco;
+	@FXML 
+	private TextField ttfAno;
+	@FXML 
+	private TextField ttfMes;
+	@FXML 
+	private TextField ttfDia;
+
 	
 	
 	
@@ -67,12 +91,14 @@ public class EstoqueFuncionarioLayoutController {
 			public void handle(MouseEvent event) {
 				Produto produto = tblProduto.getSelectionModel().getSelectedItem();
 				
-				lblNome.setText( "Nome: " + produto.getNome() );
-				lblDescricao.setText( "Descrição: " + produto.getDescricao() );
-				// TODO ajustar a formatação da validade
-				lblValidade.setText( "Validade: " + produto.getValidade().getCalendarType() );
-				lblQuantidade.setText( "Quantidade: " + produto.getQuantidade() );
-				lblPreco.setText( "Preço: " + produto.getPreco() );
+				ttfNome.setText( produto.getNome() + "" );
+				ttfDescricao.setText( produto.getDescricao() + "" );
+				ttfQuantidade.setText( produto.getQuantidade() + "");
+				ttfPreco.setText( produto.getPreco() + "" );
+				ttfDia.setText( produto.getValidade().get(Calendar.DAY_OF_MONTH) + "" );
+				ttfMes.setText( produto.getValidade().get(Calendar.MONTH ) + "");
+				ttfAno.setText( produto.getValidade().get(Calendar.YEAR ) + "");
+				
 			}
 			
 		} );
@@ -102,6 +128,22 @@ public class EstoqueFuncionarioLayoutController {
 		ArrayList<Produto> encontrados = this.sistema.buscarProdutoOcorrencia( ttfBuscarProduto.getText() );
 		tblProduto.setItems( FXCollections.observableArrayList(encontrados) );
 	}
+
+
+	@FXML
+	public void onActionCadastrar() {}
+
+
+	@FXML
+	public void onActionConfirmarCadastrar() {}
+
+
+	@FXML
+	public void onActionCancelarCadastrar() {}
+
+
+	@FXML
+	public void onActionAtualizar() {}
 	
 	
 	

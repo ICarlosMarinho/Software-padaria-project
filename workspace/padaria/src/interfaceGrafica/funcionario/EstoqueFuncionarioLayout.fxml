@@ -57,8 +57,8 @@
                               <Insets left="5.0" right="5.0" top="10.0" />
                            </GridPane.margin>
                         </TextField>
-                        <Button fx:id="btnBuscar" onAction="#onActionBuscar" alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Buscar" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                        <Button fx:id="btnLimpar" onAction="#onActionLimpar" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Limpar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <Button fx:id="btnBuscar" alignment="CENTER" mnemonicParsing="false" onAction="#onActionBuscar" prefHeight="25.0" prefWidth="70.0" text="Buscar" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <Button fx:id="btnLimpar" mnemonicParsing="false" onAction="#onActionLimpar" prefHeight="25.0" prefWidth="70.0" text="Limpar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                </children>
@@ -82,7 +82,8 @@
    <center>
       <GridPane maxHeight="327.0" maxWidth="303.0" minHeight="327.0" minWidth="303.0" BorderPane.alignment="TOP_LEFT">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="90.0" minWidth="10.0" prefWidth="90.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints />
         </columnConstraints>
         <rowConstraints>
@@ -93,35 +94,67 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
+            <TextField fx:id="ttfDescricao" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label text="Estoque" GridPane.columnSpan="2" GridPane.halignment="CENTER">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Label fx:id="lblNome" text="Nome:" GridPane.rowIndex="1" />
-            <Label fx:id="lblDescricao" text="Descrição:" GridPane.rowIndex="2" />
-            <Label fx:id="lblValidade" text="Validade:" GridPane.rowIndex="3" />
-            <Label fx:id="lblQuantidade" text="Quantidade:" GridPane.rowIndex="4" />
-            <Label fx:id="lblPreco" text="Preço:" GridPane.rowIndex="5" />
+            <Label text="Nome:" GridPane.rowIndex="1" />
+            <Label text="Descrição:" GridPane.rowIndex="2" />
+            <Label text="Validade" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+            <Label text="Quantidade:" GridPane.rowIndex="3" />
+            <Label text="Preço:" GridPane.rowIndex="4" />
+            <TextField fx:id="ttfNome" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="ttfAno" layoutX="110.0" layoutY="80.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <TextField fx:id="ttfDia" layoutX="105.0" layoutY="126.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextField fx:id="ttfMes" layoutX="105.0" layoutY="126.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <TextField fx:id="ttfQuantidade" layoutX="110.0" layoutY="112.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="ttfPreco" layoutX="110.0" layoutY="144.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label layoutX="15.0" layoutY="131.0" text="dia:" GridPane.rowIndex="6" />
+            <Label layoutX="15.0" layoutY="167.0" text="mês:" GridPane.rowIndex="7" />
+            <Label layoutX="15.0" layoutY="203.0" text="ano:" GridPane.rowIndex="8" />
          </children>
          <padding>
-            <Insets bottom="100.0" left="10.0" />
+            <Insets left="5.0" right="5.0" />
          </padding>
       </GridPane>
    </center>
    <bottom>
       <HBox alignment="BOTTOM_RIGHT" prefHeight="40.0" spacing="30.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnVoltar" onAction="#onActionVoltar" alignment="CENTER" mnemonicParsing="false" prefHeight="38.0" prefWidth="70.0" text="Voltar">
+            <Button fx:id="btnCadastrar" mnemonicParsing="false" onAction="#onActionCadastrar" text="Cadastrar">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnConfirmarCadastrar" mnemonicParsing="false" onAction="#onActionConfirmarCadastrar" text="Confirmar">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnCancelarCadastrar" mnemonicParsing="false" onAction="#onActionCancelarCadastrar" prefHeight="29.0" text="Cancelar">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnAtualizar" mnemonicParsing="false" onAction="#onActionAtualizar" prefHeight="52.0" prefWidth="90.0" text="Atualizar">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnVoltar" alignment="CENTER" mnemonicParsing="false" onAction="#onActionVoltar" prefHeight="38.0" prefWidth="70.0" text="Voltar">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
          </children>
          <padding>
-            <Insets bottom="15.0" right="15.0" />
+            <Insets bottom="10.0" right="10.0" top="5.0" />
          </padding>
       </HBox>
    </bottom>
