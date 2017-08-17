@@ -43,14 +43,11 @@ public class PrincipalFuncionarioLayoutController {
 		try {
 			root = FXMLLoader.load( getClass().getResource("TelaClienteFuncionarioLayout.fxml") );			
 		} catch ( IOException ioe ) {
-<<<<<<< HEAD
 			System.out.println("Problema para carregar arquivo ClienteFuncionarioLayout");
 			ioe.printStackTrace();
-=======
 			System.out.println("Problema para carregar arquivo TelaClienteFuncionarioLayout");
 			ioe.printStackTrace();
 			System.exit(1);
->>>>>>> origin/master
 		}
 		
 		Scene scene = new Scene(root, 600, 400);
@@ -67,11 +64,8 @@ public class PrincipalFuncionarioLayoutController {
 		try {
 			root = FXMLLoader.load( getClass().getResource("TelaEstoqueFuncionarioLayout.fxml") );			
 		} catch ( IOException ioe ) {
-<<<<<<< HEAD
 			System.out.println("Problema para carregar arquivo EstoqueFuncionarioLayout");
-=======
 			System.out.println("Problema para carregar arquivo TelaEstoqueFuncionarioLayout");
->>>>>>> origin/master
 			ioe.printStackTrace();
 			System.exit(1);
 		}
