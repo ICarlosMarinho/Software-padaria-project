@@ -146,7 +146,11 @@ public class SistemaPadaria {
         return this.opCliente.total();
     }
 
-    public Cliente[] listaCliente() {
+    public ArrayList<Cliente> buscarClienteOcorrencia(String ocorrencia) {
+    	return this.opCliente.buscarOcorrencia(ocorrencia);
+    }
+    
+    public ArrayList<Cliente> listaCliente() {
         return this.opCliente.todos();
     }
 

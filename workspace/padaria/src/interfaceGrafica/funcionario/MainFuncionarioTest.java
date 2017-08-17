@@ -45,11 +45,18 @@ public class MainFuncionarioTest extends Application {
 			sistema.cadastrarProduto("Leite", "Camponesa", 9, 2, 2020, 40, 4.5);
 			sistema.cadastrarProduto("Leite em pó", "Camponesa", 9, 2, 2020, 40, 4.5);
 			sistema.cadastrarProduto("Pão Francês", "Encomendado pelo fornecedor de Joana Bezerra", 9, 2, 2019, 200, 5.5);
+			
+			sistema.cadastrarCliente("Maria", "Vasco da Gama", "1856", "A", "Recife", "PE");
+			sistema.cadastrarCliente("José", "Vasco da Gama", "1856", "A", "Recife", "PE");
+			sistema.cadastrarCliente("Arimatéia", "Vasco da Gama", "1856", "A", "Recife", "PE");
+		
 		} catch (NegocioException ne) {
 			System.out.println(ne.getMessage());
 		}
 		
-		System.out.println("Quantidade = " + sistema.totalProduto());
+		System.out.println("Quantidade produto = " + sistema.totalProduto());
+		System.out.println("Quantidade cliente = " + sistema.totalCliente());
+
 		
 		launch(args);
 	}

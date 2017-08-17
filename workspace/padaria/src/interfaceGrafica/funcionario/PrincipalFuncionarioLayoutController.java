@@ -21,9 +21,9 @@ public class PrincipalFuncionarioLayoutController {
 		Parent root = null;
 		
 		try {
-			root = FXMLLoader.load( getClass().getResource("VendaFuncionarioLayout.fxml") );			
+			root = FXMLLoader.load( getClass().getResource("TelaVendaFuncionarioLayout.fxml") );			
 		} catch ( IOException ioe ) {
-			System.out.println("Problema para carregar arquivo VendaFuncionarioLayout");
+			System.out.println("Problema para carregar arquivo TelaVendaFuncionarioLayout");
 			System.exit(1);
 		}
 		
@@ -41,9 +41,10 @@ public class PrincipalFuncionarioLayoutController {
 		Parent root = null;
 		
 		try {
-			root = FXMLLoader.load( getClass().getResource("ClienteFuncionarioLayout.fxml") );			
+			root = FXMLLoader.load( getClass().getResource("TelaClienteFuncionarioLayout.fxml") );			
 		} catch ( IOException ioe ) {
-			System.out.println("Problema para carregar arquivo ClienteFuncionarioLayout");
+			System.out.println("Problema para carregar arquivo TelaClienteFuncionarioLayout");
+			ioe.printStackTrace();
 			System.exit(1);
 		}
 		
@@ -59,9 +60,9 @@ public class PrincipalFuncionarioLayoutController {
 		Parent root = null;
 		
 		try {
-			root = FXMLLoader.load( getClass().getResource("EstoqueFuncionarioLayout.fxml") );			
+			root = FXMLLoader.load( getClass().getResource("TelaEstoqueFuncionarioLayout.fxml") );			
 		} catch ( IOException ioe ) {
-			System.out.println("Problema para carregar arquivo EstoqueFuncionarioLayout");
+			System.out.println("Problema para carregar arquivo TelaEstoqueFuncionarioLayout");
 			ioe.printStackTrace();
 			System.exit(1);
 		}
