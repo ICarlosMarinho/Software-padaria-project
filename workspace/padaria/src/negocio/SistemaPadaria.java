@@ -103,9 +103,9 @@ public class SistemaPadaria {
 
     public boolean modificarProduto(int id, String nome, String descricao
 			, String dia, String mes, String ano
-			, String quantidade, String preco) throws NegocioException {
+			, String quantidade, String preco) throws NegocioException, SistemaException {
     	
-    	return this.opProduto.cadastrar(nome, descricao, dia, mes, ano, quantidade, preco);
+    	return this.opProduto.modificar(id, nome, descricao, dia, mes, ano, quantidade, preco);
     }
     
     public Produto buscarProduto(int id) {

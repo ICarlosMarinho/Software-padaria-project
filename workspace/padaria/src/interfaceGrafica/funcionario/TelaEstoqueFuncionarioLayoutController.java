@@ -10,6 +10,7 @@ import com.sun.javafx.scene.control.behavior.OptionalBoolean;
 
 import classesBasicas.*;
 import exceptions.NegocioException;
+import exceptions.SistemaException;
 import negocio.*;
 import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
@@ -224,17 +225,43 @@ public class TelaEstoqueFuncionarioLayoutController {
 
 	@FXML
 	public void onActionAtualizar() {
+		Produto atualizar = tblProduto.getSelectionModel().getSelectedItem();
+		Alert dialogo;
 		
+		try {
+			if ( this.sistema.modificarProduto(atualizar.getId(), ttfNome.getText(), ttfDescricao.getText()
+					, ttfDia.getText(), ttfMes.getText(), ttfAno.getText()
+					, ttfQuantidade.getText(), ttfPreco.getText() ) ) {
+				
+				dialogo = new Alert(Alert.AlertType.INFORMATION);
+				dialogo.setTitle("INFO");
+				dialogo.setHeaderText("Estoque");
+				dialogo.setContentText("Produto atualizado com sucesso !");
+				dialogo.showAndWait();
+				
+			}
+			
+		} catch ( NegocioException ne ) {
+			dialogo = new Alert(Alert.AlertType.ERROR);
+			dialogo.setTitle("ERRO");
+			dialogo.setHeaderText("Estoque");
+			dialogo.setContentText(ne.getMessage());
+			dialogo.showAndWait();
+		} catch ( SistemaException se ) {
+			dialogo = new Alert(Alert.AlertType.ERROR);
+			dialogo.setTitle("ERRO");
+			dialogo.setHeaderText("Estoque");
+			dialogo.setContentText(se.getMessage());
+			dialogo.showAndWait();
+		}
 		
-		
-		
-		
+		tblProduto.setItems( FXCollections.observableArrayList(this.sistema.listaProduto()) );
+		tblProduto.refresh();
 	}
 
 
 	@FXML public void onActionExcluir() {
 		Produto excluir = tblProduto.getSelectionModel().getSelectedItem();
-		boolean excluido = true;
 		
 		Alert dialogo = new Alert(Alert.AlertType.CONFIRMATION);
 		ButtonType sim  = new ButtonType("Sim");
@@ -250,24 +277,23 @@ public class TelaEstoqueFuncionarioLayoutController {
 		}
 		
 		try {
-			this.sistema.removerProduto( excluir.getId() );
+			if( this.sistema.removerProduto( excluir.getId() ) ) {
+				dialogo = new Alert(Alert.AlertType.INFORMATION);
+				dialogo.setTitle("INFO");
+				dialogo.setHeaderText("Estoque");
+				dialogo.setContentText("Produto excluído com sucesso !");
+				dialogo.showAndWait();
+			}
+			
 		} catch (NegocioException ne) {
 			dialogo = new Alert(Alert.AlertType.ERROR);
 			dialogo.setTitle("ERRO");
 			dialogo.setHeaderText("Estoque");
 			dialogo.setContentText( ne.getMessage() );
 			dialogo.showAndWait();
-			excluido = false;
 		}
 		
 		tblProduto.setItems( FXCollections.observableArrayList(this.sistema.listaProduto()) );
-		if(excluido) {
-			dialogo = new Alert(Alert.AlertType.INFORMATION);
-			dialogo.setTitle("INFO");
-			dialogo.setHeaderText("Estoque");
-			dialogo.setContentText("Produto excluído com sucesso !");
-			dialogo.showAndWait();
-		}
 	}
 	
 	
