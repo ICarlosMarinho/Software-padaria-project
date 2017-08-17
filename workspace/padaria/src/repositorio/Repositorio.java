@@ -40,7 +40,6 @@ public class Repositorio {
         return this.repositorio.toArray();
     }
     
-
     public boolean adicionar(Object novo) {
 
         if (novo == null) {

@@ -69,6 +69,13 @@ public class SistemaPadaria {
                  dia, mes, ano,
                  quantidade, preco);
     }
+    
+    public boolean cadastrarProduto(String nome, String descricao
+		    , String dia, String mes, String ano
+		    , String quantidade, String preco) throws NegocioException {
+    	
+    	return this.opProduto.cadastrar(nome, descricao, dia, mes, ano, quantidade, preco);
+    }
 
     public boolean validadeProduto(int dia, int mes, int ano) {
         return this.opProduto.validadeOK(dia, mes, ano);
@@ -94,6 +101,13 @@ public class SistemaPadaria {
         return this.opProduto.modificar(id, opcao, valor);
     }
 
+    public boolean modificarProduto(int id, String nome, String descricao
+			, String dia, String mes, String ano
+			, String quantidade, String preco) throws NegocioException {
+    	
+    	return this.opProduto.cadastrar(nome, descricao, dia, mes, ano, quantidade, preco);
+    }
+    
     public Produto buscarProduto(int id) {
         return this.opProduto.buscar(id);
     }

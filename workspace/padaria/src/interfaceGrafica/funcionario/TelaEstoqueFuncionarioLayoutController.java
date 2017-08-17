@@ -3,8 +3,13 @@ package interfaceGrafica.funcionario;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Optional;
+import java.util.function.Consumer;
+
+import com.sun.javafx.scene.control.behavior.OptionalBoolean;
 
 import classesBasicas.*;
+import exceptions.NegocioException;
 import negocio.*;
 import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
@@ -13,9 +18,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 
 public class TelaEstoqueFuncionarioLayoutController {
 	
@@ -146,6 +154,14 @@ public class TelaEstoqueFuncionarioLayoutController {
 	public void onActionLimpar() {
 		ttfBuscarProduto.clear();
 		tblProduto.setItems( FXCollections.observableArrayList(this.sistema.listaProduto()) );
+		
+		ttfNome.clear();
+		ttfDescricao.clear();
+		ttfDia.clear();
+		ttfMes.clear();
+		ttfAno.clear();
+		ttfPreco.clear();
+		ttfQuantidade.clear();
 	}
 
 
@@ -158,19 +174,101 @@ public class TelaEstoqueFuncionarioLayoutController {
 
 
 	@FXML
-	public void onActionCadastrar() {}
+	public void onActionCadastrar() {
+		
+	}
 
 
 	@FXML
-	public void onActionConfirmarCadastrar() {}
+	public void onActionConfirmarCadastrar() {
+		boolean cadastrado = true;
+		
+		try {
+			this.sistema.cadastrarProduto( ttfNome.getText(), ttfDescricao.getText()
+				, ttfDia.getText(), ttfMes.getText(), ttfAno.getText()
+				, ttfQuantidade.getText(), ttfPreco.getText() );
+		
+		} catch (NegocioException ne) {
+			Alert erro = new Alert(Alert.AlertType.ERROR);
+			erro.setTitle("ERRO");
+			erro.setHeaderText("Estoque");
+			erro.setContentText( ne.getMessage() );
+			erro.showAndWait();
+			cadastrado = false;
+		}
+		
+		tblProduto.setItems( FXCollections.observableArrayList(this.sistema.listaProduto()) );
+		if(cadastrado) {
+			Alert info = new Alert(Alert.AlertType.INFORMATION);
+			info.setTitle("INFO");
+			info.setHeaderText("Estoque");
+			info.setContentText( "Produto cadastrado com sucesso !" );
+			info.showAndWait();
+		}
+	}
 
 
 	@FXML
-	public void onActionCancelarCadastrar() {}
+	public void onActionCancelarCadastrar() {
+		tblProduto.setItems( FXCollections.observableArrayList(this.sistema.listaProduto()) );
+		
+		ttfNome.clear();
+		ttfDescricao.clear();
+		ttfDia.clear();
+		ttfMes.clear();
+		ttfAno.clear();
+		ttfPreco.clear();
+		ttfQuantidade.clear();
+	}
 
 
 	@FXML
-	public void onActionAtualizar() {}
+	public void onActionAtualizar() {
+		
+		
+		
+		
+		
+	}
+
+
+	@FXML public void onActionExcluir() {
+		Produto excluir = tblProduto.getSelectionModel().getSelectedItem();
+		boolean excluido = true;
+		
+		Alert dialogo = new Alert(Alert.AlertType.CONFIRMATION);
+		ButtonType sim  = new ButtonType("Sim");
+		ButtonType nao  = new ButtonType("Não");
+		dialogo.getButtonTypes().setAll(sim, nao);
+		dialogo.setTitle("REMOÇÃO");
+		dialogo.setHeaderText("Você realmente deseja excluir:");
+		dialogo.setContentText(excluir.getNome());
+		Optional<ButtonType> resposta = dialogo.showAndWait();
+		
+		if( resposta.get() == nao ) {
+			return;
+		}
+		
+		try {
+			this.sistema.removerProduto( excluir.getId() );
+		} catch (NegocioException ne) {
+			dialogo = new Alert(Alert.AlertType.ERROR);
+			dialogo.setTitle("ERRO");
+			dialogo.setHeaderText("Estoque");
+			dialogo.setContentText( ne.getMessage() );
+			dialogo.showAndWait();
+			excluido = false;
+		}
+		
+		tblProduto.setItems( FXCollections.observableArrayList(this.sistema.listaProduto()) );
+		if(excluido) {
+			dialogo = new Alert(Alert.AlertType.INFORMATION);
+			dialogo.setTitle("INFO");
+			dialogo.setHeaderText("Estoque");
+			dialogo.setContentText("Produto excluído com sucesso !");
+			dialogo.showAndWait();
+		}
+	}
 	
 	
 	

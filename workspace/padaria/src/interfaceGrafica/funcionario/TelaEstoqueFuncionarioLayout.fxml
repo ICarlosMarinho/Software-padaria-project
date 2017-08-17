@@ -125,7 +125,7 @@
       </GridPane>
    </center>
    <bottom>
-      <HBox alignment="BOTTOM_RIGHT" prefHeight="40.0" spacing="30.0" BorderPane.alignment="CENTER">
+      <HBox alignment="BOTTOM_RIGHT" prefHeight="40.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="btnCadastrar" mnemonicParsing="false" onAction="#onActionCadastrar" text="Cadastrar">
                <font>
@@ -138,6 +138,11 @@
                </font>
             </Button>
             <Button fx:id="btnCancelarCadastrar" mnemonicParsing="false" onAction="#onActionCancelarCadastrar" prefHeight="29.0" text="Cancelar">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#onActionExcluir" text="Excluir">
                <font>
                   <Font size="15.0" />
                </font>

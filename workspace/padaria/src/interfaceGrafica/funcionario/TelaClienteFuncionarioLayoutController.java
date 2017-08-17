@@ -138,6 +138,16 @@ public class TelaClienteFuncionarioLayoutController {
 	public void onActionLimpar() {
 		ttfBuscarProduto.clear();
 		tblCliente.setItems( FXCollections.observableArrayList(this.sistema.listaCliente()) );
+		
+		ttfNome.clear();
+		ttfLogradouro.clear();
+		ttfNumero.clear();
+		ttfComplemento.clear();
+		ttfCidade.clear();
+		ttfEstado.clear();
+		ttfCredito.clear();
+		ttfQtdVendas.clear();
+		ttfValorVendas.clear();
 	}
 
 

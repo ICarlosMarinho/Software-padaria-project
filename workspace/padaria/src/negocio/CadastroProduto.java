@@ -167,7 +167,30 @@ public class CadastroProduto {
 		auxiliar = new Produto(nome, descricao, id, validade, quantidade, preco);
 		
 		this.estoque.adicionar(auxiliar);
-		return true; // TODO remover
+		return true;
+	}
+	public boolean cadastrar(String nome, String descricao
+		    , String dia, String mes, String ano
+		    , String quantidade, String preco) throws NegocioException {
+		
+		int diaInt, mesInt, anoInt;
+		double quantidadeDou, precoDou;
+		
+		try {
+			diaInt = Integer.parseInt(dia);
+			mesInt = Integer.parseInt(mes);
+			anoInt = Integer.parseInt(ano);
+			quantidadeDou = Double.parseDouble(quantidade);
+			precoDou = Double.parseDouble(preco);
+		} catch( NumberFormatException  nfe ) {
+			throw new NegocioException("Dados inválidos", this);
+		}
+		
+		if(this.cadastrar(nome, descricao, diaInt, mesInt, anoInt, quantidadeDou, precoDou) ) {
+			return true;
+		}
+		
+		return false;
 	}
 	
 	
@@ -190,7 +213,6 @@ public class CadastroProduto {
 		if( this.estoque.buscar( auxiliar ) == null ) {
 			throw new NegocioException( "Produto Inexistente", this );
 		}
-		
 		
 		if( this.estoque.remover(auxiliar) ) {
 			return true;
@@ -343,7 +365,25 @@ public class CadastroProduto {
 		
 		return false;
 	}
-	
+	public boolean modificar(int id, String nome, String descricao
+			, String dia, String mes, String ano
+			, String quantidade, String preco) throws NegocioException {
+		
+		// TODO continuar aqui
+		
+		Produto backup = this.buscar(id);
+		this.remover(id);
+		
+		try {
+			this.cadastrar(nome, descricao, dia, mes, ano, quantidade, preco); 
+		} catch (NegocioException ne) {
+			/// se houver algum dado errado restaurar produto removido
+			this.estoque.adicionar(backup);
+			throw ne;
+		}
+		
+		return true;
+	}
 	
 	/*
 	 * este metodo retorna um produto do estoque se o mesmo existir
