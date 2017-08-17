@@ -17,7 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class EstoqueFuncionarioLayoutController {
+public class TelaEstoqueFuncionarioLayoutController {
 	
 	private SistemaPadaria sistema;
 
@@ -105,8 +105,33 @@ public class EstoqueFuncionarioLayoutController {
 		} );
 		
 		
+		// botao limpar so ficara ativado se o campo de busca tiver algo
+		btnLimpar.disableProperty().bind( ttfBuscarProduto.textProperty().isEmpty() );
+		// botao limpar so ficara ativado se o campo de busca tiver algo
+		btnBuscar.disableProperty().bind( ttfBuscarProduto.textProperty().isEmpty() );
 		
 		
+		// botao atualizar so ficara ativado se todos os campos forem preenchidos
+		btnAtualizar.disableProperty().bind( ttfNome.textProperty().isEmpty().or(
+				ttfDescricao.textProperty().isEmpty().or(
+				ttfQuantidade.textProperty().isEmpty().or(
+				ttfPreco.textProperty().isEmpty().or(
+				ttfDia.textProperty().isEmpty().or(
+				ttfMes.textProperty().isEmpty().or(
+				ttfAno.textProperty().isEmpty())))))) );
+		
+		
+		// botao confirmar so ficara ativado se todos os campos forem preenchidos
+		btnConfirmarCadastrar.disableProperty().bind( ttfNome.textProperty().isEmpty().or(
+				ttfDescricao.textProperty().isEmpty().or(
+				ttfQuantidade.textProperty().isEmpty().or(
+				ttfPreco.textProperty().isEmpty().or(
+				ttfDia.textProperty().isEmpty().or(
+				ttfMes.textProperty().isEmpty().or(
+				ttfAno.textProperty().isEmpty())))))) );
+		
+		
+		// TODO ajustar opcoes conforme funcionario
 		
 	}
 

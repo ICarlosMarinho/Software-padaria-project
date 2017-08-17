@@ -1,6 +1,9 @@
 package negocio;
 
 import repositorio.*;
+
+import java.util.ArrayList;
+
 import classesBasicas.*;
 
 public class CadastroCliente {
@@ -134,6 +137,27 @@ public class CadastroCliente {
 		return (Cliente)this.clientes.buscar(procurado);
 	}
 
+	/**
+	 * Buscar ocorrencia de string nos nomes dos clientes
+	 * @return uma ArrayList contendo os clientes encontrados
+	 */
+	public ArrayList<Cliente> buscarOcorrencia(String ocorrencia) {
+		
+		ArrayList<Cliente> encontrados = new ArrayList<Cliente>();
+		ArrayList<Cliente> clientes    = this.todos();
+		
+		
+		for( int k = 0; k < clientes.size(); k++ ) {
+			
+			Cliente aux = clientes.get(k);
+			
+			if( aux.getNome().contains(ocorrencia) ) {
+				encontrados.add(aux);
+			}
+		}
+		
+		return encontrados;
+	}
 	
 	/*
 	 * este metodo retorna a quantidade total de clientes
@@ -151,8 +175,15 @@ public class CadastroCliente {
 	 * 
 	 * @ retorna lista[] --- todos os clientes cadastrados
 	 */
-	public Cliente[] todos() {
-		return (Cliente[])this.clientes.listar();
+	public ArrayList<Cliente> todos() {
+		
+		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+		
+		for( Object obj : this.clientes.listar() ) {
+			clientes.add( (Cliente)obj );
+		}
+		
+		return clientes;
 	}
 	
 	
