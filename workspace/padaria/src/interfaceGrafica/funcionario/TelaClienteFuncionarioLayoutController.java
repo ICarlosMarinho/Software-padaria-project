@@ -1,8 +1,11 @@
 package interfaceGrafica.funcionario;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import classesBasicas.*;
+import exceptions.NegocioException;
+import exceptions.SistemaException;
 import negocio.*;
 
 import javafx.collections.FXCollections;
@@ -11,7 +14,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 
@@ -65,6 +70,8 @@ public class TelaClienteFuncionarioLayoutController {
 	private Button btnCancelarCadastrar;
 	@FXML
 	private Button btnConfirmarCadastrar;
+	@FXML
+	private Button btnExcluir;
 
 
 
@@ -99,8 +106,6 @@ public class TelaClienteFuncionarioLayoutController {
 		
 		
 		// botao limpar so ficara ativado se o campo de busca tiver algo
-		btnLimpar.disableProperty().bind( ttfBuscarProduto.textProperty().isEmpty() );
-		// botao limpar so ficara ativado se o campo de busca tiver algo
 		btnBuscar.disableProperty().bind( ttfBuscarProduto.textProperty().isEmpty() );
 		
 		
@@ -121,6 +126,7 @@ public class TelaClienteFuncionarioLayoutController {
 				ttfCidade.textProperty().isEmpty()))))) );
 		
 		
+		// TODO ajustar opcoes conforme cliente
 	}
 
 
@@ -145,40 +151,169 @@ public class TelaClienteFuncionarioLayoutController {
 		ttfComplemento.clear();
 		ttfCidade.clear();
 		ttfEstado.clear();
-		ttfCredito.clear();
 		ttfQtdVendas.clear();
 		ttfValorVendas.clear();
+		ttfCredito.clear();
 	}
 
 
 
 
 	@FXML
-	public void onActionCadastrar() {}
+	public void onActionCadastrar() {
+		// TODO fazer btnConfirmarCadastrar e btnCancelarCadastrar visiveis
+	}
 
 
 
 
 	@FXML
-	public void onActionConfirmarCadastrar() {}
+	public void onActionConfirmarCadastrar() {
+		
+		try {
+			
+			if( this.sistema.cadastrarCliente( ttfNome.getText(), ttfLogradouro.getText()
+					, ttfNumero.getText(), ttfComplemento.getText(), ttfCidade.getText()
+					, ttfEstado.getText() ) ) {
+				
+				Alert info = new Alert(Alert.AlertType.INFORMATION);
+				info.setTitle("INFO");
+				info.setHeaderText("Cliente");
+				info.setContentText( "Cliente cadastrado com sucesso !" );
+				info.showAndWait();
+			}
+			
+			
+		} catch (NegocioException ne) {
+			Alert erro = new Alert(Alert.AlertType.ERROR);
+			erro.setTitle("ERRO");
+			erro.setHeaderText("Cliente");
+			erro.setContentText( ne.getMessage() );
+			erro.showAndWait();
+		} catch (SistemaException se) {
+			Alert erro = new Alert(Alert.AlertType.ERROR);
+			erro.setTitle("ERRO");
+			erro.setHeaderText("Cliente");
+			erro.setContentText( se.getMessage() );
+			erro.showAndWait();
+		}
+		
+		tblCliente.setItems( FXCollections.observableArrayList(this.sistema.listaCliente()) );
+		tblCliente.refresh();
+	}
 
 
 
 
 	@FXML
-	public void onActionCancelarCadastrar() {}
+	public void onActionCancelarCadastrar() {
+		tblCliente.setItems( FXCollections.observableArrayList(this.sistema.listaCliente()) );
+		
+		ttfNome.clear();
+		ttfLogradouro.clear();
+		ttfNumero.clear();
+		ttfComplemento.clear();
+		ttfCidade.clear();
+		ttfEstado.clear();
+		
+		// // TODO fazer btnConfirmarCadastrar e btnCancelarCadastrar invisiveis
+	}
 
 
 
 
 	@FXML
-	public void onActionAtualizar() {}
+	public void onActionAtualizar() {
+		Cliente atualizar = tblCliente.getSelectionModel().getSelectedItem();
+		Alert dialogo;
+		
+		try {
+			if ( this.sistema.modificarCliente(atualizar.getId(), ttfNome.getText(), ttfLogradouro.getText()
+					, ttfNumero.getText(), ttfComplemento.getText(), ttfCidade.getText()
+					, ttfEstado.getText() ) ) {
+				
+				dialogo = new Alert(Alert.AlertType.INFORMATION);
+				dialogo.setTitle("INFO");
+				dialogo.setHeaderText("Cliente");
+				dialogo.setContentText("Cliente atualizado com sucesso !");
+				dialogo.showAndWait();
+				
+			}
+			
+		} catch ( NegocioException ne ) {
+			dialogo = new Alert(Alert.AlertType.ERROR);
+			dialogo.setTitle("ERRO");
+			dialogo.setHeaderText("Cliente");
+			dialogo.setContentText(ne.getMessage());
+			dialogo.showAndWait();
+		} catch ( SistemaException se ) {
+			dialogo = new Alert(Alert.AlertType.ERROR);
+			dialogo.setTitle("ERRO");
+			dialogo.setHeaderText("Cliente");
+			dialogo.setContentText(se.getMessage());
+			dialogo.showAndWait();
+		}
+		
+		tblCliente.setItems( FXCollections.observableArrayList(this.sistema.listaCliente()) );
+		tblCliente.refresh();
+	}
 
 
 
 
-	@FXML public void onActionVoltar() {
+	@FXML
+	public void onActionVoltar() {
 		MainFuncionarioTest.setCenaAnterior();
+	}
+
+
+
+
+	@FXML
+	public void onActionExcluir() {
+		Cliente excluir = tblCliente.getSelectionModel().getSelectedItem();
+		
+		Alert dialogo = new Alert(Alert.AlertType.CONFIRMATION);
+		ButtonType sim  = new ButtonType("Sim");
+		ButtonType nao  = new ButtonType("Não");
+		dialogo.getButtonTypes().setAll(sim, nao);
+		dialogo.setTitle("REMOÇÃO");
+		dialogo.setHeaderText("Você realmente deseja excluir");
+		dialogo.setContentText(excluir.getNome());
+		Optional<ButtonType> resposta = dialogo.showAndWait();
+		
+		if( resposta.get() == nao ) {
+			return;
+		}
+		
+		try {
+			if( this.sistema.removerCliente( excluir.getId() ) ) {
+				dialogo = new Alert(Alert.AlertType.INFORMATION);
+				dialogo.setTitle("INFO");
+				dialogo.setHeaderText("Cliente");
+				dialogo.setContentText("Cliente excluído com sucesso !");
+				dialogo.showAndWait();
+			}
+			
+		} catch (NegocioException ne) {
+			dialogo = new Alert(Alert.AlertType.ERROR);
+			dialogo.setTitle("ERRO");
+			dialogo.setHeaderText("Cliente");
+			dialogo.setContentText( ne.getMessage() );
+			dialogo.showAndWait();
+		}
+		
+		tblCliente.setItems( FXCollections.observableArrayList(this.sistema.listaCliente()) );
+		tblCliente.refresh();
+		ttfNome.clear();
+		ttfLogradouro.clear();
+		ttfNumero.clear();
+		ttfComplemento.clear();
+		ttfCidade.clear();
+		ttfEstado.clear();
+		ttfQtdVendas.clear();
+		ttfValorVendas.clear();
+		ttfCredito.clear();
 	}
 
 

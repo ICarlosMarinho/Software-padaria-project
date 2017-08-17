@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Stack;
 
 import exceptions.NegocioException;
+import exceptions.SistemaException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -37,22 +38,19 @@ public class MainFuncionarioTest extends Application {
 	}
 	
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SistemaException, NegocioException {
 		
 		SistemaPadaria sistema = SistemaPadaria.getInstancia();
 		
-		try { /// caso para teste
-			sistema.cadastrarProduto("Leite", "Camponesa", 9, 2, 2020, 40, 4.5);
-			sistema.cadastrarProduto("Leite em pó", "Camponesa", 9, 2, 2020, 40, 4.5);
-			sistema.cadastrarProduto("Pão Francês", "Encomendado pelo fornecedor de Joana Bezerra", 9, 2, 2019, 200, 5.5);
-			
-			sistema.cadastrarCliente("Maria", "Vasco da Gama", "1856", "A", "Recife", "PE");
-			sistema.cadastrarCliente("José", "Vasco da Gama", "1856", "A", "Recife", "PE");
-			sistema.cadastrarCliente("Arimatéia", "Vasco da Gama", "1856", "A", "Recife", "PE");
+		/// caso para teste
+		sistema.cadastrarProduto("Leite", "Camponesa", 9, 2, 2020, 40, 4.5);
+		sistema.cadastrarProduto("Leite em pó", "Camponesa", 9, 2, 2020, 40, 4.5);
+		sistema.cadastrarProduto("Pão Francês", "Encomendado pelo fornecedor de Joana Bezerra", 9, 2, 2019, 200, 5.5);
 		
-		} catch (NegocioException ne) {
-			System.out.println(ne.getMessage());
-		}
+		sistema.cadastrarCliente("Maria", "Vasco da Gama", "1856", "A", "Recife", "PE");
+		sistema.cadastrarCliente("José", "Vasco da Gama", "1856", "A", "Recife", "PE");
+		sistema.cadastrarCliente("Arimatéia", "Vasco da Gama", "1856", "A", "Recife", "PE");
+		
 		
 		System.out.println("Quantidade produto = " + sistema.totalProduto());
 		System.out.println("Quantidade cliente = " + sistema.totalCliente());

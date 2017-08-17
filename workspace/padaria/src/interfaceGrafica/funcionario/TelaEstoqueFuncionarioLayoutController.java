@@ -115,8 +115,6 @@ public class TelaEstoqueFuncionarioLayoutController {
 		
 		
 		// botao limpar so ficara ativado se o campo de busca tiver algo
-		btnLimpar.disableProperty().bind( ttfBuscarProduto.textProperty().isEmpty() );
-		// botao limpar so ficara ativado se o campo de busca tiver algo
 		btnBuscar.disableProperty().bind( ttfBuscarProduto.textProperty().isEmpty() );
 		
 		
@@ -176,36 +174,36 @@ public class TelaEstoqueFuncionarioLayoutController {
 
 	@FXML
 	public void onActionCadastrar() {
-		
+		// TODO fazer btnConfirmarCadastrar e btnCancelarCadastrar visiveis
 	}
 
 
 	@FXML
 	public void onActionConfirmarCadastrar() {
-		boolean cadastrado = true;
 		
 		try {
-			this.sistema.cadastrarProduto( ttfNome.getText(), ttfDescricao.getText()
-				, ttfDia.getText(), ttfMes.getText(), ttfAno.getText()
-				, ttfQuantidade.getText(), ttfPreco.getText() );
-		
+			
+			if(this.sistema.cadastrarProduto( ttfNome.getText(), ttfDescricao.getText()
+					, ttfDia.getText(), ttfMes.getText(), ttfAno.getText()
+					, ttfQuantidade.getText(), ttfPreco.getText() )) {
+				Alert info = new Alert(Alert.AlertType.INFORMATION);
+				info.setTitle("INFO");
+				info.setHeaderText("Estoque");
+				info.setContentText( "Produto cadastrado com sucesso !" );
+				info.showAndWait();
+			}
+			
+			
 		} catch (NegocioException ne) {
 			Alert erro = new Alert(Alert.AlertType.ERROR);
 			erro.setTitle("ERRO");
 			erro.setHeaderText("Estoque");
 			erro.setContentText( ne.getMessage() );
 			erro.showAndWait();
-			cadastrado = false;
 		}
 		
 		tblProduto.setItems( FXCollections.observableArrayList(this.sistema.listaProduto()) );
-		if(cadastrado) {
-			Alert info = new Alert(Alert.AlertType.INFORMATION);
-			info.setTitle("INFO");
-			info.setHeaderText("Estoque");
-			info.setContentText( "Produto cadastrado com sucesso !" );
-			info.showAndWait();
-		}
+		tblProduto.refresh();
 	}
 
 
@@ -260,7 +258,8 @@ public class TelaEstoqueFuncionarioLayoutController {
 	}
 
 
-	@FXML public void onActionExcluir() {
+	@FXML
+	public void onActionExcluir() {
 		Produto excluir = tblProduto.getSelectionModel().getSelectedItem();
 		
 		Alert dialogo = new Alert(Alert.AlertType.CONFIRMATION);
@@ -268,7 +267,7 @@ public class TelaEstoqueFuncionarioLayoutController {
 		ButtonType nao  = new ButtonType("Não");
 		dialogo.getButtonTypes().setAll(sim, nao);
 		dialogo.setTitle("REMOÇÃO");
-		dialogo.setHeaderText("Você realmente deseja excluir:");
+		dialogo.setHeaderText("Você realmente deseja excluir");
 		dialogo.setContentText(excluir.getNome());
 		Optional<ButtonType> resposta = dialogo.showAndWait();
 		
@@ -294,6 +293,14 @@ public class TelaEstoqueFuncionarioLayoutController {
 		}
 		
 		tblProduto.setItems( FXCollections.observableArrayList(this.sistema.listaProduto()) );
+		tblProduto.refresh();
+		ttfNome.clear();
+		ttfDescricao.clear();
+		ttfDia.clear();
+		ttfMes.clear();
+		ttfAno.clear();
+		ttfPreco.clear();
+		ttfQuantidade.clear();
 	}
 	
 	

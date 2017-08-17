@@ -145,6 +145,11 @@
                   <Font size="15.0" />
                </font>
             </Button>
+            <Button fx:id="btnExcluir" mnemonicParsing="false" onAction="#onActionExcluir" text="Excluir">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
             <Button fx:id="btnAtualizar" mnemonicParsing="false" onAction="#onActionAtualizar" prefHeight="29.0" prefWidth="90.0" text="Atualizar">
                <font>
                   <Font size="15.0" />

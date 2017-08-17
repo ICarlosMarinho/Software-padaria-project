@@ -130,17 +130,17 @@ public class SistemaPadaria {
 
     //**METODOS DE ACESSO A CLASSE OPERACOESCLIENTE
     public boolean cadastrarCliente(String nome, String logradouro, String numero,
-             String complemento, String cidade, String estado) {
+             String complemento, String cidade, String estado) throws NegocioException, SistemaException {
 
         return this.opCliente.cadastrar(nome, logradouro, numero,
                  complemento, cidade, estado);
     }
 
-    public boolean removerCliente(int id) {
+    public boolean removerCliente(int id) throws NegocioException {
         return this.opCliente.remover(id);
     }
 
-    public boolean removerCliente(String nome) {
+    public boolean removerCliente(String nome) throws NegocioException {
         return this.opCliente.remover(nome);
     }
 
@@ -168,10 +168,17 @@ public class SistemaPadaria {
         return this.opCliente.todos();
     }
 
-    public boolean modificarCliente(int id, int campo, String valor) {
+    public boolean modificarCliente(int id, int campo, String valor) throws NegocioException, SistemaException {
         return this.opCliente.modificar(id, campo, valor);
     }
 
+    public boolean modificarCliente(int id, String nome, String logradouro
+			, String numero, String complemento, String cidade
+			, String estado) throws NegocioException, SistemaException {
+    	
+    	return this.opCliente.modificar(id, nome, logradouro, numero, complemento, cidade, estado);
+    }
+    
     //**METODO DE ACESSO A CLASSE CADASTROVENDAS
     public Venda[] listaVenda() {
         return opVendas.lista();

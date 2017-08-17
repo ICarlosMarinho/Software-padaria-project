@@ -5,6 +5,8 @@ import repositorio.*;
 import java.util.ArrayList;
 
 import classesBasicas.*;
+import exceptions.NegocioException;
+import exceptions.SistemaException;
 
 public class CadastroCliente {
 	
@@ -41,18 +43,19 @@ public class CadastroCliente {
 	 * @ parametro estado      --- estado      do cliente
 	 */
 	public boolean cadastrar( String nome, String logradouro, String numero
-							, String complemento, String cidade, String estado) {
+							, String complemento, String cidade, String estado) throws NegocioException, SistemaException {
 		
 		if(  nome == null    || logradouro == null || numero == null
 		  || complemento == null || cidade == null || estado == null ) {
-			return false;
+			throw new SistemaException("Ocorreu algum erro no sistema, contate o administrador!", 
+					"Erro na opcao do metodo cadastrar, classe CadastroCliente");
 		}
 		
 		
 		Cliente aux = this.clientes.buscar(nome);
 		
 		if( aux != null ) {
-			return false;
+			throw new NegocioException("Cliente " + nome + " já existe !", this);
 		}
 		
 		Endereco endereco = new Endereco( logradouro, numero, complemento
@@ -89,7 +92,7 @@ public class CadastroCliente {
 	 * @ parametro id   --- remover cliente por id
 	 * @ parametro nome --- remover cliente por nome
 	 */
-	public boolean remover(int id) {
+	public boolean remover(int id) throws NegocioException {
 		
 		Cliente aux = new Cliente(null, id, null, 0, 0);
 		
@@ -98,22 +101,20 @@ public class CadastroCliente {
 		
 		
 		if( remover == null ) {
-			// cliente nao encontrado
-			return false;
+			throw new NegocioException("Cliente não encontrado", this);
 		}
 		
 		
 		this.clientes.remover(remover);
 		return true;
 	}
-	public boolean remover(String nome) {
+	public boolean remover(String nome) throws NegocioException {
 		
 		Cliente remover = this.clientes.buscar(nome);
 		
 		
 		if( remover == null ) {
-			// cliente nao encontrado
-			return false;
+			throw new NegocioException("Cliente não encontrado", this);
 		}
 		
 		
@@ -202,13 +203,13 @@ public class CadastroCliente {
 	 * 							1] mudar o logradouro
 	 * 							2] mudar o numero
 	 * 							3] mudar o complemento
-	 *                                                      4] mudar a cidade
+	 *                          4] mudar a cidade
 	 * 							5] mudar o estado
 	 * 
 	 * 
 	 * @ parametro valor --- novo valor a ser posto no campo
 	 */
-	public boolean modificar(int id, int campo, String valor) {
+	public boolean modificar(int id, int campo, String valor) throws NegocioException, SistemaException {
 		
 		if( valor == null ) {
 			return false;
@@ -217,13 +218,12 @@ public class CadastroCliente {
 		Cliente antigo = this.buscar(id);
 		
 		if( antigo == null ) {
-			// cliente nao encontrado
-			return false;
+			throw new NegocioException("Cliente não encontrado", this);
 		}
 		
 		if( campo > 5 || campo < 0) {
-			// campo errado
-			return false;
+			throw new SistemaException("Ocorreu algum erro no sistema, contate o administrador!", 
+					"Erro no campo do metodo modificar, classe CadastroCliente");
 		}
 		
 		
@@ -331,6 +331,18 @@ public class CadastroCliente {
 		
 		return true;
 	}
-	
+	public boolean modificar(int id, String nome, String logradouro
+			, String numero, String complemento, String cidade
+			, String estado) throws NegocioException, SistemaException {
+		
+		this.modificar(id, 0, nome);
+		this.modificar(id, 1, logradouro);
+		this.modificar(id, 2, numero);
+		this.modificar(id, 3, complemento);
+		this.modificar(id, 4, cidade);
+		this.modificar(id, 5, estado);
+		
+		return true;
+	}
 	
 }
