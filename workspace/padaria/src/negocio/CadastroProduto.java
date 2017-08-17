@@ -167,7 +167,30 @@ public class CadastroProduto {
 		auxiliar = new Produto(nome, descricao, id, validade, quantidade, preco);
 		
 		this.estoque.adicionar(auxiliar);
-		return true; // TODO remover
+		return true;
+	}
+	public boolean cadastrar(String nome, String descricao
+		    , String dia, String mes, String ano
+		    , String quantidade, String preco) throws NegocioException {
+		
+		int diaInt, mesInt, anoInt;
+		double quantidadeDou, precoDou;
+		
+		try {
+			diaInt = Integer.parseInt(dia);
+			mesInt = Integer.parseInt(mes);
+			anoInt = Integer.parseInt(ano);
+			quantidadeDou = Double.parseDouble(quantidade);
+			precoDou = Double.parseDouble(preco);
+		} catch( NumberFormatException  nfe ) {
+			throw new NegocioException("Dados inválidos", this);
+		}
+		
+		if(this.cadastrar(nome, descricao, diaInt, mesInt, anoInt, quantidadeDou, precoDou) ) {
+			return true;
+		}
+		
+		return false;
 	}
 	
 	
@@ -190,7 +213,6 @@ public class CadastroProduto {
 		if( this.estoque.buscar( auxiliar ) == null ) {
 			throw new NegocioException( "Produto Inexistente", this );
 		}
-		
 		
 		if( this.estoque.remover(auxiliar) ) {
 			return true;
@@ -343,7 +365,60 @@ public class CadastroProduto {
 		
 		return false;
 	}
-	
+	public boolean modificar(int id, String nome, String descricao
+			, String dia, String mes, String ano
+			, String quantidade, String preco) throws NegocioException, SistemaException {
+		
+		
+		if( nome == null || descricao == null
+				|| dia == null || mes == null || ano == null
+				|| quantidade == null || preco == null ) {
+			throw new NegocioException("Dados inválidos", this);
+		}
+		
+		int diaInt, mesInt, anoInt;
+		double quantidadeDou, precoDou;
+		
+		try {
+			diaInt = Integer.parseInt(dia);
+			mesInt = Integer.parseInt(mes);
+			anoInt = Integer.parseInt(ano);
+			quantidadeDou = Double.parseDouble(quantidade);
+			precoDou = Double.parseDouble(preco);
+		} catch( NumberFormatException  nfe ) {
+			throw new NegocioException("Dados inválidos", this);
+		}
+		
+		boolean cNome = false;
+		boolean cDescricao = false;
+		boolean cDia = false;
+		boolean cMes = false;
+		boolean cAno = false;
+		boolean cQuantidade = false;
+		boolean cPreco = false;
+		
+		Produto antigo = this.buscar(id);
+		if( antigo == null ) {
+			throw new NegocioException("Produto não encontrado", this);
+		}
+		
+		if( !antigo.getNome().equals(nome) ) cNome = true;
+		if( !antigo.getDescricao().equals(descricao) ) cDescricao = true;
+		if( antigo.getValidade().get(Calendar.DAY_OF_MONTH) != diaInt ) cDia = true;
+		if( antigo.getValidade().get(Calendar.MONTH) != mesInt ) cMes = true;
+		if( antigo.getValidade().get(Calendar.YEAR) != anoInt ) cAno = true;
+		if( antigo.getQuantidade() != quantidadeDou ) cQuantidade = true;
+		if( antigo.getPreco() != precoDou ) cPreco = true;
+		
+		
+		if( cNome ) { this.modificar(id, 0, nome); }
+		if( cDescricao ) { this.modificar(id, 1, descricao); }
+		if( cDia || cMes || cAno ) { this.modificar(id, 2, diaInt, mesInt, anoInt); }
+		if( cQuantidade ) { this.modificar(id, 3, quantidadeDou); }
+		if( cPreco ) { this.modificar(id, 4, precoDou); }
+		
+		return true;
+	}
 	
 	/*
 	 * este metodo retorna um produto do estoque se o mesmo existir
