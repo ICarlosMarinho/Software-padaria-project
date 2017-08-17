@@ -39,27 +39,50 @@ public class RepositorioFuncionario extends Repositorio implements IRepositorioF
 
     @Override
     public Funcionario buscar(int auxiliarId) {
-        Object[] listaFuncionario = new Object[this.tamanho()];
-        Funcionario auxFuncionario;
 
-        listaFuncionario = super.listar();
+        for (int i = 0; i < this.repositorio.size(); i++) {
 
-        for (int i = 0; i < this.tamanho(); i++) {
+            if (this.repositorio.get(i) != null) {
 
-            auxFuncionario = (Funcionario) listaFuncionario[i];
+                if (((Funcionario) this.repositorio.get(i)).getId() == auxiliarId) {
 
-            if (auxFuncionario.getId() == auxiliarId) {
-                return auxFuncionario;
+                    return (Funcionario) this.repositorio.get(i);
+                }
             }
-
         }
 
         return null;
     }
-    
+
     @Override
-    public boolean atualizar(Funcionario antigo, Funcionario novo)
-    {
+    public boolean atualizar(Funcionario antigo, Funcionario novo) {
         return super.atualizar(antigo, novo);
+    }
+
+    public Funcionario buscar(String login) {
+
+        for (int i = 0; i < this.repositorio.size(); i++) {
+
+            if (((Funcionario) this.repositorio.get(i)).getLogin() != null) {
+
+                if (((Funcionario) this.repositorio.get(i)).getLogin().equalsIgnoreCase(login) == true) {
+
+                    return (Funcionario) this.repositorio.get(i);
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public ArrayList<Funcionario> listaFuncionario() {
+
+        ArrayList<Funcionario> auxFuncionarios = new ArrayList();
+
+        for (int i = 0; i < this.repositorio.size(); i++) {
+            auxFuncionarios.add((Funcionario) this.repositorio.get(i));
+        }
+
+        return auxFuncionarios;
     }
 }

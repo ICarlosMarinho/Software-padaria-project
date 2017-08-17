@@ -14,7 +14,6 @@ public class SistemaPadaria {
     private CadastroCliente opCliente;
     private CadastroProduto opProduto;
     private CadastroVendas opVendas;
-    //private SistemaLogin opLogin;
 
     private SistemaPadaria() {
         opFuncionarios = new CadastroFuncionario();
@@ -48,8 +47,16 @@ public class SistemaPadaria {
         return this.opFuncionarios.buscar(auxId);
     }
 
+    public Funcionario buscarFuncionario(String nomeUsuario) {
+        return this.opFuncionarios.buscar(nomeUsuario);
+    }
+
     public int atribuirIdFuncionario() {
         return this.opFuncionarios.atribuirId();
+    }
+    
+    public ArrayList<Funcionario> listaFuncionario(){
+        return this.opFuncionarios.listaFuncionario();
     }
 
     //**METODOS DE ACESSO A CLASSE OPERACOESPRODUTO
@@ -62,12 +69,12 @@ public class SistemaPadaria {
     }
 
     public boolean cadastrarProduto(String nome, String descricao,
-             int dia, int mes, int ano,
-             double quantidade, double preco) throws NegocioException {
+            int dia, int mes, int ano,
+            double quantidade, double preco) throws NegocioException {
 
         return this.opProduto.cadastrar(nome, descricao,
-                 dia, mes, ano,
-                 quantidade, preco);
+                dia, mes, ano,
+                quantidade, preco);
     }
     
     public boolean cadastrarProduto(String nome, String descricao
@@ -86,18 +93,18 @@ public class SistemaPadaria {
     }
 
     public boolean modificarProduto(int id, int opcao, String valor)
-    		throws NegocioException, SistemaException {
+            throws NegocioException, SistemaException {
         return this.opProduto.modificar(id, opcao, valor);
     }
 
     public boolean modificarProduto(int id, int opcao,
-             int dia, int mes, int ano) throws NegocioException, SistemaException {
+            int dia, int mes, int ano) throws NegocioException, SistemaException {
 
         return this.opProduto.modificar(id, opcao, dia, mes, ano);
     }
 
     public boolean modificarProduto(int id, int opcao, double valor)
-    		throws NegocioException, SistemaException {
+            throws NegocioException, SistemaException {
         return this.opProduto.modificar(id, opcao, valor);
     }
 
@@ -133,7 +140,7 @@ public class SistemaPadaria {
              String complemento, String cidade, String estado) throws NegocioException, SistemaException {
 
         return this.opCliente.cadastrar(nome, logradouro, numero,
-                 complemento, cidade, estado);
+                complemento, cidade, estado);
     }
 
     public boolean removerCliente(int id) throws NegocioException {
@@ -193,12 +200,12 @@ public class SistemaPadaria {
     }
 
     public boolean efetuarVenda(int idProduto, int idFuncionario, double quantidade)
-    		throws SistemaException, NegocioException {
+            throws SistemaException, NegocioException {
         return this.opVendas.vender(idProduto, idFuncionario, quantidade);
     }
 
     public boolean efetuarVenda(int idProduto, int idCliente, int idFuncionario, double quantidade)
-    		throws SistemaException, NegocioException {
+            throws SistemaException, NegocioException {
         return this.opVendas.vender(idProduto, idCliente, idFuncionario, quantidade);
     }
 
