@@ -1,4 +1,4 @@
-package interfaceGrafica.funcionario;
+package interfaceGrafica;
 
 import java.io.IOException;
 

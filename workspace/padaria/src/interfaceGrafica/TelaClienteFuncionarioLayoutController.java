@@ -1,4 +1,4 @@
-package interfaceGrafica.funcionario;
+package interfaceGrafica;
 
 import java.util.ArrayList;
 import java.util.Optional;
