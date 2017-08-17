@@ -2,6 +2,7 @@ package negocio;
 
 import repositorio.IRepositorioFuncionario;
 import classesBasicas.*;
+import java.util.ArrayList;
 import repositorio.RepositorioFuncionario;
 
 public class CadastroFuncionario {
@@ -36,13 +37,13 @@ public class CadastroFuncionario {
             if (auxFun.getLogin() == null | auxFun.getSenha() == null) {
                 return null;
             } //**VERIFICA O TAMANHO DO LOGIN E SENHA (A REGRA AQUI Ã‰ ESTAR ENTRE 4~10 CARACTERES)
-            else if (auxFun.getLogin().length() < 4 && auxFun.getLogin().length() > 10
-                    | auxFun.getSenha().length() < 4 && auxFun.getSenha().length() > 10) {
+            else if (auxFun.getLogin().length() < 4 | auxFun.getLogin().length() > 10
+                    | auxFun.getSenha().length() < 4 | auxFun.getSenha().length() > 10) {
                 return null;
             }
 
             //**VERIFICA SE O LOGIN DO FUNCIONARIO A SER CADASTRADO JA EXISTE
-            if (this.repo.buscar(auxFun.getLogin()) != null) {
+            if (this.repo.buscar(auxFun.getLogin()) != null && auxFun.getId() != this.repo.buscar(auxFun.getLogin()).getId()) {
 
                 return null;
             }
@@ -121,5 +122,10 @@ public class CadastroFuncionario {
         }
 
         return auxId;
+    }
+    
+    public ArrayList<Funcionario> listaFuncionario(){
+        
+        return this.repo.listaFuncionario();
     }
 }

@@ -63,7 +63,7 @@ public class RepositorioFuncionario extends Repositorio implements IRepositorioF
 
         for (int i = 0; i < this.repositorio.size(); i++) {
 
-            if (((Funcionario)this.repositorio.get(i)).getLogin() != null) {
+            if (((Funcionario) this.repositorio.get(i)).getLogin() != null) {
 
                 if (((Funcionario) this.repositorio.get(i)).getLogin().equalsIgnoreCase(login) == true) {
 
@@ -73,5 +73,16 @@ public class RepositorioFuncionario extends Repositorio implements IRepositorioF
         }
 
         return null;
+    }
+
+    public ArrayList<Funcionario> listaFuncionario() {
+
+        ArrayList<Funcionario> auxFuncionarios = new ArrayList();
+
+        for (int i = 0; i < this.repositorio.size(); i++) {
+            auxFuncionarios.add((Funcionario) this.repositorio.get(i));
+        }
+
+        return auxFuncionarios;
     }
 }

@@ -19,7 +19,7 @@ import javafx.scene.layout.Pane;
  *
  * @author User
  */
-public class MenuGerenteLayoutController implements Initializable {
+public class TelaMenuPrincipalGerenteLayoutController implements Initializable {
 
     @FXML
     private Button btnSair;
@@ -55,13 +55,13 @@ public class MenuGerenteLayoutController implements Initializable {
         MainLogin.setCena(scene);
     }
 
-    public void botaoMenuFuncionarios() {
+    public void abrirMenuFuncionarios() {
 
         Pane root = null;
 
         try {
 
-            root = FXMLLoader.load(getClass().getResource("FuncionarioMenuLayout.fxml"));
+            root = FXMLLoader.load(getClass().getResource("TelaMenuFuncionariosLayout.fxml"));
 
         } catch (Exception exc) {
 
@@ -70,7 +70,7 @@ public class MenuGerenteLayoutController implements Initializable {
             System.exit(0);
         }
 
-        Scene scene = new Scene(root, 600, 400);
+        Scene scene = new Scene(root, 720, 400);
 
         MainLogin.setCena(scene);
     }

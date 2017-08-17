@@ -32,7 +32,7 @@ public class MainLogin extends Application {
 
         try {
 
-            root = FXMLLoader.load(getClass().getResource("LoginLayout.fxml"));
+            root = FXMLLoader.load(getClass().getResource("TelaLoginLayout.fxml"));
 
         } catch (Exception exc) {
 

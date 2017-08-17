@@ -20,7 +20,7 @@ import negocio.SistemaPadaria;
  *
  * @author User
  */
-public class LoginLayoutController {
+public class TelaLoginLayoutController {
 
     SistemaPadaria sistema = SistemaPadaria.getInstancia();
 
@@ -41,11 +41,11 @@ public class LoginLayoutController {
 
         Endereco end = new Endereco("-", "-", "-", "-", "-");
 
-        Funcionario teste1 = new Funcionario("carlos", "gerente", "admin", "12345", end, 0, 0, 0);
+        Funcionario teste1 = new Funcionario("carlos", "Gerente", "admin", "12345", end, 0, 0, 0);
         teste1.setId(sistema.atribuirIdFuncionario());
         sistema.cadastrarFuncionario(teste1);
 
-        Funcionario teste2 = new Funcionario("carlos", "caixa", "funcionario", "54321", end, 0, 0, 0);
+        Funcionario teste2 = new Funcionario("Jonas", "Caixa", "abcde", "54321", end, 0, 0, 0);
         teste2.setId(sistema.atribuirIdFuncionario());
         sistema.cadastrarFuncionario(teste2);
 
@@ -69,7 +69,7 @@ public class LoginLayoutController {
 
                 try {
 
-                    root = FXMLLoader.load(getClass().getResource("MenuGerenteLayout.fxml"));
+                    root = FXMLLoader.load(getClass().getResource("TelaMenuPrincipalGerenteLayout.fxml"));
 
                 } catch (Exception exc) {
 
