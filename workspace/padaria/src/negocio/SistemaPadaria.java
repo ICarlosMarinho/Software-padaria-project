@@ -83,13 +83,6 @@ public class SistemaPadaria {
     	
     	return this.opProduto.cadastrar(nome, descricao, dia, mes, ano, quantidade, preco);
     }
-    
-    public boolean cadastrarProduto(String nome, String descricao
-		    , String dia, String mes, String ano
-		    , String quantidade, String preco) throws NegocioException {
-    	
-    	return this.opProduto.cadastrar(nome, descricao, dia, mes, ano, quantidade, preco);
-    }
 
     public boolean validadeProduto(int dia, int mes, int ano) {
         return this.opProduto.validadeOK(dia, mes, ano);
