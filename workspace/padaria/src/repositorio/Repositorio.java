@@ -1,8 +1,14 @@
 package repositorio;
 
-
 // TODO esta classe eh a super classe dos repositorios
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Repositorio {
 
@@ -39,7 +45,7 @@ public class Repositorio {
     public Object[] listar() {
         return this.repositorio.toArray();
     }
-    
+
     public boolean adicionar(Object novo) {
 
         if (novo == null) {
@@ -93,6 +99,43 @@ public class Repositorio {
 
     public int tamanho() {
         return this.repositorio.size();
+    }
+
+    public void lerDoArquivo(ArrayList repositorio, FileInputStream arquivo) {
+
+        ObjectInputStream objAuxiliar;
+
+        try {
+
+            objAuxiliar = new ObjectInputStream(arquivo);
+
+            this.repositorio.addAll((Collection<? extends Object>) objAuxiliar.readObject());
+
+            objAuxiliar.close();
+            arquivo.close();
+
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(Repositorio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void gravarNoArquivo(ArrayList repositorio, FileOutputStream arquivo) {
+
+        ObjectOutputStream objAuxiliar;
+        try {
+            objAuxiliar = new ObjectOutputStream(arquivo);
+
+            objAuxiliar.writeObject(repositorio);
+
+            objAuxiliar.flush();
+            objAuxiliar.close();
+            arquivo.flush();
+            arquivo.close();
+
+        } catch (IOException ex) {
+            Logger.getLogger(Repositorio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
 }

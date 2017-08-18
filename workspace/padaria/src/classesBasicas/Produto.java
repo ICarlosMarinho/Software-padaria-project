@@ -1,9 +1,10 @@
 package classesBasicas;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 
-public class Produto {
+public class Produto implements Serializable{
 	
 	// atributos
 	private String nome;

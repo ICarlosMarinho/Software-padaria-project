@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import classesBasicas.*;
 import exceptions.NegocioException;
 import exceptions.SistemaException;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 
 public class SistemaPadaria {
 
@@ -57,6 +59,14 @@ public class SistemaPadaria {
     
     public ArrayList<Funcionario> listaFuncionario(){
         return this.opFuncionarios.listaFuncionario();
+    }
+    
+    public void lerDoArquivo(ArrayList repositorio, FileInputStream arquivo){
+        this.opFuncionarios.lerDoArquivo(repositorio, arquivo);
+    }
+    
+    public void gravarNoArquivo(ArrayList repositorio, FileOutputStream arquivo){
+        this.opFuncionarios.GravarNoArquivo(repositorio, arquivo);
     }
 
     //**METODOS DE ACESSO A CLASSE OPERACOESPRODUTO

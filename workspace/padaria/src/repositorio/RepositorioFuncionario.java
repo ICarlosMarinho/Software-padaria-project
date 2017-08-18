@@ -1,6 +1,8 @@
 package repositorio;
 
 import classesBasicas.Funcionario;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 public class RepositorioFuncionario extends Repositorio implements IRepositorioFuncionario {
@@ -59,6 +61,7 @@ public class RepositorioFuncionario extends Repositorio implements IRepositorioF
         return super.atualizar(antigo, novo);
     }
 
+    @Override
     public Funcionario buscar(String login) {
 
         for (int i = 0; i < this.repositorio.size(); i++) {
@@ -75,6 +78,7 @@ public class RepositorioFuncionario extends Repositorio implements IRepositorioF
         return null;
     }
 
+    @Override
     public ArrayList<Funcionario> listaFuncionario() {
 
         ArrayList<Funcionario> auxFuncionarios = new ArrayList();
@@ -84,5 +88,15 @@ public class RepositorioFuncionario extends Repositorio implements IRepositorioF
         }
 
         return auxFuncionarios;
+    }
+    
+    @Override
+    public void lerDoArquivo(ArrayList repositorio, FileInputStream arquivo){
+        super.lerDoArquivo(repositorio, arquivo);
+    }
+    
+    @Override
+    public void gravarNoArquivo(ArrayList repositorio, FileOutputStream arquivo){
+        super.gravarNoArquivo(repositorio, arquivo);
     }
 }
