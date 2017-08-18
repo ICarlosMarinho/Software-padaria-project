@@ -1,6 +1,8 @@
 package classesBasicas;
 
-public class DadoVenda {
+import java.io.Serializable;
+
+public class DadoVenda implements Serializable{
 	
 	private String nome;
 	private double quantidade;

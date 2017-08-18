@@ -1,6 +1,8 @@
 package repositorio;
 
 import classesBasicas.Funcionario;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 public interface IRepositorioFuncionario {
@@ -20,5 +22,8 @@ public interface IRepositorioFuncionario {
     public Funcionario buscar(String login);
     
     public ArrayList<Funcionario> listaFuncionario();
-
+    
+    public void gravarNoArquivo(ArrayList repositorio, FileOutputStream arquivo);
+    
+    public void lerDoArquivo(ArrayList repositorio, FileInputStream arquivo);
 }

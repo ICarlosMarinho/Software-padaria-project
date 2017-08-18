@@ -3,6 +3,8 @@ package negocio;
 import repositorio.IRepositorioFuncionario;
 import classesBasicas.*;
 import exceptions.NegocioException;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import repositorio.RepositorioFuncionario;
 
@@ -138,5 +140,13 @@ public class CadastroFuncionario {
     public ArrayList<Funcionario> listaFuncionario() {
 
         return this.repo.listaFuncionario();
+    }
+    
+    public void GravarNoArquivo(ArrayList repositorio, FileOutputStream arquivo){
+        this.repo.gravarNoArquivo(repositorio, arquivo);
+    }
+    
+    public void lerDoArquivo(ArrayList repositorio, FileInputStream arquivo){
+        this.repo.lerDoArquivo(repositorio, arquivo);
     }
 }

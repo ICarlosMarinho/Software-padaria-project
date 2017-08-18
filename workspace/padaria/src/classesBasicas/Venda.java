@@ -1,10 +1,11 @@
 package classesBasicas;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 
-public class Venda {
+public class Venda implements Serializable{
 	
 	// atributos
 	private Calendar    data;

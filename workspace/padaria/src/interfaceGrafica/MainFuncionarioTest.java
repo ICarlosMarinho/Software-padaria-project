@@ -7,6 +7,10 @@ import java.util.Stack;
 
 import exceptions.NegocioException;
 import exceptions.SistemaException;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -72,6 +76,16 @@ public class MainFuncionarioTest extends Application {
 
         System.out.println("Quantidade produto = " + sistema.totalProduto());
         System.out.println("Quantidade cliente = " + sistema.totalCliente());
+
+        try {
+            FileOutputStream arquivoTeste = new FileOutputStream("ArquivoFuncionarios.bin");
+            sistema.gravarNoArquivo(sistema.listaFuncionario(), arquivoTeste);
+            
+        } catch (FileNotFoundException ex) {
+            ex.getMessage();
+        }
+
+        
 
         launch(args);
     }
