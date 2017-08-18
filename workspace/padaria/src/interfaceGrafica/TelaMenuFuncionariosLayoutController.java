@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package interfaceGrafica;
 
 import classesBasicas.Endereco;
 import classesBasicas.Funcionario;
+import exceptions.NegocioException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -15,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
@@ -24,11 +21,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import negocio.SistemaPadaria;
 
-/**
- * FXML Controller class
- *
- * @author User
- */
 public class TelaMenuFuncionariosLayoutController implements Initializable {
 
     SistemaPadaria sistema = SistemaPadaria.getInstancia();
@@ -172,16 +164,15 @@ public class TelaMenuFuncionariosLayoutController implements Initializable {
 
             } catch (NumberFormatException num) {
 
-                System.out.println("Numero Invalido");
-
-                System.exit(1);
+                auxFuncionario.setSalario(-1);
             }
         }
 
         auxFuncionario.setId(sistema.atribuirIdFuncionario());
 
-        if (sistema.cadastrarFuncionario(auxFuncionario) == true) {
+        try {
 
+            sistema.cadastrarFuncionario(auxFuncionario);
             this.limparCamposDeTexto();
             this.limparCampoDeBusca();
 
@@ -197,15 +188,17 @@ public class TelaMenuFuncionariosLayoutController implements Initializable {
 
             this.carregarItensNaTabela(FXCollections.observableArrayList(sistema.listaFuncionario()));
 
-            System.out.println("Funcionario Cadastrado");
-        } else {
+        } catch (NegocioException neg) {
 
-            System.out.println("Erro no cadastro");
+            Alert erro = new Alert(Alert.AlertType.ERROR);
+            erro.setTitle("ERRO");
+            erro.setHeaderText("Funcionário");
+            erro.setContentText(neg.getMessage());
+            erro.showAndWait();
+
+            System.out.println("Erro: " + neg.getMessage());
         }
-
         this.carregarItensNaTabela(FXCollections.observableArrayList(sistema.listaFuncionario()));
-
-        System.out.println(auxFuncionario.toString());
     }
 
     public void cancelarCadastro() {
@@ -279,24 +272,33 @@ public class TelaMenuFuncionariosLayoutController implements Initializable {
 
             auxFuncionario.setCargo((String) this.cbCargo.getValue());
 
-            if (this.tfSalario.getText().isEmpty() != true) {
+            try {
 
-                try {
+                auxFuncionario.setSalario(Double.parseDouble(this.tfSalario.getText()));
 
-                    auxFuncionario.setSalario(Double.parseDouble(this.tfSalario.getText()));
+            } catch (NumberFormatException num) {
 
-                } catch (NumberFormatException num) {
+                auxFuncionario.setSalario(-1);
 
-                    System.out.println("Numero Invalido");
-
-                    System.exit(1);
-                }
             }
 
-            if (this.sistema.alterarInfoFuncionario(pressionado, auxFuncionario) == true) {
-                System.out.println("Atualizado");
-            } else {
-                System.out.println("Erro ao atualizar");
+            try {
+
+                this.sistema.alterarInfoFuncionario(pressionado, auxFuncionario);
+
+                System.out.println(auxFuncionario.toString());
+
+                System.out.println("\nAtualizado");
+
+            } catch (NegocioException neg) {
+
+                Alert erro = new Alert(Alert.AlertType.ERROR);
+                erro.setTitle("ERRO");
+                erro.setHeaderText("Funcionário");
+                erro.setContentText(neg.getMessage());
+                erro.showAndWait();
+
+                System.out.println("Erro: " + neg.getMessage());
             }
         }
         this.carregarItensNaTabela(FXCollections.observableArrayList(sistema.listaFuncionario()));
@@ -320,6 +322,14 @@ public class TelaMenuFuncionariosLayoutController implements Initializable {
     }
 
     public void limparCampoDeBusca() {
+
         this.tfBuscar.clear();
+        this.carregarItensNaTabela(FXCollections.observableArrayList(sistema.listaFuncionario()));
     }
+
+    public void botaoVoltar() {
+        
+        MainFuncionarioTest.setCenaAnterior();
+    }
+
 }

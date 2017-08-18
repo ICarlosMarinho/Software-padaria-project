@@ -1,25 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package interfaceGrafica;
 
-import classesBasicas.Endereco;
-import classesBasicas.Funcionario;
-import java.awt.Color;
-import java.awt.Graphics;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.Pane;
 import negocio.SistemaPadaria;
 
-/**
- *
- * @author User
- */
 public class TelaLoginLayoutController {
 
     SistemaPadaria sistema = SistemaPadaria.getInstancia();
@@ -39,19 +26,11 @@ public class TelaLoginLayoutController {
     @FXML
     public void initialize() {
 
-        Endereco end = new Endereco("-", "-", "-", "-", "-");
-
-        Funcionario teste1 = new Funcionario("carlos", "Gerente", "admin", "12345", end, 0, 0, 0);
-        teste1.setId(sistema.atribuirIdFuncionario());
-        sistema.cadastrarFuncionario(teste1);
-
-        Funcionario teste2 = new Funcionario("Jonas", "Caixa", "abcde", "54321", end, 0, 0, 0);
-        teste2.setId(sistema.atribuirIdFuncionario());
-        sistema.cadastrarFuncionario(teste2);
-
         btnLogin.disableProperty().bind(tfLogin.textProperty().isEmpty().or(tfSenha.textProperty().isEmpty()));
 
         lblFalhaLogin.setVisible(false);
+        this.tfLogin.clear();
+        this.tfSenha.clear();
     }
 
     @FXML
@@ -59,17 +38,26 @@ public class TelaLoginLayoutController {
 
         System.out.println(this.tfLogin.getText());
 
-        Funcionario auxFun = sistema.buscarFuncionario(this.tfLogin.getText());
+        MainFuncionarioTest.logado = sistema.buscarFuncionario(this.tfLogin.getText());
 
-        if (auxFun != null) {
+        if (MainFuncionarioTest.logado != null) {
 
-            if (auxFun.getSenha().equals(this.tfSenha.getText()) != false) {
+            if (MainFuncionarioTest.logado.getSenha().equals(this.tfSenha.getText()) != false) {
 
-                Pane root = null;
+                this.initialize();
+
+                Parent root = null;
 
                 try {
 
-                    root = FXMLLoader.load(getClass().getResource("TelaMenuPrincipalGerenteLayout.fxml"));
+                    if (MainFuncionarioTest.logado.getCargo().equalsIgnoreCase("Gerente") == true) {
+
+                        root = FXMLLoader.load(getClass().getResource("TelaMenuPrincipalGerenteLayout.fxml"));
+
+                    } else if (MainFuncionarioTest.logado.getCargo().equalsIgnoreCase("Caixa") == true) {
+
+                        root = FXMLLoader.load(getClass().getResource("TelaMenuPrincipalFuncionarioLayout.fxml"));
+                    }
 
                 } catch (Exception exc) {
 
@@ -80,18 +68,19 @@ public class TelaLoginLayoutController {
 
                 Scene scene = new Scene(root, 600, 400);
 
-                MainLogin.setCena(scene);
+                MainFuncionarioTest.setTituloAtualPalco("Menu Principal | Funcionário: " + MainFuncionarioTest.logado.getNome());
+                MainFuncionarioTest.setCenaAtual(scene);
             } else {
 
                 System.out.println("Falha no login");
-                
+
                 lblFalhaLogin.setText("Senha digitada incorreta!");
                 lblFalhaLogin.visibleProperty().setValue(true);
             }
         } else {
 
             System.out.println("Falha no login");
-            
+
             lblFalhaLogin.setText("Usuario digitado invalido!");
             lblFalhaLogin.visibleProperty().setValue(true);
         }
