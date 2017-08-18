@@ -25,21 +25,17 @@
       </Label>
       <MenuBar layoutX="1.0" layoutY="2.0" prefHeight="24.0" prefWidth="600.0">
         <menus>
-          <Menu mnemonicParsing="false" text="File">
+          <Menu mnemonicParsing="false" text="Padarex">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem fx:id="mniLogout" mnemonicParsing="false" text="Sair de sessão" />
+                  <MenuItem fx:id="mniFechar" mnemonicParsing="false" onAction="#fecharPrograma" text="Fechar" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
+            <Menu mnemonicParsing="false" text="Ajuda">
+              <items>
+                <MenuItem fx:id="mniSobre" mnemonicParsing="false" text="Sobre" />
+              </items>
+            </Menu>
         </menus>
       </MenuBar>
    </children>
