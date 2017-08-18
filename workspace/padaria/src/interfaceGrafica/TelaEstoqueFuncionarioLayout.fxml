@@ -142,7 +142,7 @@
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#onActionExcluir" text="Excluir">
+            <Button fx:id="btnExcluir" mnemonicParsing="false" onAction="#onActionExcluir" text="Excluir">
                <font>
                   <Font size="15.0" />
                </font>

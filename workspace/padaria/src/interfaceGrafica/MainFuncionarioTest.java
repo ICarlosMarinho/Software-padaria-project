@@ -24,6 +24,14 @@ public class MainFuncionarioTest extends Application {
     public static Stack<Scene> cenaAnterior;
     public static Stack<String> tituloAnterior;
     public static Funcionario logado;
+    
+    public static Funcionario getLogado() {
+    	return MainFuncionarioTest.logado;
+    }
+    
+    public static void setLogado( Funcionario logado ) {
+    	MainFuncionarioTest.logado = logado;
+    }
 
     public static void setCenaAtual(Scene scene) {
         MainFuncionarioTest.cenaAnterior.push(MainFuncionarioTest.palco.getScene());
