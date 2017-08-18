@@ -126,7 +126,19 @@ public class TelaClienteFuncionarioLayoutController {
 				ttfCidade.textProperty().isEmpty()))))) );
 		
 		
-		// TODO ajustar opcoes conforme cliente
+		btnConfirmarCadastrar.setVisible(false);
+		btnCancelarCadastrar.setVisible(false);
+		
+		// TODO verificar se quem tem poder para
+		// 	    modificar sobre os clientes é o gerente, ou caixa
+		if( MainFuncionarioTest.getLogado().getCargo().equalsIgnoreCase("Caixa") ) {
+			btnCadastrar.setVisible(false);
+			btnExcluir.setVisible(false);
+			btnAtualizar.setVisible(false);
+		}
+		
+		
+		
 	}
 
 
@@ -161,7 +173,26 @@ public class TelaClienteFuncionarioLayoutController {
 
 	@FXML
 	public void onActionCadastrar() {
-		// TODO fazer btnConfirmarCadastrar e btnCancelarCadastrar visiveis
+		
+		ttfNome.clear();
+		ttfLogradouro.clear();
+		ttfNumero.clear();
+		ttfComplemento.clear();
+		ttfCidade.clear();
+		ttfEstado.clear();
+		ttfQtdVendas.clear();
+		ttfValorVendas.clear();
+		ttfCredito.clear();
+		
+		ttfQtdVendas.setDisable(true);
+		ttfValorVendas.setDisable(true);
+		ttfCredito.setDisable(true);;
+		
+		btnConfirmarCadastrar.setVisible(true);
+		btnCancelarCadastrar.setVisible(true);
+		
+		btnAtualizar.setVisible(false);
+		btnExcluir.setVisible(false);
 	}
 
 
@@ -198,6 +229,23 @@ public class TelaClienteFuncionarioLayoutController {
 			erro.showAndWait();
 		}
 		
+		ttfNome.clear();
+		ttfLogradouro.clear();
+		ttfNumero.clear();
+		ttfComplemento.clear();
+		ttfCidade.clear();
+		ttfEstado.clear();
+		ttfQtdVendas.clear();
+		ttfValorVendas.clear();
+		ttfCredito.clear();
+		
+		btnExcluir.setVisible(true);
+		btnAtualizar.setVisible(true);
+		
+		btnConfirmarCadastrar.setVisible(false);
+		btnCancelarCadastrar.setVisible(false);
+		
+		tblCliente.setItems(null);
 		tblCliente.setItems( FXCollections.observableArrayList(this.sistema.listaCliente()) );
 		tblCliente.refresh();
 	}
@@ -207,16 +255,26 @@ public class TelaClienteFuncionarioLayoutController {
 
 	@FXML
 	public void onActionCancelarCadastrar() {
-		tblCliente.setItems( FXCollections.observableArrayList(this.sistema.listaCliente()) );
-		
 		ttfNome.clear();
 		ttfLogradouro.clear();
 		ttfNumero.clear();
 		ttfComplemento.clear();
 		ttfCidade.clear();
 		ttfEstado.clear();
+		ttfQtdVendas.clear();
+		ttfValorVendas.clear();
+		ttfCredito.clear();
 		
-		// // TODO fazer btnConfirmarCadastrar e btnCancelarCadastrar invisiveis
+		btnExcluir.setVisible(true);
+		btnAtualizar.setVisible(true);
+		
+		btnConfirmarCadastrar.setVisible(false);
+		btnCancelarCadastrar.setVisible(false);
+		
+		tblCliente.setItems(null);
+		tblCliente.setItems( FXCollections.observableArrayList(this.sistema.listaCliente()) );
+		tblCliente.refresh();
+		
 	}
 
 

@@ -9,6 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="interfaceGrafica.TelaLoginLayoutController">
    <children>
+      <TextField fx:id="tfLogin" layoutX="233.0" layoutY="200.0" />
       <PasswordField fx:id="tfSenha" layoutX="233.0" layoutY="240.0" />
       <Button fx:id="btnLogin" layoutX="349.0" layoutY="279.0" mnemonicParsing="false" onAction="#botaoLogin" prefHeight="21.0" text="Login" />
       <Label layoutX="140.0" layoutY="201.0" text="Usuario">
@@ -26,7 +27,6 @@
             <Font name="Arial Black" size="21.0" />
          </font>
       </Label>
-      <TextField fx:id="tfLogin" layoutX="233.0" layoutY="200.0" />
       <Label fx:id="lblFalhaLogin" layoutX="233.0" layoutY="166.0" prefHeight="15.0" prefWidth="169.0" textFill="#ff0101">
          <font>
             <Font name="Arial" size="12.0" />

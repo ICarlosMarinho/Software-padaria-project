@@ -107,20 +107,20 @@
             <Label text="Logradouro:" GridPane.rowIndex="2" />
             <Label text="Número:" GridPane.rowIndex="3" />
             <Label text="Complemento:" GridPane.rowIndex="4" />
+            <Label layoutX="15.0" layoutY="167.0" text="Cidade:" GridPane.rowIndex="5" />
             <Label text="Estado:" GridPane.rowIndex="6" />
             <Label text="Crédito:" GridPane.rowIndex="7" />
+            <Label layoutX="15.0" layoutY="253.0" text="Valor vendas:" GridPane.rowIndex="9" />
+            <Label text="Qtd vendas:" GridPane.rowIndex="8" />
             <TextField fx:id="ttfNome" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="ttfLogradouro" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="ttfNumero" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <TextField fx:id="ttfComplemento" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="ttfCidade" layoutX="125.0" layoutY="162.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <TextField fx:id="ttfEstado" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <TextField fx:id="ttfCredito" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <Label text="Qtd vendas:" GridPane.rowIndex="8" />
-            <Label layoutX="15.0" layoutY="253.0" text="Valor vendas:" GridPane.rowIndex="9" />
             <TextField fx:id="ttfQtdVendas" layoutX="125.0" layoutY="215.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
             <TextField fx:id="ttfValorVendas" layoutX="125.0" layoutY="215.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-            <Label layoutX="15.0" layoutY="167.0" text="Cidade:" GridPane.rowIndex="5" />
-            <TextField fx:id="ttfCidade" layoutX="125.0" layoutY="162.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
          <padding>
             <Insets left="5.0" right="5.0" />
