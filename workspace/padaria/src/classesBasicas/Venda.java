@@ -1,5 +1,6 @@
 package classesBasicas;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 
@@ -7,13 +8,13 @@ public class Venda {
 	
 	// atributos
 	private Calendar    data;
-	private Produto     vendido;
+	private ArrayList<DadoVenda> vendido;
 	private Cliente     comprador;
 	private Funcionario vendedor;
 	
 	
 	// constructor
-	public Venda( Calendar data, Produto vendido, Cliente comprador, Funcionario vendedor ) {
+	public Venda( Calendar data, ArrayList<DadoVenda> vendido, Cliente comprador, Funcionario vendedor ) {
 		
 		this.data = data;
 		this.vendido = vendido;
@@ -27,7 +28,7 @@ public class Venda {
 	public void setData( Calendar novaData ) {
 		this.data = novaData;
 	}
-	public void setProduto( Produto novoProduto ) {
+	public void setProduto( ArrayList<DadoVenda> novoProduto ) {
 		this.vendido = novoProduto;
 	}
 	public void setComprador( Cliente novoComprador ) {
@@ -42,7 +43,7 @@ public class Venda {
 	public Calendar getData() {
 		return this.data;
 	}
-	public Produto getVendido() {
+	public ArrayList<DadoVenda> getVendido() {
 		return this.vendido;
 	}
 	public Cliente getComprador() {
@@ -53,22 +54,16 @@ public class Venda {
 	}
 	
 	
-	// metodo equals
+	
 	public boolean equals( Venda comparar ) {
-		
 		if( comparar == null ) {
 			return false;
 		}
 		
-		
 		if( this.vendido.equals( comparar.getVendido() ) && this.data.equals( comparar.getData() )  ) {
-			
 			return true;
-			
 		} else {
-			
 			return false;
-			
 		}
 	}
 	

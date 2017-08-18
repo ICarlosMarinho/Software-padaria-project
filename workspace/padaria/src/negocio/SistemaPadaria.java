@@ -191,22 +191,22 @@ public class SistemaPadaria {
         return opVendas.lista();
     }
 
-    public boolean adicionarVenda(Produto vendido, Funcionario vendedor) throws SistemaException {
+    public boolean adicionarVenda(ArrayList<DadoVenda> vendido, Funcionario vendedor) throws SistemaException {
         return opVendas.adicionar(vendido, vendedor);
     }
 
-    public boolean adicionarVenda(Produto vendido, Funcionario vendedor, Cliente comprador) {
+    public boolean adicionarVenda(ArrayList<DadoVenda> vendido, Funcionario vendedor, Cliente comprador) throws SistemaException {
         return opVendas.adicionar(vendido, vendedor, comprador);
     }
 
-    public boolean efetuarVenda(int idProduto, int idFuncionario, double quantidade)
-            throws SistemaException, NegocioException {
-        return this.opVendas.vender(idProduto, idFuncionario, quantidade);
+    public boolean efetuarVenda( ArrayList<DadoVenda> vendido, int idFuncionario )
+			throws NegocioException, SistemaException {
+        return this.opVendas.vender(vendido, idFuncionario );
     }
 
-    public boolean efetuarVenda(int idProduto, int idCliente, int idFuncionario, double quantidade)
-            throws SistemaException, NegocioException {
-        return this.opVendas.vender(idProduto, idCliente, idFuncionario, quantidade);
+    public boolean efetuarVenda( ArrayList<DadoVenda> vendido, int idCliente, int idFuncionario ) 
+    		throws NegocioException, SistemaException {
+        return this.opVendas.vender(vendido, idCliente, idFuncionario );
     }
 
 }
