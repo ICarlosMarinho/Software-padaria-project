@@ -6,21 +6,37 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="interfaceGrafica.TelaMenuPrincipalGerenteLayoutController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="interfaceGrafica.TelaMenuPrincipalGerenteLayoutController">
    <children>
-      <Button fx:id="btnSair" layoutX="527.0" layoutY="358.0" mnemonicParsing="false" onAction="#botaoSair" prefHeight="28.0" prefWidth="59.0" text="Sair" />
-      <Button fx:id="btnFuncionarios" layoutX="248.0" layoutY="158.0" mnemonicParsing="false" onAction="#abrirMenuFuncionarios" prefHeight="42.0" prefWidth="105.0" text="Funcionarios">
+      <Button fx:id="btnSair" layoutX="515.0" layoutY="351.0" mnemonicParsing="false" onAction="#botaoSair" prefHeight="35.0" text="Logout">
          <font>
-            <Font name="Arial" size="11.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnProdutos" layoutX="248.0" layoutY="227.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="105.0" text="Produtos" />
-      <Button fx:id="btnClientes" layoutX="248.0" layoutY="294.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="105.0" text="Clientes" />
-      <Label layoutX="216.0" layoutY="42.0" text="Menu principal">
+            <Font size="15.0" />
+         </font></Button>
+      <VBox alignment="CENTER" layoutX="210.0" layoutY="117.0" prefHeight="261.0" prefWidth="143.0" spacing="30.0">
+         <children>
+            <Button fx:id="btnFuncionarios" mnemonicParsing="false" onAction="#abrirMenuFuncionarios" prefHeight="42.0" prefWidth="116.0" text="Funcionarios">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnProdutos" mnemonicParsing="false" prefHeight="42.0" prefWidth="116.0" text="Produtos">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnClientes" mnemonicParsing="false" prefHeight="42.0" prefWidth="116.0" text="Clientes">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+      <Label layoutX="177.0" layoutY="62.0" text="Menu principal">
          <font>
-            <Font name="Arial Black" size="21.0" />
+            <Font name="System Bold" size="25.0" />
          </font>
       </Label>
       <MenuBar layoutX="1.0" layoutY="2.0" prefHeight="24.0" prefWidth="600.0">

@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="interfaceGrafica.TelaVendaFuncionarioLayoutController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -52,24 +52,24 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TextField promptText="Buscar produto" GridPane.columnSpan="2">
+                        <TextField fx:id="ttfBuscarProduto" promptText="Buscar produto" GridPane.columnSpan="2">
                            <GridPane.margin>
                               <Insets left="5.0" right="5.0" top="10.0" />
                            </GridPane.margin>
                         </TextField>
-                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Buscar" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Limpar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <Button fx:id="btnBuscar" alignment="CENTER" mnemonicParsing="false" onAction="#onActionBuscar" prefHeight="25.0" prefWidth="70.0" text="Buscar" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <Button fx:id="btnLimpar" mnemonicParsing="false" onAction="#onActionLimpar" prefHeight="25.0" prefWidth="70.0" text="Limpar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <TableView minHeight="240.0" minWidth="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="tblProduto" minHeight="240.0" minWidth="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn prefWidth="129.0" text="Nome" />
-                      <TableColumn prefWidth="67.0" text="Preço" />
-                        <TableColumn prefWidth="105.0" text="Qtd" />
+                      <TableColumn fx:id="colNomeProduto" prefWidth="129.0" text="Nome" />
+                      <TableColumn fx:id="colPrecoProduto" prefWidth="67.0" text="Preço" />
+                        <TableColumn fx:id="colQtdProduto" prefWidth="105.0" text="Qtd" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -80,21 +80,21 @@
       </SplitPane>
    </left>
    <bottom>
-      <HBox alignment="BOTTOM_RIGHT" prefHeight="40.0" spacing="30.0" BorderPane.alignment="CENTER">
+      <HBox alignment="BOTTOM_RIGHT" prefHeight="40.0" spacing="15.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" prefHeight="41.0" prefWidth="74.0" text="Vender">
+            <Button fx:id="btnConfirmarVenda" mnemonicParsing="false" onAction="#onActionConfirmarVenda" prefHeight="41.0" text="Confirmar Venda">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="38.0" prefWidth="70.0" text="Voltar">
+            <Button fx:id="btnVoltar" alignment="CENTER" mnemonicParsing="false" onAction="#onActionVoltar" prefHeight="38.0" prefWidth="70.0" text="Voltar">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
          </children>
          <padding>
-            <Insets bottom="15.0" right="15.0" />
+            <Insets bottom="5.0" right="5.0" top="5.0" />
          </padding>
       </HBox>
    </bottom>
@@ -116,7 +116,7 @@
                      <children>
                         <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
                            <children>
-                              <Button mnemonicParsing="false" text="Adicionar" />
+                              <Button fx:id="btnAdicionar" mnemonicParsing="false" onAction="#onActionAdicionar" text="Adicionar" />
                            </children>
                            <padding>
                               <Insets bottom="5.0" right="5.0" />
@@ -128,7 +128,7 @@
                            </font>
                         </Label>
                         <Label text="Quantidade:" GridPane.rowIndex="1" />
-                        <TextField promptText="Quantidade do produto" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="ttfQuantidade" promptText="Quantidade do produto" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                      <padding>
                         <Insets left="5.0" right="5.0" />
@@ -149,25 +149,44 @@
                       <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowSpan="2">
-                          <columns>
-                            <TableColumn prefWidth="75.0" text="Produto" />
-                            <TableColumn prefWidth="75.0" text="Qtd" />
-                          </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
-                        </TableView>
                         <Label text="Cliente:" GridPane.rowIndex="2">
                            <GridPane.margin>
                               <Insets left="5.0" />
                            </GridPane.margin>
                         </Label>
-                        <TextField promptText="Cliente cadastrado" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <TextField fx:id="ttfClienteCadastrado" promptText="Cliente cadastrado" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <GridPane.margin>
                               <Insets right="5.0" />
                            </GridPane.margin>
                         </TextField>
+                        <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowSpan="2">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <TableView fx:id="tblNomeVenda" maxWidth="145.0" minWidth="145.0" prefHeight="200.0" prefWidth="200.0">
+                                      <columns>
+                                        <TableColumn fx:id="colNomeVenda" prefWidth="75.0" text="Nome" />
+                                      </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <TableView fx:id="tblQtdVenda" maxWidth="145.0" minWidth="145.0" prefHeight="200.0" prefWidth="200.0">
+                                      <columns>
+                                        <TableColumn fx:id="colQtdVenda" prefWidth="75.0" text="Qtd" />
+                                      </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
                      </children>
                   </GridPane>
                </children>

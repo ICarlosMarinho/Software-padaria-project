@@ -27,7 +27,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 
 public class TelaEstoqueFuncionarioLayoutController {
-	
+
 	private SistemaPadaria sistema;
 
 	@FXML 
@@ -152,7 +152,9 @@ public class TelaEstoqueFuncionarioLayoutController {
 	@FXML
 	public void onActionLimpar() {
 		ttfBuscarProduto.clear();
+		tblProduto.setItems(null);
 		tblProduto.setItems( FXCollections.observableArrayList(this.sistema.listaProduto()) );
+		tblProduto.refresh();
 		
 		ttfNome.clear();
 		ttfDescricao.clear();

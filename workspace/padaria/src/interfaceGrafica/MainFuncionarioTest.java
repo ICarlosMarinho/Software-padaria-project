@@ -27,7 +27,7 @@ public class MainFuncionarioTest extends Application {
 		if(title == null) {
 			throw new RuntimeException("Variable is null");
 		}
-		
+	
 		MainFuncionarioTest.tituloAnterior.push( MainFuncionarioTest.palco.getTitle() );
 		MainFuncionarioTest.palco.setTitle(title);
 	}
@@ -72,9 +72,9 @@ public class MainFuncionarioTest extends Application {
 		Parent root = null;
 		
 		try {
-			root = FXMLLoader.load( getClass().getResource("PrincipalFuncionarioLayout.fxml") );
+			root = FXMLLoader.load( getClass().getResource("TelaMenuPrincipalFuncionarioLayout.fxml") );
 		} catch ( IOException ioe ) {
-			System.out.println("Problema para carregar arquivo PrincipalFuncionarioLayout");
+			System.out.println("Problema para carregar arquivo TelaMenuPrincipalFuncionarioLayout");
 			System.exit(1);
 		}
 		
