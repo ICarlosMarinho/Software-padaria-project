@@ -49,6 +49,8 @@ public class TelaEstoqueFuncionarioLayoutController {
 	private Button btnCancelarCadastrar;
 	@FXML 
 	private Button btnAtualizar;
+	@FXML
+	private Button btnExcluir;
 
 	@FXML 
 	private Label lblNome;
@@ -82,6 +84,7 @@ public class TelaEstoqueFuncionarioLayoutController {
 	private TextField ttfMes;
 	@FXML 
 	private TextField ttfDia;
+
 
 	
 	
@@ -137,8 +140,16 @@ public class TelaEstoqueFuncionarioLayoutController {
 				ttfMes.textProperty().isEmpty().or(
 				ttfAno.textProperty().isEmpty())))))) );
 		
+		// botao cancelar e confirmar ficarao inicialmente invisiveis
+		btnConfirmarCadastrar.setVisible(false);
+		btnCancelarCadastrar.setVisible(false);
 		
-		// TODO ajustar opcoes conforme funcionario
+		if( MainFuncionarioTest.getLogado().getCargo().equalsIgnoreCase("Caixa") ) {
+			btnCadastrar.setVisible(false);
+			btnExcluir.setVisible(false);
+			btnAtualizar.setVisible(false);
+		}
+		
 		
 	}
 
@@ -176,7 +187,19 @@ public class TelaEstoqueFuncionarioLayoutController {
 
 	@FXML
 	public void onActionCadastrar() {
-		// TODO fazer btnConfirmarCadastrar e btnCancelarCadastrar visiveis
+		ttfNome.clear();
+		ttfDescricao.clear();
+		ttfDia.clear();
+		ttfMes.clear();
+		ttfAno.clear();
+		ttfPreco.clear();
+		ttfQuantidade.clear();
+		
+		btnConfirmarCadastrar.setVisible(true);
+		btnCancelarCadastrar.setVisible(true);
+		
+		btnAtualizar.setVisible(false);
+		btnExcluir.setVisible(false);
 	}
 
 
@@ -220,6 +243,12 @@ public class TelaEstoqueFuncionarioLayoutController {
 		ttfAno.clear();
 		ttfPreco.clear();
 		ttfQuantidade.clear();
+		
+		btnConfirmarCadastrar.setVisible(false);
+		btnCancelarCadastrar.setVisible(false);
+		
+		btnAtualizar.setVisible(true);
+		btnExcluir.setVisible(true);
 	}
 
 
