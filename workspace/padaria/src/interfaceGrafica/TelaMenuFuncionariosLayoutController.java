@@ -187,6 +187,12 @@ public class TelaMenuFuncionariosLayoutController implements Initializable {
             this.btnCancelar.setVisible(false);
 
             this.carregarItensNaTabela(FXCollections.observableArrayList(sistema.listaFuncionario()));
+            
+            Alert info = new Alert(Alert.AlertType.INFORMATION);
+            info.setTitle("INFO");
+            info.setHeaderText("Funcionário");
+            info.setContentText("Funcionário cadastrado!");
+            info.showAndWait();
 
         } catch (NegocioException neg) {
 
