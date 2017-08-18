@@ -23,7 +23,9 @@ public interface IRepositorioFuncionario {
     
     public ArrayList<Funcionario> listaFuncionario();
     
-    public void gravarNoArquivo(ArrayList repositorio, FileOutputStream arquivo);
+    public Repositorio getRepositorio();
     
-    public void lerDoArquivo(ArrayList repositorio, FileInputStream arquivo);
+//    public void gravarNoArquivo(ArrayList repositorio, FileOutputStream arquivo);
+    
+//    public void lerDoArquivo(ArrayList repositorio, FileInputStream arquivo);
 }

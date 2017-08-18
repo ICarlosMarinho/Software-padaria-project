@@ -25,6 +25,9 @@ public class CadastroCliente {
 		return (Cliente[])this.clientes.listar();
 	}
 	
+	public Repositorio getRepositorio() {
+		return this.clientes;
+	}
 	
 	public boolean atualizar(Cliente antigo, Cliente novo) {
 		this.clientes.atualizar(antigo, novo);

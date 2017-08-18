@@ -81,7 +81,7 @@ public class RepositorioFuncionario extends Repositorio implements IRepositorioF
     @Override
     public ArrayList<Funcionario> listaFuncionario() {
 
-        ArrayList<Funcionario> auxFuncionarios = new ArrayList();
+        ArrayList<Funcionario> auxFuncionarios = new ArrayList<Funcionario>();
 
         for (int i = 0; i < this.repositorio.size(); i++) {
             auxFuncionarios.add((Funcionario) this.repositorio.get(i));
@@ -90,13 +90,17 @@ public class RepositorioFuncionario extends Repositorio implements IRepositorioF
         return auxFuncionarios;
     }
     
-    @Override
-    public void lerDoArquivo(ArrayList repositorio, FileInputStream arquivo){
-        super.lerDoArquivo(repositorio, arquivo);
-    }
+    public Repositorio getRepositorio() {
+		return this;
+	}
     
-    @Override
-    public void gravarNoArquivo(ArrayList repositorio, FileOutputStream arquivo){
-        super.gravarNoArquivo(repositorio, arquivo);
-    }
+//    @Override
+//    public void lerDoArquivo(ArrayList repositorio, FileInputStream arquivo){
+//        super.lerDoArquivo(repositorio, arquivo);
+//    }
+    
+//    @Override
+//    public void gravarNoArquivo(ArrayList repositorio, FileOutputStream arquivo){
+//        super.gravarNoArquivo(repositorio, arquivo);
+//    }
 }

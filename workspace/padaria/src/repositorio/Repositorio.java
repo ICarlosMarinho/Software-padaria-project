@@ -101,7 +101,7 @@ public class Repositorio {
         return this.repositorio.size();
     }
 
-    public void lerDoArquivo(ArrayList repositorio, FileInputStream arquivo) {
+    public void lerDoArquivo(FileInputStream arquivo) {
 
         ObjectInputStream objAuxiliar;
 
@@ -119,13 +119,13 @@ public class Repositorio {
         }
     }
 
-    public void gravarNoArquivo(ArrayList repositorio, FileOutputStream arquivo) {
+    public void gravarNoArquivo(FileOutputStream arquivo) {
 
         ObjectOutputStream objAuxiliar;
         try {
             objAuxiliar = new ObjectOutputStream(arquivo);
 
-            objAuxiliar.writeObject(repositorio);
+            objAuxiliar.writeObject(this.repositorio);
 
             objAuxiliar.flush();
             objAuxiliar.close();
@@ -137,5 +137,4 @@ public class Repositorio {
         }
 
     }
-
 }

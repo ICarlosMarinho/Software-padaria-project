@@ -18,6 +18,9 @@ public class CadastroProduto {
 		this.estoque = new RepositorioProduto();
 	}
 	
+	public Repositorio getRepositorio() {
+		return this.estoque;
+	}
 	
 	// metodo get
 	public RepositorioProduto getProdutos() {

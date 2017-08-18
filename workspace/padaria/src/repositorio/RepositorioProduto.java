@@ -1,5 +1,8 @@
 package repositorio;
 
+import java.io.FileInputStream;
+import java.util.ArrayList;
+
 import classesBasicas.Produto;
 
 public class RepositorioProduto extends Repositorio {
@@ -43,5 +46,6 @@ public class RepositorioProduto extends Repositorio {
 		
 		return (Produto)super.repositorio.get(posicao);
 	}
+	
 	
 }

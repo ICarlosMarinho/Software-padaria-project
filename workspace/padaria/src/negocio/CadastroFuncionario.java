@@ -1,6 +1,7 @@
 package negocio;
 
 import repositorio.IRepositorioFuncionario;
+import repositorio.Repositorio;
 import classesBasicas.*;
 import exceptions.NegocioException;
 import java.io.FileInputStream;
@@ -16,6 +17,10 @@ public class CadastroFuncionario {
         repo = new RepositorioFuncionario();
     }
 
+    public Repositorio getRepositorio() {
+		return this.repo.getRepositorio();
+	}
+    
     public Funcionario verificarInformacoes(Funcionario auxFun) throws NegocioException {
         //**VERIFICAR FUNCIONARIO OU ENDEREÃ‡O NULO
         if (auxFun == null | auxFun.getEndereco() == null) {
@@ -142,11 +147,11 @@ public class CadastroFuncionario {
         return this.repo.listaFuncionario();
     }
     
-    public void GravarNoArquivo(ArrayList repositorio, FileOutputStream arquivo){
-        this.repo.gravarNoArquivo(repositorio, arquivo);
-    }
+//    public void GravarNoArquivo(ArrayList repositorio, FileOutputStream arquivo){
+//        this.repo.gravarNoArquivo(repositorio, arquivo);
+//    }
     
-    public void lerDoArquivo(ArrayList repositorio, FileInputStream arquivo){
-        this.repo.lerDoArquivo(repositorio, arquivo);
-    }
+//    public void lerDoArquivo(ArrayList repositorio, FileInputStream arquivo){
+//        this.repo.lerDoArquivo(repositorio, arquivo);
+//    }
 }

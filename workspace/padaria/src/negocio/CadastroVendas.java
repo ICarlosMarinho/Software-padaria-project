@@ -15,9 +15,14 @@ public class CadastroVendas {
 	private static double porcentual = 0.1;
 	
 	
+	
 	// construtor
 	public CadastroVendas() {
 		this.vendas = new RepositorioVendas();
+	}
+	
+	public Repositorio getRepositorio() {
+		return this.vendas;
 	}
 	
 	
@@ -26,10 +31,14 @@ public class CadastroVendas {
 	 * 
 	 * @ retorna historico[] --- historico de vendas
 	 */
-	public Venda[] lista() {
+	public ArrayList<Venda> lista() {
+		ArrayList<Venda> vendas = new ArrayList<Venda>();
 		
-		return this.vendas.todos();
+		for( Object obj : this.vendas.listar() ) {
+			vendas.add( (Venda)obj );
+		}
 		
+		return vendas;
 	}
 	
 	// TODO parei aqui implementacao das funcionalidades de exception

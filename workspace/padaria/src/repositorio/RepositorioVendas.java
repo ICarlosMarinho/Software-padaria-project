@@ -4,7 +4,7 @@ import java.util.*; // ArrayList
 
 import classesBasicas.*;
 
-public class RepositorioVendas implements IRepositorioVenda {
+public class RepositorioVendas extends Repositorio {
 	
 	private ArrayList<Venda> vendas;
 	
@@ -60,28 +60,6 @@ public class RepositorioVendas implements IRepositorioVenda {
 		return true;
 	}
 	
-	
-	/*
-	 * este metodo retorna uma array de vendas
-	 * 
-	 * @ retorna Venda[] --- array de vendas
-	 */
-	public Venda[] todos() {
-		
-		if( this.vendas.size() == 0 ) {
-			return null;
-		}
-		
-		Venda[] lista = new Venda[ this.vendas.size() ];
-		
-		for( int k = 0; k < this.vendas.size(); k++ ) {
-			
-			lista[k] = this.vendas.get(k);
-			
-		}
-		
-		return lista;
-	}
 	
 	
 	/*

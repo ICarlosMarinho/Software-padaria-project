@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import classesBasicas.*;
 import exceptions.NegocioException;
 import exceptions.SistemaException;
+import repositorio.Repositorio;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
@@ -45,6 +47,10 @@ public class SistemaPadaria {
         return this.opFuncionarios.alterarInfo(antigo, novo);
     }
 
+    public Repositorio getRepositorioFuncionario() {
+    	return this.opFuncionarios.getRepositorio();
+    }
+    
     public Funcionario buscarFuncionario(int auxId) {
         return this.opFuncionarios.buscar(auxId);
     }
@@ -61,13 +67,13 @@ public class SistemaPadaria {
         return this.opFuncionarios.listaFuncionario();
     }
     
-    public void lerDoArquivo(ArrayList repositorio, FileInputStream arquivo){
-        this.opFuncionarios.lerDoArquivo(repositorio, arquivo);
-    }
-    
-    public void gravarNoArquivo(ArrayList repositorio, FileOutputStream arquivo){
-        this.opFuncionarios.GravarNoArquivo(repositorio, arquivo);
-    }
+//    public void lerDoArquivo(ArrayList repositorio, FileInputStream arquivo){
+//        this.opFuncionarios.lerDoArquivo(repositorio, arquivo);
+//    }
+//    
+//    public void gravarNoArquivo(ArrayList repositorio, FileOutputStream arquivo){
+//        this.opFuncionarios.GravarNoArquivo(repositorio, arquivo);
+//    }
 
     //**METODOS DE ACESSO A CLASSE OPERACOESPRODUTO
     public boolean setPorcentual(double porcentual) {
@@ -85,6 +91,10 @@ public class SistemaPadaria {
         return this.opProduto.cadastrar(nome, descricao,
                 dia, mes, ano,
                 quantidade, preco);
+    }
+    
+    public Repositorio getRepositorioProduto() {
+    	return this.opProduto.getRepositorio();
     }
     
     public boolean cadastrarProduto(String nome, String descricao
@@ -153,6 +163,10 @@ public class SistemaPadaria {
                 complemento, cidade, estado);
     }
 
+    public Repositorio getRepositorioCliente() {
+    	return this.opCliente.getRepositorio();
+    }
+    
     public boolean removerCliente(int id) throws NegocioException {
         return this.opCliente.remover(id);
     }
@@ -197,10 +211,14 @@ public class SistemaPadaria {
     }
     
     //**METODO DE ACESSO A CLASSE CADASTROVENDAS
-    public Venda[] listaVenda() {
+    public ArrayList<Venda> listaVenda() {
         return opVendas.lista();
     }
 
+    public Repositorio getRepositorioVenda() {
+    	return this.opVendas.getRepositorio();
+    }
+    
     public boolean adicionarVenda(ArrayList<DadoVenda> vendido, Funcionario vendedor) throws SistemaException {
         return opVendas.adicionar(vendido, vendedor);
     }
