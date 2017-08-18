@@ -19,6 +19,7 @@ public class MainFuncionarioTest extends Application {
     public static Stage palco;
     public static Stack<Scene> cenaAnterior;
     public static Stack<String> tituloAnterior;
+    public static Funcionario logado;
 
     public static void setCenaAtual(Scene scene) {
         MainFuncionarioTest.cenaAnterior.push(MainFuncionarioTest.palco.getScene());

@@ -38,7 +38,7 @@ public class TelaMenuPrincipalGerenteLayoutController implements Initializable {
     }
 
     public void botaoSair() {
-
+        MainFuncionarioTest.logado = null;
         MainFuncionarioTest.setCenaAnterior();
     }
 
@@ -59,7 +59,7 @@ public class TelaMenuPrincipalGerenteLayoutController implements Initializable {
 
         Scene scene = new Scene(root, 720, 400);
 
-        MainFuncionarioTest.setTituloAtualPalco("Funcionarios");
+        MainFuncionarioTest.setTituloAtualPalco("Funcionários | Funcionário: " + MainFuncionarioTest.logado.getNome());
         MainFuncionarioTest.setCenaAtual(scene);
     }
 
@@ -84,7 +84,7 @@ public class TelaMenuPrincipalGerenteLayoutController implements Initializable {
         Scene scene = new Scene(root, 600, 400);
 
         MainFuncionarioTest.setCenaAtual(scene);
-        MainFuncionarioTest.setTituloAtualPalco("Cliente | Funcionario: " + "Jonas");
+        MainFuncionarioTest.setTituloAtualPalco("Clientes | Funcionario: " + MainFuncionarioTest.logado.getNome());
     }
 
     public void abrirMenuProdutos() {
@@ -103,6 +103,6 @@ public class TelaMenuPrincipalGerenteLayoutController implements Initializable {
         Scene scene = new Scene(root, 600, 400);
 
         MainFuncionarioTest.setCenaAtual(scene);
-        MainFuncionarioTest.setTituloAtualPalco("Estoque | Funcionario: " + "Jonas");
+        MainFuncionarioTest.setTituloAtualPalco("Estoque | Funcionário: " + MainFuncionarioTest.logado.getNome());
     }
 }

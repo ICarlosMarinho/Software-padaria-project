@@ -11,7 +11,7 @@ public class TelaMenuPrincipalFuncionarioLayoutController {
 
 	@FXML
 	public void onActionLogout() {
-		System.out.println("onActionLogout method activated");
+		MainFuncionarioTest.logado = null;
 		MainFuncionarioTest.setCenaAnterior();
 	}
 
@@ -32,7 +32,7 @@ public class TelaMenuPrincipalFuncionarioLayoutController {
 		Scene scene = new Scene(root, 600, 400);
 		
 		MainFuncionarioTest.setCenaAtual(scene);
-		MainFuncionarioTest.setTituloAtualPalco("Venda | Funcionario: " + "Jonas");
+		MainFuncionarioTest.setTituloAtualPalco("Venda | Funcionário: " + MainFuncionarioTest.logado.getNome());
 	}
 
 	@FXML
@@ -53,7 +53,7 @@ public class TelaMenuPrincipalFuncionarioLayoutController {
 		Scene scene = new Scene(root, 600, 400);
 		
 		MainFuncionarioTest.setCenaAtual(scene);
-		MainFuncionarioTest.setTituloAtualPalco("Cliente | Funcionario: " + "Jonas");
+		MainFuncionarioTest.setTituloAtualPalco("Cliente | Funcionário: " + MainFuncionarioTest.logado.getNome());
 	}
 
 	@FXML
@@ -74,7 +74,7 @@ public class TelaMenuPrincipalFuncionarioLayoutController {
 		Scene scene = new Scene(root, 600, 400);
 		
 		MainFuncionarioTest.setCenaAtual(scene);
-		MainFuncionarioTest.setTituloAtualPalco("Estoque | Funcionario: " + "Jonas");
+		MainFuncionarioTest.setTituloAtualPalco("Estoque | Funcionário: " + MainFuncionarioTest.logado.getNome());
 	}
 	
 

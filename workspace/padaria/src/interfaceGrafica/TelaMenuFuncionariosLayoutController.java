@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package interfaceGrafica;
 
 import classesBasicas.Endereco;
@@ -26,11 +21,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import negocio.SistemaPadaria;
 
-/**
- * FXML Controller class
- *
- * @author User
- */
 public class TelaMenuFuncionariosLayoutController implements Initializable {
 
     SistemaPadaria sistema = SistemaPadaria.getInstancia();
@@ -339,7 +329,6 @@ public class TelaMenuFuncionariosLayoutController implements Initializable {
 
     public void botaoVoltar() {
         
-
         MainFuncionarioTest.setCenaAnterior();
     }
 
