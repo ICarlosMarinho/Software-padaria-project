@@ -31,7 +31,7 @@ public class SistemaPadaria {
     }
 
     //**METODOS DE ACESSO A CLASSE OPERACOESFUNCIONARIO
-    public boolean cadastrarFuncionario(Funcionario auxFun) {
+    public boolean cadastrarFuncionario(Funcionario auxFun) throws NegocioException{
         return this.opFuncionarios.cadastrar(auxFun);
     }
 
@@ -39,7 +39,7 @@ public class SistemaPadaria {
         return this.opFuncionarios.excluir(auxFun);
     }
 
-    public boolean alterarInfoFuncionario(Funcionario antigo, Funcionario novo) {
+    public boolean alterarInfoFuncionario(Funcionario antigo, Funcionario novo) throws NegocioException{
         return this.opFuncionarios.alterarInfo(antigo, novo);
     }
 

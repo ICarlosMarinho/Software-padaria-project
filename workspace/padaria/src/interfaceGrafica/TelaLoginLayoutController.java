@@ -7,6 +7,7 @@ package interfaceGrafica;
 
 import classesBasicas.Endereco;
 import classesBasicas.Funcionario;
+import exceptions.NegocioException;
 import java.awt.Color;
 import java.awt.Graphics;
 import javafx.fxml.FXML;
@@ -41,14 +42,20 @@ public class TelaLoginLayoutController {
 
         Endereco end = new Endereco("-", "-", "-", "-", "-");
 
-        Funcionario teste1 = new Funcionario("carlos", "Gerente", "admin", "12345", end, 0, 0, 0);
-        teste1.setId(sistema.atribuirIdFuncionario());
-        sistema.cadastrarFuncionario(teste1);
+        try {
 
-        Funcionario teste2 = new Funcionario("Jonas", "Caixa", "abcde", "54321", end, 0, 0, 0);
-        teste2.setId(sistema.atribuirIdFuncionario());
-        sistema.cadastrarFuncionario(teste2);
+            Funcionario teste1 = new Funcionario("carlos", "Gerente", "admin", "12345", end, 0, 0, 1100);
+            teste1.setId(sistema.atribuirIdFuncionario());
+            sistema.cadastrarFuncionario(teste1);
 
+            Funcionario teste2 = new Funcionario("Jonas", "Caixa", "abcde", "54321", end, 0, 0, 1200);
+            teste2.setId(sistema.atribuirIdFuncionario());
+            sistema.cadastrarFuncionario(teste2);
+
+        } catch (NegocioException neg) {
+            
+            System.out.println(neg.getMessage());
+        }
         btnLogin.disableProperty().bind(tfLogin.textProperty().isEmpty().or(tfSenha.textProperty().isEmpty()));
 
         lblFalhaLogin.setVisible(false);
@@ -84,14 +91,14 @@ public class TelaLoginLayoutController {
             } else {
 
                 System.out.println("Falha no login");
-                
+
                 lblFalhaLogin.setText("Senha digitada incorreta!");
                 lblFalhaLogin.visibleProperty().setValue(true);
             }
         } else {
 
             System.out.println("Falha no login");
-            
+
             lblFalhaLogin.setText("Usuario digitado invalido!");
             lblFalhaLogin.visibleProperty().setValue(true);
         }

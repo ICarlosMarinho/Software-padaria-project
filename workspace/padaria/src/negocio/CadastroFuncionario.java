@@ -2,6 +2,7 @@ package negocio;
 
 import repositorio.IRepositorioFuncionario;
 import classesBasicas.*;
+import exceptions.NegocioException;
 import java.util.ArrayList;
 import repositorio.RepositorioFuncionario;
 
@@ -13,44 +14,57 @@ public class CadastroFuncionario {
         repo = new RepositorioFuncionario();
     }
 
-    public Funcionario verificarInformacoes(Funcionario auxFun) {
+    public Funcionario verificarInformacoes(Funcionario auxFun) throws NegocioException {
         //**VERIFICAR FUNCIONARIO OU ENDEREÃ‡O NULO
         if (auxFun == null | auxFun.getEndereco() == null) {
-            return null;
-        } //**VERIFICAR SE A STRING REFERENTE AO NOME Ã‰ NULA
-        else if (auxFun.getNome() == null | auxFun.getNome().isEmpty() == true) {
-            return null;
-        } //**VERIFICA SE O CARGO DO FUNCIONARIO Ã‰ VALIDO 
-        else if(auxFun.getCargo() ==null){
-            
+
             return null;
         }
-        else if (auxFun.getCargo().equalsIgnoreCase("Gerente") == false
+        //**VERIFICAR SE A STRING REFERENTE AO NOME Ã‰ NULA
+        if (auxFun.getNome() == null | auxFun.getNome().isEmpty() == true) {
+
+            throw new NegocioException(("Nome inserido inválido"), auxFun);
+
+        }
+
+        //**VERIFICA SE O CARGO DO FUNCIONARIO Ã‰ VALIDO 
+        if (auxFun.getCargo() == null) {
+
+            throw new NegocioException(("Insira o cargo"), auxFun);
+
+        } else if (auxFun.getCargo().equalsIgnoreCase("Gerente") == false
                 && auxFun.getCargo().equalsIgnoreCase("Caixa") == false
                 && auxFun.getCargo().equalsIgnoreCase("Padeiro") == false) {
-            return null;
-        } /*
+
+            throw new NegocioException(("Insira um cargo válido"), auxFun);
+        }
+        /*
         *Verifica algumas informaÃ§Ãµes sobre login e senha caso o funcionÃ¡rio seja gerente ou caixa,
         *pois somente esses cargos tem acesso ao sistema.
-         */ else if (auxFun.getCargo().equalsIgnoreCase("Gerente") | auxFun.getCargo().equalsIgnoreCase("Caixa")) {
+         */ if (auxFun.getCargo().equalsIgnoreCase("Gerente") | auxFun.getCargo().equalsIgnoreCase("Caixa")) {
             //**VERIFICA SE O LOGIN E A SENHA ESTÃƒO NULOS
-            if (auxFun.getLogin() == null | auxFun.getSenha() == null) {
-                return null;
-            } //**VERIFICA O TAMANHO DO LOGIN E SENHA (A REGRA AQUI Ã‰ ESTAR ENTRE 4~10 CARACTERES)
-            else if (auxFun.getLogin().length() < 4 | auxFun.getLogin().length() > 10
-                    | auxFun.getSenha().length() < 4 | auxFun.getSenha().length() > 10) {
-                return null;
-            }
+                if (auxFun.getLogin() == null | auxFun.getSenha() == null) {
+
+                    throw new NegocioException(("Insira o usuário e a senha"), auxFun);
+
+                } //**VERIFICA O TAMANHO DO LOGIN E SENHA (A REGRA AQUI Ã‰ ESTAR ENTRE 4~10 CARACTERES)
+                else if (auxFun.getLogin().length() < 4 | auxFun.getLogin().length() > 10
+                        | auxFun.getSenha().length() < 4 | auxFun.getSenha().length() > 10) {
+
+                    throw new NegocioException(("O usuário e a senha devem estar entre 4 e 10 caracteres."), auxFun);
+                }
 
             //**VERIFICA SE O LOGIN DO FUNCIONARIO A SER CADASTRADO JA EXISTE
             if (this.repo.buscar(auxFun.getLogin()) != null && auxFun.getId() != this.repo.buscar(auxFun.getLogin()).getId()) {
 
-                return null;
+                throw new NegocioException(("O usuário inserido já existe."), auxFun);
             }
 
-        } //**VERIFICA SE O SALARIO Ã‰ MAIOR QUE ZERO
-        else if (auxFun.getSalario() <= 0f) {
-            return null;
+        }
+        //**VERIFICA SE O SALARIO Ã‰ MAIOR QUE ZERO
+        if (auxFun.getSalario() <= 0) {
+
+            throw new NegocioException(("O Salário inserido não e válido."), auxFun);
         }
 
         //**VERIFICA SE ALGUMA INFORMAÃ‡ÃƒO DO ENDEREÃ‡O ESTÃ� NULA
@@ -59,20 +73,18 @@ public class CadastroFuncionario {
                 | auxFun.getEndereco().getComplemento().isEmpty()
                 | auxFun.getEndereco().getEstado().isEmpty()
                 | auxFun.getEndereco().getNumero().isEmpty()) {
-            return null;
+
+            throw new NegocioException(("Todos os campos do endereço devem ser preenchidos."), auxFun);
         }
 
         return auxFun;
     }
 
-    public boolean cadastrar(Funcionario novoFun) {
-        if (this.verificarInformacoes(novoFun) == null) {
-            return false;
-        }
+    public boolean cadastrar(Funcionario novoFun) throws NegocioException {
 
-        this.repo.adicionar(novoFun);
+        this.verificarInformacoes(novoFun);
 
-        return true;
+        return this.repo.adicionar(novoFun);
     }
 
     public boolean excluir(Funcionario auxFun) {
@@ -85,12 +97,11 @@ public class CadastroFuncionario {
         return true;
     }
 
-    public boolean alterarInfo(Funcionario antigo, Funcionario novo) {
-        if (this.verificarInformacoes(novo) != null) {
-            return this.repo.atualizar(antigo, novo);
-        }
+    public boolean alterarInfo(Funcionario antigo, Funcionario novo) throws NegocioException {
 
-        return false;
+        this.verificarInformacoes(novo);
+
+        return this.repo.atualizar(antigo, novo);
     }
 
     public Funcionario buscar(int auxId)//**BUSCAR FUNCIONARIO A PARTIR DO ID
@@ -123,9 +134,9 @@ public class CadastroFuncionario {
 
         return auxId;
     }
-    
-    public ArrayList<Funcionario> listaFuncionario(){
-        
+
+    public ArrayList<Funcionario> listaFuncionario() {
+
         return this.repo.listaFuncionario();
     }
 }

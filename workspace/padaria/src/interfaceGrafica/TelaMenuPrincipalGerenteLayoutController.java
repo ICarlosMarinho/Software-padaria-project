@@ -74,4 +74,8 @@ public class TelaMenuPrincipalGerenteLayoutController implements Initializable {
 
         MainLogin.setCena(scene);
     }
+
+    public void fecharPrograma() {
+        System.exit(0);
+    }
 }
