@@ -7,7 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
-public class PrincipalFuncionarioLayoutController {
+public class TelaMenuPrincipalFuncionarioLayoutController {
 
 	@FXML
 	public void onActionLogout() {
