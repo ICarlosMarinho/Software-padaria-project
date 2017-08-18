@@ -1,16 +1,14 @@
 package interfaceGrafica;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Stack;
 
 import classesBasicas.*;
+import exceptions.NegocioException;
+import exceptions.SistemaException;
 import javafx.collections.FXCollections;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import negocio.SistemaPadaria;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -20,8 +18,7 @@ import javafx.scene.control.TableColumn;
 public class TelaVendaFuncionarioLayoutController {
 	
 	private SistemaPadaria sistema;
-	private Stack<Produto> adicionados;
-	private Stack<Double> quantidades;
+	private ArrayList<DadoVenda> adicionados;
 	
 	
 	@FXML
@@ -49,29 +46,28 @@ public class TelaVendaFuncionarioLayoutController {
 
 	@FXML
 	private Button btnAdicionar;
-
 	@FXML
-	private TextField ttfQuantidade;
-
-	@FXML
-	private TableView<Produto> tblNomeVenda;
-	@FXML
-	private TableView<Double> tblQtdVenda;
+	private Button btnRemover;
 	
 	@FXML
-	private TableColumn<Produto, String> colNomeVenda;
+	private TextField ttfQuantidade;
+	
+	@FXML 
+	private TableView<DadoVenda> tblVenda;
+	
 	@FXML
-	private TableColumn<Double, Double> colQtdVenda;
+	private TableColumn<DadoVenda, String> colNomeVenda;
+	@FXML
+	private TableColumn<DadoVenda, Double> colQtdVenda;
 	
 	@FXML
 	private TextField ttfClienteCadastrado;
-
 	
 	
 	@FXML
 	public void initialize() {
 		this.sistema = SistemaPadaria.getInstancia();
-		this.adicionados = new Stack<Produto>();
+		this.adicionados = new ArrayList<DadoVenda>();
 		
 		tblProduto.setItems( FXCollections.observableArrayList(this.sistema.listaProduto()) );
 		colNomeProduto.setCellValueFactory( new PropertyValueFactory<>("nome") );
@@ -85,8 +81,9 @@ public class TelaVendaFuncionarioLayoutController {
 		// botao limpar so ficara ativado se o campo de busca tiver algo
 		btnBuscar.disableProperty().bind( ttfBuscarProduto.textProperty().isEmpty() );
 		
-		// botao limpar so ficara ativado se o campo de busca tiver algo
-		btnAdicionar.disableProperty().bind( ttfQuantidade.textProperty().isEmpty() );		
+		// botao adicionar so ficara ativado se o campo de quantidade tiver algo
+		btnAdicionar.disableProperty().bind( ttfQuantidade.textProperty().isEmpty() );
+		
 		
 		
 		
@@ -115,7 +112,50 @@ public class TelaVendaFuncionarioLayoutController {
 
 
 	@FXML
-	public void onActionConfirmarVenda() {}
+	public void onActionConfirmarVenda() {
+		Alert dialogo;
+		
+		try {
+		
+			if( ttfClienteCadastrado.getText().isEmpty() ) {
+				this.sistema.efetuarVenda(adicionados, 0);
+			} else {
+				
+				Cliente comprador = this.sistema.buscarCliente(ttfClienteCadastrado.getText());
+				if(comprador == null ) {
+					throw new NegocioException("Não existe cliente: " + ttfClienteCadastrado.getText(), this);
+				}
+				this.sistema.efetuarVenda(adicionados, 0, comprador.getId());
+			}
+			
+			dialogo = new Alert(Alert.AlertType.INFORMATION);
+			dialogo.setTitle("INFO");
+			dialogo.setHeaderText("Venda");
+			dialogo.setContentText("Venda efetuada com sucesso!");
+			dialogo.showAndWait();
+		
+		} catch (NegocioException ne) {
+			dialogo = new Alert(Alert.AlertType.ERROR);
+			dialogo.setTitle("ERRO");
+			dialogo.setHeaderText("Venda");
+			dialogo.setContentText(ne.getMessage());
+			dialogo.showAndWait();
+		} catch (SistemaException se) {
+			dialogo = new Alert(Alert.AlertType.ERROR);
+			dialogo.setTitle("ERRO");
+			dialogo.setHeaderText("Venda");
+			dialogo.setContentText(se.getMessage());
+			System.out.println(se.getMensagemParaDesenvolvedor());
+			dialogo.showAndWait();
+		}
+		
+		tblProduto.setItems( FXCollections.observableArrayList(this.sistema.listaProduto()) );
+		tblProduto.refresh();
+		tblVenda.setItems(null);
+		adicionados.clear();
+		ttfClienteCadastrado.clear();
+		ttfQuantidade.clear();
+	}
 
 
 
@@ -143,11 +183,12 @@ public class TelaVendaFuncionarioLayoutController {
 		
 		try {
 			quantidade = Double.parseDouble( ttfQuantidade.getText() );
+
+			adicionados.add( new DadoVenda( adicionar.getNome(), quantidade, adicionar ) );
 			
-			adicionados.push( adicionar );
-			quantidades.push( new Double(quantidade) );
-			
-//			tblVenda.setItems( FXCollections.observableArrayList( adicionados ) );
+			tblVenda.setItems( FXCollections.observableArrayList(adicionados) );
+			tblVenda.refresh();
+			ttfQuantidade.clear();
 			
 		} catch ( NumberFormatException nfe ) {
 			dialogo = new Alert(Alert.AlertType.ERROR);
@@ -158,8 +199,28 @@ public class TelaVendaFuncionarioLayoutController {
 		}
 		
 		
+	}
+
+
+
+	@FXML
+	public void onActionRemover() {
+		DadoVenda remover = tblVenda.getSelectionModel().getSelectedItem();
+		Alert dialogo;
 		
+		if( remover == null ) {
+			dialogo = new Alert(Alert.AlertType.ERROR);
+			dialogo.setTitle("ERRO");
+			dialogo.setHeaderText("Venda");
+			dialogo.setContentText("É necessário escolher um produto");
+			dialogo.showAndWait();
+		}
 		
+		adicionados.remove(remover);
+		
+		tblVenda.setItems(null);
+		tblVenda.setItems( FXCollections.observableArrayList(adicionados) );
+		tblVenda.refresh();
 	}
 
 
