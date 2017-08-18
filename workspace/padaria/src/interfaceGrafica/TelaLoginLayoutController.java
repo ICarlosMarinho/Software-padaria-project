@@ -8,19 +8,14 @@ package interfaceGrafica;
 import classesBasicas.Endereco;
 import classesBasicas.Funcionario;
 import exceptions.NegocioException;
-import java.awt.Color;
-import java.awt.Graphics;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import negocio.SistemaPadaria;
 
-/**
- *
- * @author User
- */
 public class TelaLoginLayoutController {
 
     SistemaPadaria sistema = SistemaPadaria.getInstancia();
@@ -40,22 +35,6 @@ public class TelaLoginLayoutController {
     @FXML
     public void initialize() {
 
-        Endereco end = new Endereco("-", "-", "-", "-", "-");
-
-        try {
-
-            Funcionario teste1 = new Funcionario("carlos", "Gerente", "admin", "12345", end, 0, 0, 1100);
-            teste1.setId(sistema.atribuirIdFuncionario());
-            sistema.cadastrarFuncionario(teste1);
-
-            Funcionario teste2 = new Funcionario("Jonas", "Caixa", "abcde", "54321", end, 0, 0, 1200);
-            teste2.setId(sistema.atribuirIdFuncionario());
-            sistema.cadastrarFuncionario(teste2);
-
-        } catch (NegocioException neg) {
-            
-            System.out.println(neg.getMessage());
-        }
         btnLogin.disableProperty().bind(tfLogin.textProperty().isEmpty().or(tfSenha.textProperty().isEmpty()));
 
         lblFalhaLogin.setVisible(false);
@@ -72,11 +51,22 @@ public class TelaLoginLayoutController {
 
             if (auxFun.getSenha().equals(this.tfSenha.getText()) != false) {
 
-                Pane root = null;
+                lblFalhaLogin.setVisible(false);
+                this.tfLogin.clear();
+                this.tfSenha.clear();
+
+                Parent root = null;
 
                 try {
 
-                    root = FXMLLoader.load(getClass().getResource("TelaMenuPrincipalGerenteLayout.fxml"));
+                    if (auxFun.getCargo().equalsIgnoreCase("Gerente") == true) {
+
+                        root = FXMLLoader.load(getClass().getResource("TelaMenuPrincipalGerenteLayout.fxml"));
+
+                    } else if (auxFun.getCargo().equalsIgnoreCase("Caixa") == true) {
+
+                        root = FXMLLoader.load(getClass().getResource("TelaMenuPrincipalFuncionarioLayout.fxml"));
+                    }
 
                 } catch (Exception exc) {
 
@@ -87,7 +77,8 @@ public class TelaLoginLayoutController {
 
                 Scene scene = new Scene(root, 600, 400);
 
-                MainLogin.setCena(scene);
+                MainFuncionarioTest.setTituloAtualPalco("Menu Principal");
+                MainFuncionarioTest.setCenaAtual(scene);
             } else {
 
                 System.out.println("Falha no login");

@@ -332,9 +332,15 @@ public class TelaMenuFuncionariosLayoutController implements Initializable {
     }
 
     public void limparCampoDeBusca() {
-        
+
         this.tfBuscar.clear();
         this.carregarItensNaTabela(FXCollections.observableArrayList(sistema.listaFuncionario()));
+    }
+
+    public void botaoVoltar() {
+        
+
+        MainFuncionarioTest.setCenaAnterior();
     }
 
 }

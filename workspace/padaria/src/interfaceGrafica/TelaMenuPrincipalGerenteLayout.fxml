@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="interfaceGrafica.TelaMenuPrincipalGerenteLayoutController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="interfaceGrafica.TelaMenuPrincipalGerenteLayoutController">
    <children>
       <Button fx:id="btnSair" layoutX="515.0" layoutY="351.0" mnemonicParsing="false" onAction="#botaoSair" prefHeight="35.0" text="Logout">
          <font>
@@ -22,12 +22,12 @@
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button fx:id="btnProdutos" mnemonicParsing="false" prefHeight="42.0" prefWidth="116.0" text="Produtos">
+            <Button fx:id="btnProdutos" mnemonicParsing="false" onAction="#abrirMenuProdutos" prefHeight="42.0" prefWidth="116.0" text="Produtos">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button fx:id="btnClientes" mnemonicParsing="false" prefHeight="42.0" prefWidth="116.0" text="Clientes">
+            <Button fx:id="btnClientes" mnemonicParsing="false" onAction="#abrirMenuClientes" prefHeight="42.0" prefWidth="116.0" text="Clientes">
                <font>
                   <Font size="15.0" />
                </font>

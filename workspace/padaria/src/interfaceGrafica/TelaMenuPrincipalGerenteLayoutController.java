@@ -5,11 +5,13 @@
  */
 package interfaceGrafica;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
@@ -37,22 +39,7 @@ public class TelaMenuPrincipalGerenteLayoutController implements Initializable {
 
     public void botaoSair() {
 
-        Pane root = null;
-
-        try {
-
-            root = FXMLLoader.load(getClass().getResource("../gerente/FuncionarioMenuLayout.fxml"));
-
-        } catch (Exception exc) {
-
-            System.out.println("Erro ao ler fxml");
-            exc.printStackTrace();
-            System.exit(0);
-        }
-
-        Scene scene = new Scene(root, 600, 400);
-
-        MainLogin.setCena(scene);
+        MainFuncionarioTest.setCenaAnterior();
     }
 
     public void abrirMenuFuncionarios() {
@@ -72,10 +59,50 @@ public class TelaMenuPrincipalGerenteLayoutController implements Initializable {
 
         Scene scene = new Scene(root, 720, 400);
 
-        MainLogin.setCena(scene);
+        MainFuncionarioTest.setTituloAtualPalco("Funcionarios");
+        MainFuncionarioTest.setCenaAtual(scene);
     }
 
     public void fecharPrograma() {
         System.exit(0);
+    }
+
+    public void abrirMenuClientes() {
+
+        Parent root = null;
+
+        try {
+            root = FXMLLoader.load(getClass().getResource("TelaClienteFuncionarioLayout.fxml"));
+        } catch (IOException ioe) {
+            System.out.println("Problema para carregar arquivo ClienteFuncionarioLayout");
+            ioe.printStackTrace();
+            System.out.println("Problema para carregar arquivo TelaClienteFuncionarioLayout");
+            ioe.printStackTrace();
+            System.exit(1);
+        }
+
+        Scene scene = new Scene(root, 600, 400);
+
+        MainFuncionarioTest.setCenaAtual(scene);
+        MainFuncionarioTest.setTituloAtualPalco("Cliente | Funcionario: " + "Jonas");
+    }
+
+    public void abrirMenuProdutos() {
+
+        Parent root = null;
+
+        try {
+            root = FXMLLoader.load(getClass().getResource("TelaEstoqueFuncionarioLayout.fxml"));
+        } catch (IOException ioe) {
+            System.out.println("Problema para carregar arquivo EstoqueFuncionarioLayout");
+            System.out.println("Problema para carregar arquivo TelaEstoqueFuncionarioLayout");
+            ioe.printStackTrace();
+            System.exit(1);
+        }
+
+        Scene scene = new Scene(root, 600, 400);
+
+        MainFuncionarioTest.setCenaAtual(scene);
+        MainFuncionarioTest.setTituloAtualPalco("Estoque | Funcionario: " + "Jonas");
     }
 }

@@ -12,7 +12,7 @@ public class TelaMenuPrincipalFuncionarioLayoutController {
 	@FXML
 	public void onActionLogout() {
 		System.out.println("onActionLogout method activated");
-		// TODO implementar metodo do login
+		MainFuncionarioTest.setCenaAnterior();
 	}
 
 	@FXML
