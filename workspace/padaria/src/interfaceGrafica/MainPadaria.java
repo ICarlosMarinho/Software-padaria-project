@@ -31,13 +31,13 @@ public class MainPadaria extends Application {
     public static Stack<Scene> cenaAnterior;
     public static Stack<String> tituloAnterior;
     public static Funcionario logado;
-    
+
     public static Funcionario getLogado() {
-    	return MainPadaria.logado;
+        return MainPadaria.logado;
     }
-    
-    public static void setLogado( Funcionario logado ) {
-    	MainPadaria.logado = logado;
+
+    public static void setLogado(Funcionario logado) {
+        MainPadaria.logado = logado;
     }
 
     public static void setCenaAtual(Scene scene) {
@@ -59,12 +59,11 @@ public class MainPadaria extends Application {
         MainPadaria.palco.setTitle(MainPadaria.tituloAnterior.pop());
     }
 
-    
     public static void main(String[] args) throws SistemaException, NegocioException {
 
         SistemaPadaria sistema = SistemaPadaria.getInstancia();
 /// caso para teste
-//        sistema.cadastrarProduto("Leite", "Camponesa", 9, 2, 2020, 40, 4.5);
+//        sistema.cadastrarProduto("Leite", "Camponesa", 9, 2, 2020, 40, 4.5);;;;;
 //        sistema.cadastrarProduto("Leite em pó", "Camponesa", 9, 2, 2020, 40, 4.5);
 //        sistema.cadastrarProduto("Pão Francês", "Encomendado pelo fornecedor de Joana Bezerra", 9, 2, 2019, 200, 5.5);
 //
@@ -80,9 +79,6 @@ public class MainPadaria extends Application {
 //        Funcionario teste2 = new Funcionario("Jonas", "Caixa", "abcde", "54321", end, 0, 0, 1200);
 //        teste2.setId(sistema.atribuirIdFuncionario());
 //        sistema.cadastrarFuncionario(teste2);
-//
-//        System.out.println("Quantidade produto = " + sistema.totalProduto());
-//        System.out.println("Quantidade cliente = " + sistema.totalCliente());
 
         try {
             FileInputStream funcionarios = new FileInputStream("ArquivoFuncionarios.bin");
@@ -94,29 +90,32 @@ public class MainPadaria extends Application {
             sistema.getRepositorioProduto().lerDoArquivo(estoque);
             sistema.getRepositorioCliente().lerDoArquivo(clientes);
             sistema.getRepositorioVenda().lerDoArquivo(vendas);
-            
+
         } catch (FileNotFoundException ex) {
             System.out.println(ex.getMessage());
         }
 
-        launch(args);
-        
-        try {
-        	FileOutputStream funcionarios = new FileOutputStream("ArquivoFuncionarios.bin");
-        	FileOutputStream estoque = new FileOutputStream("ArquivoProdutos.bin");
-        	FileOutputStream clientes = new FileOutputStream("ArquivoClientes.bin");
-        	FileOutputStream vendas = new FileOutputStream("ArquivoVendas.bin");
-        	
-        	sistema.getRepositorioFuncionario().gravarNoArquivo(funcionarios);
-        	sistema.getRepositorioProduto().gravarNoArquivo(estoque);
-        	sistema.getRepositorioCliente().gravarNoArquivo(clientes);
-        	sistema.getRepositorioVenda().gravarNoArquivo(vendas);
+        System.out.println("Quantidade funcionario = " + sistema.getRepositorioFuncionario().tamanho());
+        System.out.println("Quantidade produto = " + sistema.totalProduto());
+        System.out.println("Quantidade cliente = " + sistema.totalCliente());
 
-        } catch ( FileNotFoundException fnfe ) {
+        launch(args);
+
+        try {
+            FileOutputStream funcionarios = new FileOutputStream("ArquivoFuncionarios.bin");
+            FileOutputStream estoque = new FileOutputStream("ArquivoProdutos.bin");
+            FileOutputStream clientes = new FileOutputStream("ArquivoClientes.bin");
+            FileOutputStream vendas = new FileOutputStream("ArquivoVendas.bin");
+
+            sistema.getRepositorioFuncionario().gravarNoArquivo(funcionarios);
+            sistema.getRepositorioProduto().gravarNoArquivo(estoque);
+            sistema.getRepositorioCliente().gravarNoArquivo(clientes);
+            sistema.getRepositorioVenda().gravarNoArquivo(vendas);
+
+        } catch (FileNotFoundException fnfe) {
             System.out.println(fnfe.getMessage());
         }
-        
-      
+
     }
 
     @Override

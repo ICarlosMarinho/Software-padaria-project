@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -132,6 +133,7 @@ public class TelaMenuFuncionariosLayoutController implements Initializable {
         this.tfCidade.clear();
         this.tfEstado.clear();
         this.tfComplemento.clear();
+        this.cbCargo.setValue(null);
     }
 
     public void confirmarCadastro() {
@@ -187,7 +189,7 @@ public class TelaMenuFuncionariosLayoutController implements Initializable {
             this.btnCancelar.setVisible(false);
 
             this.carregarItensNaTabela(FXCollections.observableArrayList(sistema.listaFuncionario()));
-            
+
             Alert info = new Alert(Alert.AlertType.INFORMATION);
             info.setTitle("INFO");
             info.setHeaderText("Funcionário");
@@ -242,10 +244,38 @@ public class TelaMenuFuncionariosLayoutController implements Initializable {
 
     public void excluirFuncionario() {
 
-        if (this.sistema.excluirFuncionario(this.pressionado) == true) {
-            System.out.println("Funcionario Excluido " + sistema.listaFuncionario().size());
+        Alert alerta;
+
+        if (this.pressionado != null) {
+
+            alerta = new Alert(Alert.AlertType.CONFIRMATION);
+            alerta.setTitle("INFO");
+            alerta.setHeaderText("Funcionário");
+            alerta.setContentText("Deseja realmente excluir o seguinte funcionário?\n\nNome: " + this.pressionado.getNome() + "\nCargo: " + this.pressionado.getCargo());
+            alerta.showAndWait();
+
+            if (alerta.getResult().getButtonData().isDefaultButton() == true) {
+
+                this.sistema.excluirFuncionario(this.pressionado);
+
+                alerta.setContentText("Funcionário excluido.");
+                alerta.showAndWait();
+
+                System.out.println("Funcionario Excluido " + sistema.listaFuncionario().size());
+
+            } else if (alerta.getResult().getButtonData().isCancelButton() == true) {
+
+                alerta.setContentText("Ação cancelada.");
+                alerta.showAndWait();
+            }
+
         } else {
-            System.out.println("Erro ao excluir");
+
+            alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("ERRO");
+            alerta.setHeaderText("Funcionário");
+            alerta.setContentText("Nenhum funcionário selecionado.");
+            alerta.showAndWait();
         }
 
         this.carregarItensNaTabela(FXCollections.observableArrayList(sistema.listaFuncionario()));
@@ -292,7 +322,16 @@ public class TelaMenuFuncionariosLayoutController implements Initializable {
 
                 this.sistema.alterarInfoFuncionario(pressionado, auxFuncionario);
 
+                Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                alerta.setTitle("INFO");
+                alerta.setHeaderText("Funcionário");
+                alerta.setContentText("Funcionário atualizado.");
+                alerta.showAndWait();
+
                 System.out.println(auxFuncionario.toString());
+
+                this.pressionado = null;
+                this.limparCamposDeTexto();
 
                 System.out.println("\nAtualizado");
 
@@ -306,12 +345,21 @@ public class TelaMenuFuncionariosLayoutController implements Initializable {
 
                 System.out.println("Erro: " + neg.getMessage());
             }
+        } else {
+
+            Alert erro = new Alert(Alert.AlertType.ERROR);
+            erro.setTitle("ERRO");
+            erro.setHeaderText("Funcionário");
+            erro.setContentText("Nenhum funcionário selecionado.");
+            erro.showAndWait();
+
         }
         this.carregarItensNaTabela(FXCollections.observableArrayList(sistema.listaFuncionario()));
     }
 
     public void buscarFuncionario() {
 
+        this.pressionado = null;
         ArrayList<Funcionario> auxLista = new ArrayList();
 
         this.limparCamposDeTexto();
@@ -331,11 +379,11 @@ public class TelaMenuFuncionariosLayoutController implements Initializable {
 
         this.tfBuscar.clear();
         this.carregarItensNaTabela(FXCollections.observableArrayList(sistema.listaFuncionario()));
-        pressionado = null;
     }
 
     public void botaoVoltar() {
-        
+
+        this.pressionado = null;
         MainPadaria.setCenaAnterior();
     }
 
