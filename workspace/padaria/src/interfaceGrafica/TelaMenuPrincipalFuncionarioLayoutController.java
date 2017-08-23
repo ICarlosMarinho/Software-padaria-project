@@ -11,8 +11,8 @@ public class TelaMenuPrincipalFuncionarioLayoutController {
 
 	@FXML
 	public void onActionLogout() {
-		MainFuncionarioTest.logado = null;
-		MainFuncionarioTest.setCenaAnterior();
+		MainPadaria.logado = null;
+		MainPadaria.setCenaAnterior();
 	}
 
 	@FXML
@@ -31,8 +31,8 @@ public class TelaMenuPrincipalFuncionarioLayoutController {
 		
 		Scene scene = new Scene(root, 600, 400);
 		
-		MainFuncionarioTest.setCenaAtual(scene);
-		MainFuncionarioTest.setTituloAtualPalco("Venda | Funcionário: " + MainFuncionarioTest.logado.getNome());
+		MainPadaria.setCenaAtual(scene);
+		MainPadaria.setTituloAtualPalco("Venda | Funcionário: " + MainPadaria.logado.getNome());
 	}
 
 	@FXML
@@ -52,8 +52,8 @@ public class TelaMenuPrincipalFuncionarioLayoutController {
 		
 		Scene scene = new Scene(root, 600, 400);
 		
-		MainFuncionarioTest.setCenaAtual(scene);
-		MainFuncionarioTest.setTituloAtualPalco("Cliente | Funcionário: " + MainFuncionarioTest.logado.getNome());
+		MainPadaria.setCenaAtual(scene);
+		MainPadaria.setTituloAtualPalco("Cliente | Funcionário: " + MainPadaria.logado.getNome());
 	}
 
 	@FXML
@@ -73,8 +73,8 @@ public class TelaMenuPrincipalFuncionarioLayoutController {
 		
 		Scene scene = new Scene(root, 600, 400);
 		
-		MainFuncionarioTest.setCenaAtual(scene);
-		MainFuncionarioTest.setTituloAtualPalco("Estoque | Funcionário: " + MainFuncionarioTest.logado.getNome());
+		MainPadaria.setCenaAtual(scene);
+		MainPadaria.setTituloAtualPalco("Estoque | Funcionário: " + MainPadaria.logado.getNome());
 	}
 	
 

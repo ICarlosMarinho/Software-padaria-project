@@ -38,8 +38,8 @@ public class TelaMenuPrincipalGerenteLayoutController implements Initializable {
     }
 
     public void botaoSair() {
-        MainFuncionarioTest.logado = null;
-        MainFuncionarioTest.setCenaAnterior();
+        MainPadaria.logado = null;
+        MainPadaria.setCenaAnterior();
     }
 
     public void abrirMenuFuncionarios() {
@@ -59,8 +59,8 @@ public class TelaMenuPrincipalGerenteLayoutController implements Initializable {
 
         Scene scene = new Scene(root, 720, 400);
 
-        MainFuncionarioTest.setTituloAtualPalco("Funcionários | Funcionário: " + MainFuncionarioTest.logado.getNome());
-        MainFuncionarioTest.setCenaAtual(scene);
+        MainPadaria.setTituloAtualPalco("Funcionários | Funcionário: " + MainPadaria.logado.getNome());
+        MainPadaria.setCenaAtual(scene);
     }
 
     public void fecharPrograma() {
@@ -83,8 +83,8 @@ public class TelaMenuPrincipalGerenteLayoutController implements Initializable {
 
         Scene scene = new Scene(root, 600, 400);
 
-        MainFuncionarioTest.setCenaAtual(scene);
-        MainFuncionarioTest.setTituloAtualPalco("Clientes | Funcionario: " + MainFuncionarioTest.logado.getNome());
+        MainPadaria.setCenaAtual(scene);
+        MainPadaria.setTituloAtualPalco("Clientes | Funcionario: " + MainPadaria.logado.getNome());
     }
 
     public void abrirMenuProdutos() {
@@ -102,7 +102,7 @@ public class TelaMenuPrincipalGerenteLayoutController implements Initializable {
 
         Scene scene = new Scene(root, 600, 400);
 
-        MainFuncionarioTest.setCenaAtual(scene);
-        MainFuncionarioTest.setTituloAtualPalco("Estoque | Funcionário: " + MainFuncionarioTest.logado.getNome());
+        MainPadaria.setCenaAtual(scene);
+        MainPadaria.setTituloAtualPalco("Estoque | Funcionário: " + MainPadaria.logado.getNome());
     }
 }

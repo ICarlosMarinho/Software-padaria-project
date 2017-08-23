@@ -161,7 +161,7 @@ public class TelaVendaFuncionarioLayoutController {
 
 	@FXML
 	public void onActionVoltar() {
-		MainFuncionarioTest.setCenaAnterior();
+		MainPadaria.setCenaAnterior();
 	}
 
 

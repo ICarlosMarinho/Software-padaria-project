@@ -25,7 +25,7 @@ import javafx.stage.Stage;
 import negocio.SistemaPadaria;
 import repositorio.Repositorio;
 
-public class MainFuncionarioTest extends Application {
+public class MainPadaria extends Application {
 
     public static Stage palco;
     public static Stack<Scene> cenaAnterior;
@@ -33,16 +33,16 @@ public class MainFuncionarioTest extends Application {
     public static Funcionario logado;
     
     public static Funcionario getLogado() {
-    	return MainFuncionarioTest.logado;
+    	return MainPadaria.logado;
     }
     
     public static void setLogado( Funcionario logado ) {
-    	MainFuncionarioTest.logado = logado;
+    	MainPadaria.logado = logado;
     }
 
     public static void setCenaAtual(Scene scene) {
-        MainFuncionarioTest.cenaAnterior.push(MainFuncionarioTest.palco.getScene());
-        MainFuncionarioTest.palco.setScene(scene);
+        MainPadaria.cenaAnterior.push(MainPadaria.palco.getScene());
+        MainPadaria.palco.setScene(scene);
     }
 
     public static void setTituloAtualPalco(String title) {
@@ -50,13 +50,13 @@ public class MainFuncionarioTest extends Application {
             throw new RuntimeException("Variable is null");
         }
 
-        MainFuncionarioTest.tituloAnterior.push(MainFuncionarioTest.palco.getTitle());
-        MainFuncionarioTest.palco.setTitle(title);
+        MainPadaria.tituloAnterior.push(MainPadaria.palco.getTitle());
+        MainPadaria.palco.setTitle(title);
     }
 
     public static void setCenaAnterior() {
-        MainFuncionarioTest.palco.setScene(MainFuncionarioTest.cenaAnterior.pop());
-        MainFuncionarioTest.palco.setTitle(MainFuncionarioTest.tituloAnterior.pop());
+        MainPadaria.palco.setScene(MainPadaria.cenaAnterior.pop());
+        MainPadaria.palco.setTitle(MainPadaria.tituloAnterior.pop());
     }
 
     
@@ -122,9 +122,9 @@ public class MainFuncionarioTest extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        MainFuncionarioTest.tituloAnterior = new Stack<>();
-        MainFuncionarioTest.cenaAnterior = new Stack<>();
-        MainFuncionarioTest.palco = primaryStage;
+        MainPadaria.tituloAnterior = new Stack<>();
+        MainPadaria.cenaAnterior = new Stack<>();
+        MainPadaria.palco = primaryStage;
 
         Parent root = null;
 
@@ -137,9 +137,9 @@ public class MainFuncionarioTest extends Application {
 
         Scene scene = new Scene(root, 600, 400);
 
-        MainFuncionarioTest.palco.setScene(scene);
-        MainFuncionarioTest.palco.setTitle("Login");
-        MainFuncionarioTest.palco.show();
+        MainPadaria.palco.setScene(scene);
+        MainPadaria.palco.setTitle("Login");
+        MainPadaria.palco.show();
 
     }
 

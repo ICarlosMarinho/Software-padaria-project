@@ -38,11 +38,11 @@ public class TelaLoginLayoutController {
 
         System.out.println(this.tfLogin.getText());
 
-        MainFuncionarioTest.logado = sistema.buscarFuncionario(this.tfLogin.getText());
+        MainPadaria.logado = sistema.buscarFuncionario(this.tfLogin.getText());
 
-        if (MainFuncionarioTest.logado != null) {
+        if (MainPadaria.logado != null) {
 
-            if (MainFuncionarioTest.logado.getSenha().equals(this.tfSenha.getText()) != false) {
+            if (MainPadaria.logado.getSenha().equals(this.tfSenha.getText()) != false) {
 
                 this.initialize();
 
@@ -50,11 +50,11 @@ public class TelaLoginLayoutController {
 
                 try {
 
-                    if (MainFuncionarioTest.logado.getCargo().equalsIgnoreCase("Gerente") == true) {
+                    if (MainPadaria.logado.getCargo().equalsIgnoreCase("Gerente") == true) {
 
                         root = FXMLLoader.load(getClass().getResource("TelaMenuPrincipalGerenteLayout.fxml"));
 
-                    } else if (MainFuncionarioTest.logado.getCargo().equalsIgnoreCase("Caixa") == true) {
+                    } else if (MainPadaria.logado.getCargo().equalsIgnoreCase("Caixa") == true) {
 
                         root = FXMLLoader.load(getClass().getResource("TelaMenuPrincipalFuncionarioLayout.fxml"));
                     }
@@ -68,8 +68,8 @@ public class TelaLoginLayoutController {
 
                 Scene scene = new Scene(root, 600, 400);
 
-                MainFuncionarioTest.setTituloAtualPalco("Menu Principal | Funcionário: " + MainFuncionarioTest.logado.getNome());
-                MainFuncionarioTest.setCenaAtual(scene);
+                MainPadaria.setTituloAtualPalco("Menu Principal | Funcionário: " + MainPadaria.logado.getNome());
+                MainPadaria.setCenaAtual(scene);
             } else {
 
                 System.out.println("Falha no login");

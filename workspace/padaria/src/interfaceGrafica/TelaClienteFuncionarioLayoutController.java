@@ -131,7 +131,7 @@ public class TelaClienteFuncionarioLayoutController {
 		
 		// TODO verificar se quem tem poder para
 		// 	    modificar sobre os clientes é o gerente, ou caixa
-		if( MainFuncionarioTest.getLogado().getCargo().equalsIgnoreCase("Caixa") ) {
+		if( MainPadaria.getLogado().getCargo().equalsIgnoreCase("Caixa") ) {
 			btnCadastrar.setVisible(false);
 			btnExcluir.setVisible(false);
 			btnAtualizar.setVisible(false);
@@ -321,7 +321,7 @@ public class TelaClienteFuncionarioLayoutController {
 
 	@FXML
 	public void onActionVoltar() {
-		MainFuncionarioTest.setCenaAnterior();
+		MainPadaria.setCenaAnterior();
 	}
 
 

@@ -144,7 +144,7 @@ public class TelaEstoqueFuncionarioLayoutController {
 		btnConfirmarCadastrar.setVisible(false);
 		btnCancelarCadastrar.setVisible(false);
 		
-		if( MainFuncionarioTest.getLogado().getCargo().equalsIgnoreCase("Caixa") ) {
+		if( MainPadaria.getLogado().getCargo().equalsIgnoreCase("Caixa") ) {
 			btnCadastrar.setVisible(false);
 			btnExcluir.setVisible(false);
 			btnAtualizar.setVisible(false);
@@ -156,7 +156,7 @@ public class TelaEstoqueFuncionarioLayoutController {
 
 	@FXML
 	public void onActionVoltar() {
-		MainFuncionarioTest.setCenaAnterior();
+		MainPadaria.setCenaAnterior();
 	}
 
 

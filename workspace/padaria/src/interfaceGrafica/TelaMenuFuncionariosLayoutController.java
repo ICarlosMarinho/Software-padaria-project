@@ -336,7 +336,7 @@ public class TelaMenuFuncionariosLayoutController implements Initializable {
 
     public void botaoVoltar() {
         
-        MainFuncionarioTest.setCenaAnterior();
+        MainPadaria.setCenaAnterior();
     }
 
 }
