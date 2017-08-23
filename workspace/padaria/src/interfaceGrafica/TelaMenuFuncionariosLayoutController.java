@@ -331,6 +331,7 @@ public class TelaMenuFuncionariosLayoutController implements Initializable {
 
         this.tfBuscar.clear();
         this.carregarItensNaTabela(FXCollections.observableArrayList(sistema.listaFuncionario()));
+        pressionado = null;
     }
 
     public void botaoVoltar() {
