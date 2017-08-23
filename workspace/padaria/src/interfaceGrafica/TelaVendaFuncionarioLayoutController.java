@@ -118,14 +118,14 @@ public class TelaVendaFuncionarioLayoutController {
 		try {
 		
 			if( ttfClienteCadastrado.getText().isEmpty() ) {
-				this.sistema.efetuarVenda(adicionados, 0);
+				this.sistema.efetuarVenda(adicionados, MainPadaria.getLogado().getId());
 			} else {
 				
 				Cliente comprador = this.sistema.buscarCliente(ttfClienteCadastrado.getText());
 				if(comprador == null ) {
-					throw new NegocioException("Não existe cliente: " + ttfClienteCadastrado.getText(), this);
+					throw new NegocioException("Não cliente não existente: " + ttfClienteCadastrado.getText(), this);
 				}
-				this.sistema.efetuarVenda(adicionados, 0, comprador.getId());
+				this.sistema.efetuarVenda(adicionados, comprador.getId(), MainPadaria.getLogado().getId());
 			}
 			
 			dialogo = new Alert(Alert.AlertType.INFORMATION);

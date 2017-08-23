@@ -155,7 +155,7 @@ public class CadastroCliente {
 			
 			Cliente aux = clientes.get(k);
 			
-			if( aux.getNome().contains(ocorrencia) ) {
+			if( aux.getNome().toUpperCase().contains(ocorrencia.toUpperCase()) ) {
 				encontrados.add(aux);
 			}
 		}

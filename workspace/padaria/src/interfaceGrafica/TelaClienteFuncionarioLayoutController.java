@@ -132,6 +132,18 @@ public class TelaClienteFuncionarioLayoutController {
 		// TODO verificar se quem tem poder para
 		// 	    modificar sobre os clientes é o gerente, ou caixa
 		if( MainPadaria.getLogado().getCargo().equalsIgnoreCase("Caixa") ) {
+			
+			ttfNome.setDisable(true);
+			ttfLogradouro.setDisable(true);
+			ttfNumero.setDisable(true);
+			ttfComplemento.setDisable(true);
+			ttfCidade.setDisable(true);
+			ttfEstado.setDisable(true);
+			ttfCredito.setDisable(true);
+			ttfQtdVendas.setDisable(true);
+			ttfValorVendas.setDisable(true);
+			
+			
 			btnCadastrar.setVisible(false);
 			btnExcluir.setVisible(false);
 			btnAtualizar.setVisible(false);

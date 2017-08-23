@@ -457,7 +457,7 @@ public class CadastroProduto {
 			
 			Produto aux = produtos.get(k);
 			
-			if( aux.getNome().contains(ocorrencia) ) {
+			if( aux.getNome().toUpperCase().contains(ocorrencia.toUpperCase()) ) {
 				encontrados.add(aux);
 			}
 		}

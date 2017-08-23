@@ -145,6 +145,16 @@ public class TelaEstoqueFuncionarioLayoutController {
 		btnCancelarCadastrar.setVisible(false);
 		
 		if( MainPadaria.getLogado().getCargo().equalsIgnoreCase("Caixa") ) {
+			
+			ttfNome.setDisable(true);
+			ttfDescricao.setDisable(true);
+			ttfDia.setDisable(true);
+			ttfMes.setDisable(true);
+			ttfAno.setDisable(true);
+			ttfPreco.setDisable(true);
+			ttfQuantidade.setDisable(true);
+
+			
 			btnCadastrar.setVisible(false);
 			btnExcluir.setVisible(false);
 			btnAtualizar.setVisible(false);

@@ -41,7 +41,6 @@ public class CadastroVendas {
 		return vendas;
 	}
 	
-	// TODO parei aqui implementacao das funcionalidades de exception
 	
 	/*
 	 * este metodo adiciona uma nova venda no historico das vendas
@@ -53,11 +52,10 @@ public class CadastroVendas {
 	 */
 	public boolean adicionar( ArrayList<DadoVenda> vendido, Funcionario vendedor ) throws SistemaException {
 		
-//		TODO descomentar isto depois que o id do funcionario estiver pronto
-//		if( vendido == null || vendedor == null ) {
-//			throw new SistemaException("Ocorreu algum erro no sistema, contate o administrador!", 
-//					"algum dos parametros do metodo adicionar estao nulls, classe CadastroVendas");
-//		}
+		if( vendido == null || vendedor == null ) {
+			throw new SistemaException("Ocorreu algum erro no sistema, contate o administrador!", 
+					"algum dos parametros do metodo adicionar estao nulls, classe CadastroVendas");
+		}
 		
 		Calendar data = Calendar.getInstance();
 		
@@ -68,11 +66,10 @@ public class CadastroVendas {
 	}
 	public boolean adicionar( ArrayList<DadoVenda> vendido, Funcionario vendedor, Cliente comprador ) throws SistemaException {
 		
-//		TODO descomentar isto depois que o id do funcionario estiver pronto
-//		if( vendido == null || vendedor == null || comprador == null ) {
-//			throw new SistemaException("Ocorreu algum erro no sistema, contate o administrador!", 
-//					"algum dos parametros do metodo adicionar estao nulls, classe CadastroVendas");
-//		}
+		if( vendido == null || vendedor == null ) {
+			throw new SistemaException("Ocorreu algum erro no sistema, contate o administrador!", 
+					"algum dos parametros do metodo adicionar estao nulls, classe CadastroVendas");
+		}
 		
 		Calendar data = Calendar.getInstance();
 		
@@ -101,8 +98,8 @@ public class CadastroVendas {
 		Cliente comprador    = sistema.buscarCliente( idCliente );
 		
 		if( vendedor == null ) {
-			// TODO implementar isto
-			System.out.println("Vendedor não encontrado");
+			throw new SistemaException("Ocorreu algum erro no sistema, contate o administrador!", 
+					"Erro no metodo vender, vendedor null, classe CadastroVenda");
 		}
 		
 		if( vendido == null || comprador == null ) {
@@ -127,8 +124,6 @@ public class CadastroVendas {
 			throw new NegocioException("Quantidade para vender é 0", this);
 		}
 		
-//		TODO descomentar isto depois que o id do funcionario estiver pronto
-//		vendedor.setValorVendas( vendedor.getValorVendas() + precoTotal );
 		
 		double precoFinal = precoTotal - comprador.getCredito();
 		
@@ -179,14 +174,14 @@ public class CadastroVendas {
 		Cliente antigo = sistema.buscarCliente(idCliente);
 		sistema.atualizarCliente( antigo, comprador );
 		
-//		TODO descomentar isto depois que o id do funcionario estiver pronto
-		// alterar funcionario
-//		sistema.alterarInfoFuncionario(sistema.buscarFuncionario(vendedor.getId()), vendedor);
+		// adicionar valor de vendas do funcionario vendedor
+		vendedor.setValorVendas( vendedor.getValorVendas() + precoTotal);
+		sistema.alterarInfoFuncionario( vendedor, vendedor);
 		
 		
 		return true;
 	}
-	public boolean vender( ArrayList<DadoVenda> vendido, int idFuncionario )
+	public boolean vender( ArrayList<DadoVenda> itens, int idFuncionario )
 			throws NegocioException, SistemaException { // sem clientes cadastrados
 		
 		SistemaPadaria sistema = SistemaPadaria.getInstancia();
@@ -199,7 +194,7 @@ public class CadastroVendas {
 			System.out.println("Vendedor não encontrado");
 		}
 		
-		if( vendido == null ) {
+		if( itens == null ) {
 			throw new SistemaException("Ocorreu algum erro no sistema, contate o administrador!", 
 					"Erro no metodo vender, classe CadastroVenda");
 		}
@@ -210,27 +205,25 @@ public class CadastroVendas {
 		double precoTotal = 0;
 		double quantidade = 0;
 		
-		for( int k = 0; k < vendido.size(); k++ ) {
+		for( int k = 0; k < itens.size(); k++ ) {
 			
-			if( vendido.get(k).getProduto().getQuantidade() < vendido.get(k).getQuantidade() ) {
-				throw new NegocioException("Quantidade inválida: " + vendido.get(k).getNome(), this);
+			if( itens.get(k).getProduto().getQuantidade() < itens.get(k).getQuantidade() ) {
+				throw new NegocioException("Quantidade inválida: " + itens.get(k).getNome(), this);
 			}
 			
-			precoTotal += vendido.get(k).getProduto().getPreco() * vendido.get(k).getQuantidade();
-			quantidade += vendido.get(k).getQuantidade();
+			precoTotal += itens.get(k).getProduto().getPreco() * itens.get(k).getQuantidade();
+			quantidade += itens.get(k).getQuantidade();
 		}
 		
 		if(quantidade <= 0) {
 			throw new NegocioException("Quantidade para vender é 0", this);
 		}
 		
-//		TODO descomentar isto depois que o id do funcionario estiver pronto
-//		vendedor.setValorVendas( vendedor.getValorVendas() + precoTotal );
 		
-		for( int k = 0; k < vendido.size(); k++ ) {
+		for( int k = 0; k < itens.size(); k++ ) {
 			
-			Produto produto = vendido.get(k).getProduto();
-			double quant    = vendido.get(k).getQuantidade();
+			Produto produto = itens.get(k).getProduto();
+			double quant    = itens.get(k).getQuantidade();
 			
 			if( quant == produto.getQuantidade() ) { // remover produto
 				sistema.removerProduto(produto.getId());
@@ -243,11 +236,11 @@ public class CadastroVendas {
 		
 
 		// adicionar venda
-		this.adicionar( vendido, vendedor);
+		this.adicionar( itens, vendedor);
 		
-//		TODO descomentar isto depois que o id do funcionario estiver pronto
-		// alterar funcionario
-//		sistema.alterarInfoFuncionario(sistema.buscarFuncionario(vendedor.getId()), vendedor);
+		// adicionar valor de vendas do funcionario vendedor
+		vendedor.setValorVendas( vendedor.getValorVendas() + precoTotal);
+		sistema.alterarInfoFuncionario( vendedor, vendedor);
 		
 		return true;
 	}
